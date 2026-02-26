@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard – FloMViDex</title>
+  <style>
+/* Generales */
+body{font-family:Arial,sans-serif;margin:20px;background:linear-gradient(135deg,#fff,#ffb3d133);color:#222}
+header{position:sticky;top:0;z-index:100;background:white;display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;margin-bottom:5px;align-items:flex-start}
+h1,h2,h3{color:#0f8b8d}
+/* Directorios */
+.tabs{display:grid;grid-template-columns:auto;margin-top:50px}
+.tab{width:150px;padding:8px 12px;border-radius:6px;cursor:pointer;background:#fff;color:#0f8b8d;border:2px solid #3fe0d0;transition:.2s;text-align:center;}
+.tab.active{background:linear-gradient(135deg,#3fe0d0,#0f8b8d);font-weight:bold;}
+.tabs a{}
+/* Motor de Busqueda */
+.filters{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
+.filters input,.filters select{padding:6px 8px;font-size:14px;border-radius:6px;border:1px solid #0f8b8d55;color:#0f8b8d}#table-toolbar{width:200px}button#delete-selected-btn{height:25px;width:185px}button#export-json-btn{height:25px}
+/* Formulario CREATE */
+form{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+form input[type=text],form input[type=file]{padding:6px 8px;border-radius:6px;border:1px solid #0f8b8d55}
+form button{padding:6px 12px;font-size:14px;cursor:pointer;border-radius:8px;border:2px solid #ffd86b;background:linear-gradient(135deg,#ffd86b,#ffb3d1);font-weight:bold;color:#222;transition:.2s}
+form button:hover{background:linear-gradient(135deg,#ffb3d1,#ffd86b)}
+/* Tabla */
+table{width:100%;border-collapse:collapse;margin-top:10px;background:#fff8;border-radius:10px;overflow:hidden;}
+th,td{border:1px solid #0f8b8d33;padding:8px;font-size:14px}
+th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
+.actions button{margin-right:5px;padding:4px 8px;font-size:12px;border-radius:5px;cursor:pointer;border:none;color:#fff;background:#3fe0d0;transition:.2s}
+.actions button:hover{background:#0f8b8d}
+.no-data{text-align:center;color:#ff5fa2;font-style:italic}
+/* PLAYER */
+
+#header-player{width:100%;border:3px solid #ffd86b;border-radius:12px;animation:led 2.2s infinite ease-in-out}
+  </style>
+</head>
+<body>
+    <header>
+      <!-- Texto + directorios + buscador con filtros -->
+      <div class="divider" style="flex: 2 1 320px;">
+        <h1>Admin Dashboard para FloMViDex</h1>
+        <div id="current-directory-label">
+          <h3>Directorio actual:</h3>
+        </div>
+         <span id="directory-stats"></span>          
+         
+        <div class="filters">
+          <input type="text" id="search-input" placeholder="Buscar por título, archivo, artista o tag...">
+          <select id="extension-filter">
+            <option value="all">Todas las extensiones</option>
+            <option value="opus">Solo .opus</option>            
+            <option value="mp3">Solo .mp3</option>
+          </select>
+          <div id="table-toolbar">
+            <button id="delete-selected-btn">Eliminar seleccionados</button>
+            <button id="export-json-btn">Exportar JSON del directorio</button>
+          </div>          
+        </div>
+      </div>
+
+      <div class="tabs">
+        <div class="tab active" data-dir="mc1">maidcore 1.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc1"> JSON</a></div>
+        <div class="tab" data-dir="mc2">maidcore 2.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc2"> JSON</a></div>
+        <div class="tab" data-dir="mc3">maidcore 3.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc2"> JSON</a></div>
+        <div class="tab" data-dir="mc4">maidcore 4.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc2"> JSON</a></div>
+      </div>
+
+      <!-- Reproductor -->
+      <div class="divider" style="flex: 1 1 260px;">
+        <h2>Reproductor básico</h2>
+        <div id="player-info"></div>
+        <audio id="header-player" controls>
+          Tu navegador no soporta el elemento de audio.
+        </audio>
+      </div>
+
+      <!-- CREATE -->
+      <div class="divider" style="flex: 1 1 260px;">
+        <h2>Crear nuevo track</h2>
+        <form id="create-form">
+          <input type="text" name="title" placeholder="[OPCIONAL] Título base del track">
+          <input type="text" name="artist" placeholder="[OPCIONAL] Artista">
+          <input type="text" name="tags" placeholder="[OPCIONAL] Tags (coma, separadas)">
+          <input type="file" name="file" accept="audio/" multiple required>
+          <button type="submit">Subir</button>
+        </form>
+      </div>     
+    </header>
+
+
+
+    <table id="tracks-table">
+      <thead>
+        <tr>
+          <th class="select-col"><input type="checkbox" id="select-all"></th>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Artista</th>
+          <th>Tags</th>
+          <th>Archivo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead> 
+      <tbody></tbody>
+    </table>
+
+<script>
+  // CONFIG
+  // Si el frontend se sirve desde el mismo host:puerto que FastAPI, podemos usar rutas relativas sin http://localhost:8000
+  const API_BASE = '';
+  // Mapa web -> carpeta física
+  const DIR_PATHS = {
+    mc1: 'maidcore 1.0',
+    mc2: 'maidcore 2.0',
+    mc3: 'maidcore 3.0',
+    mc4: 'maidcore 4.0'
+  };
+  // ESTADO EN MEMORIA (solo copia del servidor)
+  const emptyTracks = () => ({ mc1: [], mc2: [], mc3: [], mc4: [] });
+  let tracksByDirectory = emptyTracks();
+  let currentDirectory = 'mc1';
+  // Elementos del DOM
+  const tabs = document.querySelectorAll('.tab');
+  const tableBody = document.querySelector('#tracks-table tbody');
+  const dirLabel = document.getElementById('current-directory-label');
+  const createForm = document.getElementById('create-form');
+  const searchInput = document.getElementById('search-input');
+  const extensionFilter = document.getElementById('extension-filter');
+  const headerPlayer = document.getElementById('header-player');
+  const playerInfo = document.getElementById('player-info');
+  const deleteSelectedBtn = document.getElementById('delete-selected-btn');
+  const exportJsonBtn = document.getElementById('export-json-btn');
+  const selectAllCheckbox = document.getElementById('select-all');
+    function updateDirectoryLabel() {
+      const allTracks = tracksByDirectory[currentDirectory] || [];          
+      const totalTracks = allTracks.length;    
+      dirLabel.innerHTML = '<h3>Directorio actual:</h3> '+currentDirectory + ' Tracks: ' + totalTracks;
+    }
+      
+  const playInHeader = track => {
+    // URL del backend estático: /media/mc1/file.mp3
+    headerPlayer.src = `${API_BASE}/media/${currentDirectory}/${encodeURIComponent(track.file)}`;
+    headerPlayer.play().catch(() => {});
+    if (playerInfo) {
+      playerInfo.textContent =
+        (track.title || 'Sin título') + ' – ' +
+        (track.artist || '') + ' (' + track.file + ')';
+    }
+  };
+  // GET /api/tracks?dir=mcX
+  async function fetchTracks(dir) {
+    try {
+      const res = await fetch(`${API_BASE}/api/tracks?dir=${encodeURIComponent(dir)}`);
+      if (!res.ok) throw new Error('Error al cargar tracks');
+      const data = await res.json(); // data es un array de Track
+      tracksByDirectory[dir] = data;
+      loadTracks();
+    } catch (e) {
+      console.error('Error en fetchTracks:', e);
+      tracksByDirectory[dir] = [];
+      loadTracks();
+    }
+  }
+  // PUT /api/tracks/{dir}/{id} (editar metadata)
+  const editTrack = async id => {
+    const arr = tracksByDirectory[currentDirectory];
+    const track = arr.find(t => t.id === id);
+    if (!track) return;
+
+    const newTitle = prompt('Nuevo título:', track.title || '');
+    if (newTitle === null) return;
+    const newArtist = prompt('Nuevo artista:', track.artist || '');
+    if (newArtist === null) return;
+    const newTagsStr = prompt(
+      'Nuevos tags (separados por comas):',
+      Array.isArray(track.tags) ? track.tags.join(', ') : (track.tags || '')
+    );
+    if (newTagsStr === null) return;
+
+    const newTags = newTagsStr
+      .split(',')
+      .map(t => t.trim())
+      .filter(Boolean);
+
+    const payload = {
+      title: newTitle.trim() || track.title,
+      artist: newArtist.trim(),
+      tags: newTags
+    };
+
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/tracks/${currentDirectory}/${id}`,
+        {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        }
+      );
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        alert('Error al editar: ' + (err.detail || res.status));
+        return;
+      }
+      const updatedTrack = await res.json();
+      const idx = arr.findIndex(t => t.id === id);
+      if (idx > -1) {
+        arr[idx] = updatedTrack;
+      }
+      loadTracks();
+    } catch (e) {
+      console.error('Error en editTrack:', e);
+      alert('Error de red al editar track');
+    }
+  };
+  
+
+  
+  // DELETE /api/tracks/{dir}/{id}
+  const deleteTrack = async id => {
+    if (!confirm(`¿Eliminar el track con ID ${id} en ${currentDirectory}?`)) return;
+
+    try {
+      const res = await fetch(
+        `${API_BASE}/api/tracks/${currentDirectory}/${id}`,
+        { method: 'DELETE' }
+      );
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        alert('Error al eliminar: ' + (err.detail || res.status));
+        return;
+      }
+      // Actualizar copia local
+      tracksByDirectory[currentDirectory] =
+        (tracksByDirectory[currentDirectory] || []).filter(t => t.id !== id);
+      loadTracks();
+    } catch (e) {
+      console.error('Error en deleteTrack:', e);
+      alert('Error de red al eliminar track');
+    }
+  };
+
+
+  // CARGAR TABLA (con filtros)
+  const loadTracks = () => {
+    const currentList = tracksByDirectory[currentDirectory] || [];
+    // Ordenar por ID
+    currentList.sort((a, b) => a.id - b.id);
+    tableBody.innerHTML = '';
+
+    const term = searchInput.value.trim().toLowerCase();
+    const ext = extensionFilter.value;
+
+    const filtered = currentList.filter(t => {
+      const title = (t.title || '').toLowerCase();
+      const file = (t.file || '').toLowerCase();
+      const artist = (t.artist || '').toLowerCase();
+      const tagsText = Array.isArray(t.tags)
+        ? t.tags.join(' ').toLowerCase()
+        : (t.tags || '').toLowerCase();
+
+      const textMatch =
+        !term ||
+        title.includes(term) ||
+        file.includes(term) ||
+        artist.includes(term) ||
+        tagsText.includes(term);
+
+      const extMatch = ext === 'all'
+        ? true
+        : file.split('.').pop() === ext;
+
+      return textMatch && extMatch;
+    });
+
+    if (selectAllCheckbox) selectAllCheckbox.checked = false;
+
+    if (!filtered.length) {
+      const row = document.createElement('tr');
+      const cell = document.createElement('td');
+      cell.colSpan = 7;
+      cell.textContent = 'No hay tracks en este directorio con el filtro actual.';
+      cell.className = 'no-data';
+      row.appendChild(cell);
+      tableBody.appendChild(row);
+      updateDirectoryLabel();
+      return;
+    }
+
+    filtered.forEach(track => {
+      const row = document.createElement('tr');
+
+      // Selección
+      const selectCell = document.createElement('td');
+      selectCell.className = 'select-col';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'row-select';
+      cb.dataset.id = track.id;
+      selectCell.appendChild(cb);
+
+      // ID
+      const idCell = document.createElement('td');
+      idCell.textContent = track.id;
+
+      // Título (doble click para edición rápida de título local + PUT si quieres)
+      const titleCell = document.createElement('td');
+      titleCell.textContent = track.title;
+      titleCell.addEventListener('dblclick', () => {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = track.title;
+        input.className = 'title-edit-input';
+        titleCell.textContent = '';
+        titleCell.appendChild(input);
+        input.focus();
+        const save = async () => {
+          const val = input.value.trim();
+          if (val && val !== track.title) {
+            // podemos reutilizar editTrack parcial o hacer un PUT rápido solo para título
+            await editTrackTitleOnly(track.id, val);
+          } else {
+            loadTracks();
+          }
+        };
+        input.addEventListener('blur', save);
+        input.addEventListener('keydown', e => {
+          if (e.key === 'Enter') input.blur();
+          if (e.key === 'Escape') loadTracks();
+        });
+      });
+
+      // Artista
+      const artistCell = document.createElement('td');
+      artistCell.textContent = track.artist || '-';
+      // Tags
+      const tagsCell = document.createElement('td');
+      tagsCell.textContent = Array.isArray(track.tags)
+        ? track.tags.join(', ')
+        : (track.tags || '-');
+
+      // Archivo
+      const fileCell = document.createElement('td');
+      fileCell.textContent = track.file;
+
+      // Acciones
+      const actionsCell = document.createElement('td');
+      actionsCell.className = 'actions';
+      const playBtn = document.createElement('button');
+      playBtn.textContent = 'Reproducir';
+      playBtn.addEventListener('click', () => playInHeader(track));
+      const editBtn = document.createElement('button');
+      editBtn.textContent = 'Editar';
+      editBtn.addEventListener('click', () => editTrack(track.id));
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'Eliminar';
+      deleteBtn.addEventListener('click', () => deleteTrack(track.id));
+
+      actionsCell.appendChild(playBtn);
+      actionsCell.appendChild(editBtn);
+      actionsCell.appendChild(deleteBtn);
+
+      row.appendChild(selectCell);
+      row.appendChild(idCell);
+      row.appendChild(titleCell);
+      row.appendChild(artistCell);
+      row.appendChild(tagsCell);
+      row.appendChild(fileCell);
+      row.appendChild(actionsCell);
+
+      tableBody.appendChild(row);
+    });
+
+    updateDirectoryLabel();
+  };
+// Cambiar de pestaña (directorio)
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentDirectory = tab.dataset.dir;
+        if (!tracksByDirectory[currentDirectory]) {
+          tracksByDirectory[currentDirectory] = [];
+          nextIdByDirectory[currentDirectory] = 1;
+        }
+        updateDirectoryLabel();
+        fetchTracks(currentDirectory);
+      });
+    });
+
+  // ==========================
+  // CREATE (POST /api/tracks)
+  // ==========================
+  createForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const fd = new FormData(createForm);
+
+    const titleBase = (fd.get('title') || '').trim();
+    const artistBase = (fd.get('artist') || '').trim();
+    const tagsRaw = (fd.get('tags') || '').trim();
+    const files = fd.getAll('file');
+
+    if (!files || !files.length) return;
+
+    // Subimos cada archivo con una petición POST separada
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (!file || !file.name) continue;
+
+      const perFileForm = new FormData();
+      perFileForm.append('dir', currentDirectory);
+
+      const title =
+        titleBase
+          ? (files.length > 1 ? `${titleBase} (${i + 1})` : titleBase)
+          : file.name;
+
+      perFileForm.append('title', title);
+      perFileForm.append('artist', artistBase);
+      perFileForm.append('tags', tagsRaw);
+      perFileForm.append('file', file);
+
+      try {
+        const res = await fetch(`${API_BASE}/api/tracks`, {
+          method: 'POST',
+          body: perFileForm
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          console.error('Error al subir track:', err.detail || res.status);
+          alert(`Error al subir ${file.name}`);
+          continue;
+        }
+        const newTrack = await res.json();
+        tracksByDirectory[currentDirectory].push(newTrack);
+      } catch (e) {
+        console.error('Error de red al subir', file.name, e);
+        alert(`Error de red al subir ${file.name}`);
+      }
+    }
+
+    createForm.reset();
+    loadTracks();
+  });
+
+  // ==========================
+  // ELIMINAR SELECCIONADOS (DELETE múltiple)
+  // ==========================
+  if (deleteSelectedBtn) {
+    deleteSelectedBtn.addEventListener('click', async () => {
+      const checked = document.querySelectorAll('.row-select:checked');
+      if (!checked.length) {
+        alert('Selecciona al menos un track para eliminar');
+        return;
+      }
+      if (!confirm(`¿Eliminar ${checked.length} track(s)?`)) return;
+
+      const ids = Array.from(checked).map(cb => parseInt(cb.dataset.id, 10));
+
+      for (const id of ids) {
+        try {
+          const res = await fetch(
+            `${API_BASE}/api/tracks/${currentDirectory}/${id}`,
+            { method: 'DELETE' }
+          );
+          if (!res.ok) {
+            const err = await res.json().catch(() => ({}));
+            console.warn('Error al borrar', id, err.detail || res.status);
+          } else {
+            tracksByDirectory[currentDirectory] =
+              (tracksByDirectory[currentDirectory] || []).filter(t => t.id !== id);
+          }
+        } catch (e) {
+          console.error('Error de red al borrar', id, e);
+        }
+      }
+
+      loadTracks();
+    });
+  }
+// Botón "Exportar JSON del directorio"
+    if (exportJsonBtn) {
+      exportJsonBtn.addEventListener('click', () => {
+        const data = tracksByDirectory[currentDirectory] || [];
+        console.log('JSON exportado para', currentDirectory, JSON.stringify(data,null,2));
+        alert('JSON del directorio exportado a la consola (F12).');
+      });
+    }
+// Checkbox "seleccionar todo"
+    if (selectAllCheckbox) {
+      selectAllCheckbox.addEventListener('change', () => {
+        document.querySelectorAll('.row-select').forEach(cb => cb.checked = selectAllCheckbox.checked);
+      });
+    }
+// Filtros de BUSQUEDA
+    searchInput.addEventListener('input', loadTracks);
+    extensionFilter.addEventListener('change', loadTracks);
+// Inicializar
+    updateDirectoryLabel();    
+    fetchTracks(currentDirectory);
+</script>
+</body>
+</html>

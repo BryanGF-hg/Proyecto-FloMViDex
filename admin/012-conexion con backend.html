@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -108,7 +109,7 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
     const fileBlobs = {};
 // Variables principales  
     const emptyTracks = () => ({mc1:[],mc2:[],mc3:[],mc4:[]});  
-    let tracksByDirectory = {};
+    let tracksByDirectory = { mc1: [], mc2: [], mc3: [], mc4: [] };
     let nextIdByDirectory = {};
     const computeNextIds = obj => {
       const res = {};
@@ -119,26 +120,20 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       return res;
     };
 
-// Clave de localStorage  
-    const LS_KEY = 'flomvidex_tracks_v1';
-    const saveLS = () => {
-      try { localStorage.setItem(LS_KEY, JSON.stringify(tracksByDirectory)); }
-      catch(e){ console.error(e); }
-    };
-    const loadLS = () => {
+    // peticion hacia al backend para conseguir los tracks del directorio actual
+    async function fetchTracks(dir) {
       try {
-        const raw = localStorage.getItem(LS_KEY);
-        tracksByDirectory = raw ? JSON.parse(raw) : emptyTracks();
-        const base = emptyTracks();
-        Object.keys(base).forEach(d => { if (!tracksByDirectory[d]) tracksByDirectory[d]=[]; });
-      } catch(e) {
-        tracksByDirectory = emptyTracks();
+        const res = await fetch(`http://localhost:8000/api/tracks?dir=${dir}`);
+        if (!res.ok) throw new Error('Error al cargar tracks');
+        const data = await res.json();
+        tracksByDirectory[dir] = data;   // data es array de Track
+        loadTracks();                    // repinta la tabla
+      } catch (e) {
+        console.error(e);
+        tracksByDirectory[dir] = [];
+        loadTracks();
       }
-      nextIdByDirectory = computeNextIds(tracksByDirectory);
-      saveLS();
-    };
-    // Inicializar datos dinámicos
-    loadLS();
+    }
 
     // Devuelve el primer ID libre (1,2,3,...) en el directorio dado
     const getNextFreeId = dir => {
@@ -192,9 +187,8 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       if (blobUrl) {
         headerPlayer.src = blobUrl;         // Reproducir desde Blob (subido en esta sesión)
       } else {
-        const folderName = DIR_PATHS[currentDirectory] || currentDirectory;
-        headerPlayer.src = `../media/mp3/real mp3/${folderName}/${track.file}`;        
-        // Cambiar el valor de track.file como ruta directa. Por ejemplo, si tus audios están en /audio/mc1/, podrías usarse: headerPlayer.src = `audio/${currentDirectory}/${track.file}`;
+        headerPlayer.src = `http://localhost:8000/media/${currentDirectory}/${track.file}`;        
+        // Esto permite cambiar el valor de track.file como ruta directa. Por ejemplo, si tus audios están en /audio/mc1/, podrías usarse: headerPlayer.src = `audio/${currentDirectory}/${track.file}`;
       }
 
       headerPlayer.play().catch(()=>{});
@@ -212,10 +206,34 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       const i = arr.findIndex(t => t.id===id);
       if (i>-1) {
         arr.splice(i,1);
-        saveLS();
         loadTracks();
       }
     };
+// Editar track por ID dentro del directorio actual
+    const editTrack = id => {
+      const arr = tracksByDirectory[currentDirectory];
+      const track = arr.find(t => t.id === id);
+      if (!track) return;
+      // Pedimos nuevos valores, mostrando el actual como valor por defecto
+      const newTitle = prompt('Nuevo título:', track.title || '');
+      if (newTitle === null) return; // Cancelo
+      const newArtist = prompt('Nuevo artista:', track.artist || '');
+      if (newArtist === null) return;
+      const newTags = prompt(
+        'Nuevos tags (separados por comas):',
+        Array.isArray(track.tags) ? track.tags.join(', ') : (track.tags || '')
+      );
+      if (newTags === null) return;
+      // Aplicamos cambios (si el usuario deja vacío, mantenemos el anterior)
+      track.title = newTitle.trim() || track.title;
+      track.artist = newArtist.trim(); // aquí sí dejamos vacío si quiere
+      track.tags = newTags
+        .split(',')
+        .map(t => t.trim())
+        .filter(Boolean);
+
+      loadTracks();
+    };    
 // Cargar tracks en la tabla según directorio + filtros
     const loadTracks = () => {
 // Ordenar por ID antes de mostrar
@@ -276,7 +294,6 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
             const val = input.value.trim();
             if (val) {
               track.title = val;
-              saveLS();
             }
             loadTracks();
           };
@@ -296,16 +313,20 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
         const fileCell = document.createElement('td');
         fileCell.textContent = track.file;
 // Acciones
-        const actionsCell = document.createElement('td');
+      const actionsCell = document.createElement('td');
         actionsCell.className = 'actions';
         const playBtn = document.createElement('button');
         playBtn.textContent = 'Reproducir';
         playBtn.addEventListener('click', () => playInHeader(track));
+        const editBtn = document.createElement('button');
+        editBtn.textContent = 'Editar';
+        editBtn.addEventListener('click', () => editTrack(track.id));              
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = 'Eliminar';
-        deleteBtn.addEventListener('click', () => deleteTrack(track.id));
+        deleteBtn.addEventListener('click', () => deleteTrack(track.id));  
 //Acciones dentro de la tabla grande        
         actionsCell.appendChild(playBtn);
+        actionsCell.appendChild(editBtn);                
         actionsCell.appendChild(deleteBtn);
 //Resto de Cabeceras de la tabla grande
         row.appendChild(selectCell);
@@ -329,10 +350,9 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
         if (!tracksByDirectory[currentDirectory]) {
           tracksByDirectory[currentDirectory] = [];
           nextIdByDirectory[currentDirectory] = 1;
-          saveLS();
         }
         updateDirectoryLabel();
-        loadTracks();
+        fetchTracks(currentDirectory);
       });
     });
 // Crear nuevos tracks (múltiples archivos)
@@ -367,7 +387,6 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
         fileBlobs[key] = blobUrl;
         tracksByDirectory[currentDirectory].push(track);
       });
-      saveLS();
       createForm.reset();
       loadTracks();
     });                           // Fin del formulario para el CREATE
@@ -391,7 +410,6 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
           });
           tracksByDirectory[currentDirectory] =
             (tracksByDirectory[currentDirectory]||[]).filter(t => !ids.includes(t.id));
-          saveLS();
           loadTracks();
         }
       });
@@ -416,7 +434,8 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
     extensionFilter.addEventListener('change', loadTracks);
 // Inicializar
     updateDirectoryLabel();    
-    loadTracks();
+    fetchTracks(currentDirectory);
   </script>
 </body>
 </html>
+
