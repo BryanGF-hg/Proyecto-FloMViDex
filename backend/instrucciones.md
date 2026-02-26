@@ -3,5 +3,6 @@ pip install fastapi uvicorn
 uvicorn app:app --reload
 
 # Accedemos a las siguientes direcciones para probar las peticiones GET:
-http://localhost:8000/api/tracks?dir=mc1 → JSON para los tracks
-http://localhost:8000/media/mc1/archivo.mp3 → audo de los tracks
+- Admin:  http://127.0.0.1:8000/admin/012-conexion%20con%20backend.html
+- Frontend: http://127.0.0.1:8000/frontend/005-controlador.html
+- API MC1: http://127.0.0.1:8000/api/tracks?dir=mc1\n

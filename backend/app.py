@@ -21,16 +21,12 @@ app = FastAPI(title="FloMViDex Backend")
 # ===========================
 # app.py está en FloMViDex/backend/app.py
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-ADMIN_DIR    = PROJECT_ROOT / "admin"
 MEDIA_ROOT   = PROJECT_ROOT / "media" / "mp3" / "real mp3"
 
+ADMIN_DIR    = PROJECT_ROOT / "admin"
+FRONTEND_DIR = PROJECT_ROOT / "frontend"
 DATA_DIR     = PROJECT_ROOT / "backend" / "data"
 DATA_FILE    = DATA_DIR / "tracks.json"
-
-print("[DEBUG] PROJECT_ROOT =", PROJECT_ROOT)
-print("[DEBUG] ADMIN_DIR    =", ADMIN_DIR)
-print("[DEBUG] MEDIA_ROOT   =", MEDIA_ROOT)
-print("[DEBUG] DATA_FILE    =", DATA_FILE)
 
 DIR_PATHS = {
     "mc1": "maidcore 1.0",
@@ -38,10 +34,7 @@ DIR_PATHS = {
     "mc3": "maidcore 3.0",
     "mc4": "maidcore 4.0",
 }
-
-# ===========================
 # CORS
-# ===========================
 origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
@@ -177,7 +170,14 @@ if ADMIN_DIR.exists():
 else:
     print("[WARN] ADMIN_DIR no existe:", ADMIN_DIR)
 
+
+if FRONTEND_DIR.exists():
+    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend") #cambiar /app para que sea correspondiente a la carpeta real como /frontend
+else:
+    print("[WARN] FRONTEND_DIR no existe:", FRONTEND_DIR)
+
 print("\n[INFO] Admin:  http://127.0.0.1:8000/admin/012-conexion%20con%20backend.html")
+print("[INFO] Frontend: http://127.0.0.1:8000/frontend/005-controlador.html")
 print("[INFO] API MC1: http://127.0.0.1:8000/api/tracks?dir=mc1\n")
 
 # ===========================
