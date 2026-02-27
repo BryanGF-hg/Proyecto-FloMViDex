@@ -9,4 +9,22 @@ Dex = Dex/Enciclopedia
 # Etiquetas: **Maidcore**, Dex, Musica, Imagenes/Etiquetas Flotantes, Animaciones Básicas, Interacción
 
 # Necesidad principal:
- Una herramienta introductoria, multilingüe y ligera, que permita escuchar música seleccionada y entender el contexto de cada artista.
+Una herramienta introductoria, multilingüe y ligera, que permita escuchar música del genero Maidcore y ver artistas de una manera peculiar.
+
+# Total: ~1515 tracks
+Proyecto-FloMViDex/
+├── backend/
+│   ├── app.py                   # Controlador
+│   └── data/
+│       └── tracks.json          # Base de datos (metadatos)
+├── media/
+│   └─ mp3/
+      └─ real mp3/
+         ├─ maidcore 1.0/ 470 tracks
+         ├─ maidcore 2.0/ 453 tracks
+         ├─ maidcore 3.0/ 452 tracks
+         └─ maidcore 4.0/ 140 tracks
+├── admin/                       # Panel admin (backend)
+│   └── 
+└── frontend/                    # Reproductor público (frontend))
+    └──   
