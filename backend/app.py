@@ -1,11 +1,4 @@
-from fastapi import (
-    FastAPI,
-    HTTPException,
-    Query,
-    UploadFile,
-    File,
-    Form
-)
+from fastapi import ( FastAPI,HTTPException,Query,UploadFile,File,Form)
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -13,16 +6,11 @@ from typing import List, Dict, Optional
 from pathlib import Path
 import json
 import shutil
-
 app = FastAPI(title="FloMViDex Backend")
-
-# ===========================
-# RUTAS BASE SEGÚN TU ESTRUCTURA
-# ===========================
-# app.py está en FloMViDex/backend/app.py
+# =========================== RUTAS BASE SEGÚN TU ESTRUCTURA
+# app.py deberia estar en FloMViDex/backend/app.py
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MEDIA_ROOT   = PROJECT_ROOT / "media" / "mp3" / "real mp3"
-
 ADMIN_DIR    = PROJECT_ROOT / "admin"
 FRONTEND_DIR = PROJECT_ROOT / "frontend"
 DATA_DIR     = PROJECT_ROOT / "backend" / "data"
@@ -36,10 +24,8 @@ DIR_PATHS = {
 }
 # CORS
 origins = [
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
+    "http://localhost:8000","http://127.0.0.1:8000",
+    "http://localhost:5500","http://127.0.0.1:5500",
 ]
 
 app.add_middleware(
@@ -50,27 +36,21 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# ===========================
-# MODELOS
-# ===========================
+# =========================== MODELOS, es decir, como se basa los datos
 class Track(BaseModel):
-    id: int
-    title: str
-    file: str           # nombre del archivo en disco
-    artist: str = ""
-    tags: List[str] = []
-    dir: str            # "mc1", "mc2", ...
-
+    id: int       
+    title: str           # opcional
+    file: str            # nombre del archivo en disco
+    artist: str = ""     # opcional
+    tags: List[str] = [] # opcional
+    dir: str             # "mc1", "mc2", ...
 class TrackUpdate(BaseModel):
     title: Optional[str] = None
     artist: Optional[str] = None
     tags: Optional[List[str]] = None
-
 tracks_by_directory: Dict[str, List[Track]] = {k: [] for k in DIR_PATHS.keys()}
 
-# ===========================
-# UTILIDADES: JSON PERSISTENTE
-# ===========================
+# =========================== UTILIDADES: JSON PERSISTENTE
 def save_tracks_to_json() -> None:
     """Guardar tracks_by_directory -> DATA_FILE (JSON)."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -93,15 +73,13 @@ def load_tracks_from_json() -> bool:
             raw = json.load(f)
         for dir_key, arr in raw.items():
             tracks_by_directory[dir_key] = [Track(**t) for t in arr]
-        print(f"[INFO] Tracks cargados desde {DATA_FILE}")
+        print(f"[INFO]-Datos: Tracks cargados desde {DATA_FILE}")
         return True
     except Exception as e:
         print(f"[ERROR] Al leer {DATA_FILE}: {e}")
         return False
 
-# ===========================
-# UTILIDADES: ESCANEAR CARPETAS
-# ===========================
+# =========================== UTILIDADES: ESCANEAR CARPETAS
 def scan_media_folders() -> None:
     """Escanear maidcore X.0 y rellenar tracks_by_directory."""
     for dir_key, folder_name in DIR_PATHS.items():
@@ -139,9 +117,7 @@ def get_next_free_id(dir_key: str) -> int:
         i += 1
     return i
 
-# ===========================
-# STARTUP
-# ===========================
+# STARTUP, al iniciar montame estáticos y usa las API para el CRUD en el backend
 @app.on_event("startup")
 def on_startup():
     # 1) Intentar cargar desde JSON
@@ -150,35 +126,32 @@ def on_startup():
     if not loaded:
         scan_media_folders()
 
-# ===========================
-# ESTÁTICOS: AUDIO
-# ===========================
+# =========================== ESTÁTICOS: AUDIO
 # /media/mc1/archivo.mp3 -> media/mp3/real mp3/maidcore 1.0/archivo.mp3
 for dir_key, folder_name in DIR_PATHS.items():
     mount_path = f"/media/{dir_key}"
     dir_path = MEDIA_ROOT / folder_name
     app.mount(mount_path, StaticFiles(directory=dir_path), name=f"media-{dir_key}")
     print(f"[INFO] Static mount: {mount_path} -> {dir_path}")
-
-# ===========================
-# ESTÁTICOS: FRONTEND ADMIN
-# ===========================
+# =========================== ESTÁTICOS: BACKEND ADMIN
 # /admin/... -> FloMViDex/admin/*
 if ADMIN_DIR.exists():
     app.mount("/admin", StaticFiles(directory=ADMIN_DIR), name="admin")
     print(f"[INFO] Static mount: /admin -> {ADMIN_DIR}")
-else:
-    print("[WARN] ADMIN_DIR no existe:", ADMIN_DIR)
-
-
+else: print("[WARN] ADMIN_DIR no existe:", ADMIN_DIR)
+# =========================== ESTÁTICOS: FRONTEND USUARIO
 if FRONTEND_DIR.exists():
-    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend") #cambiar /app para que sea correspondiente a la carpeta real como /frontend
-else:
-    print("[WARN] FRONTEND_DIR no existe:", FRONTEND_DIR)
+    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend") #cambiar /"nombre_estatico" para que sea corresponda a la carpeta real como /frontend
+    print(f"[INFO] Static mount: /frontend -> {FRONTEND_DIR}")    
+else: print("[WARN] FRONTEND_DIR no existe:", FRONTEND_DIR)
 
-print("\n[INFO] Admin:  http://127.0.0.1:8000/admin/012-conexion%20con%20backend.html")
-print("[INFO] Frontend: http://127.0.0.1:8000/frontend/005-controlador.html")
-print("[INFO] API MC1: http://127.0.0.1:8000/api/tracks?dir=mc1\n")
+print("\n[INFO]-Admin:    http://127.0.0.1:8000/admin/archivo")
+print("[INFO]-Frontend: http://127.0.0.1:8000/frontend/archivo")
+print("[INFO]-API MCX:  http://127.0.0.1:8000/api/tracks?dir=mcX\n")
+
+
+
+
 
 # ===========================
 # API: GET /api/tracks
@@ -197,7 +170,7 @@ async def create_track(
     dir: str = Form(...),
     title: str = Form(""),
     artist: str = Form(""),
-    tags: str = Form(""),          # "maidcore, cute, fast"
+    tags: str = Form(""),          
     file: UploadFile = File(...),
 ):
     if dir not in DIR_PATHS:
@@ -211,15 +184,19 @@ async def create_track(
     dest_dir = MEDIA_ROOT / folder_name
     dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Normalizar nombre y evitar colisiones
+    # Normalizar nombre
     original_name = Path(file.filename).name
     dest_path = dest_dir / original_name
-    base = dest_path.stem
-    ext = dest_path.suffix
-    counter = 1
-    while dest_path.exists():
-        dest_path = dest_dir / f"{base}_{counter}{ext}"
-        counter += 1
+    # variables para los condicionales siguientes que comprueban los archivos en tracks.json
+    existing_tracks = tracks_by_directory.get(dir, [])
+    existing_files = {t.file for t in existing_tracks}      
+    if dest_path.exists() and original_name in existing_files:  # 1.- El archivo YA EXISTE y YA ESTÁ REGISTRADO
+        raise HTTPException( status_code=400, detail=f"El archivo '{original_name}' ya existe en el directorio {dir}" )     # 2.- Si el archivo existe en disco pero NO en tracks.json (inconsistencia)
+    if dest_path.exists() and original_name not in existing_files: # Renombrar el archivo existente como backup
+        backup_name = f"{dest_path.stem}_backup{dest_path.suffix}"
+        backup_path = dest_dir / backup_name
+        dest_path.rename(backup_path)
+        print(f"[WARN] Archivo huérfano renombrado a {backup_name}") 
 
     # Guardar archivo físico
     with dest_path.open("wb") as buffer:
@@ -274,7 +251,7 @@ def update_track(dir: str, track_id: int, payload: TrackUpdate):
     raise HTTPException(status_code=404, detail="Track no encontrado")
 
 # ===========================
-# API: DELETE /api/tracks/{dir}/{id}
+# API: DELETE /api/tracks/{dir}/{id} (eliminar metadata)
 # ===========================
 @app.delete("/api/tracks/{dir}/{track_id}")
 def delete_track(dir: str, track_id: int):

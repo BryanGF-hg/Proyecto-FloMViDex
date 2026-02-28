@@ -14,16 +14,16 @@ Una herramienta introductoria, multilingüe y ligera, que permita escuchar músi
 # Total: ~1515 tracks
 Proyecto-FloMViDex/
 ├── backend/
-│   ├── app.py                   # Controlador
+│   ├── app.py                   # Controlador Python
 │   └── data/
-│       └── tracks.json          # Base de datos (metadatos)
+│       └── tracks.json          # Base de datos (metadatos JSON)
 ├── media/
 │   └─ mp3/
       └─ real mp3/
-         ├─ maidcore 1.0/ 470 tracks
-         ├─ maidcore 2.0/ 453 tracks
-         ├─ maidcore 3.0/ 452 tracks
-         └─ maidcore 4.0/ 140 tracks
+         ├─ maidcore 1.0/ ~470 tracks
+         ├─ maidcore 2.0/ ~453 tracks
+         ├─ maidcore 3.0/ ~452 tracks
+         └─ maidcore 4.0/ ~140 tracks
 ├── admin/                       # Panel admin (backend)
 │   └── 
 └── frontend/                    # Reproductor público (frontend))
