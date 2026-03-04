@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
   <title>Admin Dashboard – FloMViDex</title>
   <style>
 /* Generales */
@@ -31,6 +32,8 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
 /* PLAYER */
 #header-player{width:100%;border:3px solid #ffd86b;border-radius:12px;animation:led 2.2s infinite ease-in-out}
   </style>
+   <link rel="stylesheet" href="css/boton lenguaje.css">
+   <link rel="stylesheet" href="css/modo oscuro.css">  
 </head>
 <body>
     <header>
@@ -85,7 +88,6 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
     </header>
 
 
-
     <table id="tracks-table">
       <thead>
         <tr>
@@ -100,6 +102,9 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       </thead> 
       <tbody></tbody>
     </table>
+    
+    <button class="theme-toggle" id="theme-toggle" title="Cambiar modo oscuro/claro">🌙</button>  <!-- Botón de modo oscuro -->
+    <button class="lang-toggle" id="lang-toggle" title="Cambiar idioma">EN</button>               <!-- Botón de idioma -->
 
 <script>
   // CONFIG
@@ -130,7 +135,7 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
   const selectAllCheckbox = document.getElementById('select-all');
     function updateDirectoryLabel() {
       const allTracks = tracksByDirectory[currentDirectory] || [];          
-      const totalTracks = allTracks.length;    
+      const totalTracks = allTracks.length; 
       dirLabel.innerHTML = '<h3>Directorio actual:</h3> '+currentDirectory + ' Tracks: ' + totalTracks;
     }
       
@@ -385,109 +390,219 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       });
     });
 
+const filePreviews = new Map(); // Solo para preview temporal
 
-  // CREATE (POST /api/tracks)
-  createForm.addEventListener('submit', async e => {
-    e.preventDefault();
-    const fd = new FormData(createForm);
+// CREATE con preview inmediato (blob) + subida real (API) + contador (en el mismo boton!)
+createForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const submitBtn = createForm.querySelector('button[type="submit"]');
+  if (submitBtn.disabled) return; // Prevenir doble clic  
+  const fd = new FormData(createForm);
+  const files = fd.getAll('file');
+  const originalText = submitBtn.textContent; // Guarda Mensaje original
+  let successCount = 0; let failCount = 0;    
+  submitBtn.disabled = true;  
+  
+  // Mostrar previews inmediatos (opcional)
+  files.forEach((file, i) => {
+    const previewUrl = URL.createObjectURL(file);
+    const previewId = `preview_${Date.now()}_${i}`;
+    filePreviews.set(previewId, previewUrl);
 
-    const titleBase = (fd.get('title') || '').trim();
-    const artistBase = (fd.get('artist') || '').trim();
-    const tagsRaw = (fd.get('tags') || '').trim();
-    const files = fd.getAll('file');
-
-    if (!files || !files.length) return;
-
-    // Subimos cada archivo con una petición POST separada
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      if (!file || !file.name) continue;
-
-      const perFileForm = new FormData();
-      perFileForm.append('dir', currentDirectory);
-
-      const title =
-        titleBase
-          ? (files.length > 1 ? `${titleBase} (${i + 1})` : titleBase)
-          : file.name;
-
-      perFileForm.append('title', title);
-      perFileForm.append('artist', artistBase);
-      perFileForm.append('tags', tagsRaw);
-      perFileForm.append('file', file);
-
-      try {
-        const res = await fetch(`${API_BASE}/api/tracks`, {
-          method: 'POST',
-          body: perFileForm
-        });
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          console.error('Error al subir track:', err.detail || res.status);
-          alert(`Error al subir ${file.name}`);
-          continue;
-        }
-        const newTrack = await res.json();
-        tracksByDirectory[currentDirectory].push(newTrack);
-      } catch (e) {
-        console.error('Error de red al subir', file.name, e);
-        alert(`Error de red al subir ${file.name}`);
-      }
-    }
-
-    createForm.reset();
-    loadTracks();
   });
+  
+  // Subida real al servidor
+  for (let i= 0; i < files.length; i++) {
+    const file = files[i];
+    // Actualizar texto del botón con progreso
+    submitBtn.textContent = `Subiendo ${i+1}/${files.length}...`;  
+    const formData = new FormData();
+    formData.append('dir', currentDirectory);
+    formData.append('file', file);
+    formData.append('title', fd.get('title') || '');
+    formData.append('artist', fd.get('artist') || '');
+    formData.append('tags', fd.get('tags') || '');
+    
+    try {
+      const res = await fetch(`${API_BASE}/api/tracks`, {
+        method: 'POST',
+        body: formData
+      });
+      
+      if (res.ok) { successCount++;
+      } else {   failCount++; }
+    } catch(e) { failCount++; console.error('Error subiendo:', e);
+      console.warn(`Error $[res.status] en archivo ${file.name}`);
+     }
+  }    
+  // Limpiar previews
+  filePreviews.forEach((url, id) => {
+    URL.revokeObjectURL(url);
+    filePreviews.delete(id);
+  });
+  
+  createForm.reset();
 
-  // ==========================
+  // Mostrar resultado
+  if (failCount === 0) { 
+  submitBtn.textContent = `𖦏 ${successCount} subidos`;
+    // Restaurar después de 5 segundos(1s = 1000ms)
+    setTimeout(() => {
+      submitBtn.textContent = originalText;submitBtn.disabled = false;
+    }, 5000);  
+  } else { 
+  submitBtn.textContent = `☢️  Subidos: ${successCount}, Fallos: ${failCount}`;
+    // Restaurar después de 10 segundos
+    setTimeout(() => {
+      submitBtn.textContent = originalText;submitBtn.disabled = false;
+    }, 10000);  
+  }  
+  
+  await fetchTracks(currentDirectory); // Recarga fresca desde API
+});
+
   // ELIMINAR SELECCIONADOS (DELETE múltiple)
-  // ==========================
   if (deleteSelectedBtn) {
     deleteSelectedBtn.addEventListener('click', async () => {
-      const checked = document.querySelectorAll('.row-select:checked');
+  const checked = document.querySelectorAll('.row-select:checked');
       if (!checked.length) {
         alert('Selecciona al menos un track para eliminar');
         return;
       }
       if (!confirm(`¿Eliminar ${checked.length} track(s)?`)) return;
-
-      const ids = Array.from(checked).map(cb => parseInt(cb.dataset.id, 10));
-
-      for (const id of ids) {
+  // Captura-IDs previo
+  const ids = Array.from(checked).map(cb => parseInt(cb.dataset.id, 10));
+  let successCount = 0;let failCount = 0;let failedIds = [];     // Deshabilitar botón durante operación
+    deleteSelectedBtn.disabled = true;
+    const originalText = deleteSelectedBtn.textContent;
+    deleteSelectedBtn.textContent = `Eliminando 0/${ids.length}...`;     
+    const idsToDelete = [...ids]; // COPIA de IDs a eliminar
+      for (let i = 0; i < idsToDelete.length; i++) {
+        const id = idsToDelete[i];
+        deleteSelectedBtn.textContent = `Eliminando ${i+1}/${idsToDelete.length}...`;
+        
         try {
           const res = await fetch(
             `${API_BASE}/api/tracks/${currentDirectory}/${id}`,
             { method: 'DELETE' }
           );
-          if (!res.ok) {
+          
+          if (res.ok) {
+            successCount++;
+            // Actualizar array local SIN recargar la tabla aún
+            tracksByDirectory[currentDirectory] = 
+              tracksByDirectory[currentDirectory].filter(t => t.id !== id);
+          } else {
+            failCount++;  failedIds.push(id);
             const err = await res.json().catch(() => ({}));
             console.warn('Error al borrar', id, err.detail || res.status);
-          } else {
-            tracksByDirectory[currentDirectory] =
-              (tracksByDirectory[currentDirectory] || []).filter(t => t.id !== id);
           }
         } catch (e) {
+          failCount++;  failedIds.push(id);
           console.error('Error de red al borrar', id, e);
         }
+        // Pequeña pausa para no saturar (opcional)
+        await new Promise(r => setTimeout(r, 50));
+      } //Aqui termina el "for" que empieza el borrado
+      
+      // Restaurar botón
+      deleteSelectedBtn.disabled = false;
+      deleteSelectedBtn.textContent = originalText;
+      // Mostrar resultado
+      if (failCount === 0) {
+        alert(`𖦏 ${successCount} tracks eliminados correctamente`);
+      } else {
+        alert(`☢️ Eliminados: ${successCount} | Fallos: ${failCount}\nIDs con error: ${failedIds.join(', ')}`);
       }
 
       loadTracks();
+      await fetchTracks(currentDirectory); //Recargar desde API
     });
   }
+
+// MODO OSCURO 
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+ // Comprobar preferencia guardada
+    const savedTheme = localStorage.getItem('flomvidex_theme');
+    if (savedTheme === 'dark') {body.classList.add('dark-mode');themeToggle.textContent = '☀️';}
+
+ // Evento del botón
+    themeToggle.addEventListener('click', () => {body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        themeToggle.textContent = '☀️';localStorage.setItem('flomvidex_theme', 'dark'); } else {
+        themeToggle.textContent = '🌙';localStorage.setItem('flomvidex_theme', 'light');}          }); 
+  
+// CAMBIO DE IDIOMA
+    let translations = {};
+    let currentLang = localStorage.getItem('flomvidex_lang') || 'es';
+    async function loadTranslations()       {
+        const res = await fetch('traducciones.json');
+        translations = await res.json();    }
+        
+    function t(key, vars = {}) {
+      let text = translations[currentLang]?.[key] || key;
+      for (const k in vars) {
+       text = text.replace(`{${k}}`, vars[k]);  };
+      return text;                           }
+  
+    function applyTranslations() {
+        // Título
+        document.title = t("title");
+        document.querySelector("header h1").textContent = t("title");
+        // Directorio actual
+        const h3 = document.querySelector("#current-directory-label h3");
+        h3.textContent = t("current_dir");
+        // Buscador
+        searchInput.placeholder = t("search_placeholder");
+        // Select extensiones
+        const opts = extensionFilter.querySelectorAll("option");
+        opts[0].textContent = t("all_extensions");
+        opts[1].textContent = t("only_opus");
+        opts[2].textContent = t("only_mp3");
+        // Botones
+        deleteSelectedBtn.textContent = t("delete_selected");
+        exportJsonBtn.textContent    = t("export_json");
+        // H2: reproductor + create
+        const h2s = document.querySelectorAll("header h2");
+        h2s[0].textContent = t("player_title");
+        h2s[1].textContent = t("create_title");
+        // Placeholders create
+        document.querySelector("input[name=title]").placeholder  = t("title_placeholder");
+        document.querySelector("input[name=artist]").placeholder = t("artist_placeholder");
+        document.querySelector("input[name=tags]").placeholder   = t("tags_placeholder");
+        document.querySelector("#create-form button").textContent = t("upload_btn");
+        // Botón IDIOMA
+        document.getElementById("lang-toggle").textContent = currentLang === "es" ? "EN" : "ES";
+    }  
+
+    const langToggle = document.getElementById('lang-toggle');  
+    langToggle.addEventListener("click", () => {
+        currentLang = currentLang === "es" ? "en" : "es";
+        localStorage.setItem("flomvidex_lang", currentLang);
+        applyTranslations();
+        loadTracks(); // refresca textos dinámicos
+    });    
+    (async () => {
+        await loadTranslations();
+        applyTranslations();
+        updateDirectoryLabel();
+        fetchTracks(currentDirectory);
+    })();
+    
+  
 // Botón "Exportar JSON del directorio"
     if (exportJsonBtn) {
       exportJsonBtn.addEventListener('click', () => {
         const data = tracksByDirectory[currentDirectory] || [];
         console.log('JSON exportado para', currentDirectory, JSON.stringify(data,null,2));
         alert('JSON del directorio exportado a la consola (F12).');
-      });
-    }
+      });              }
 // Checkbox "seleccionar todo"
     if (selectAllCheckbox) {
       selectAllCheckbox.addEventListener('change', () => {
         document.querySelectorAll('.row-select').forEach(cb => cb.checked = selectAllCheckbox.checked);
-      });
-    }
+      });                  }
 // Filtros de BUSQUEDA
     searchInput.addEventListener('input', loadTracks);
     extensionFilter.addEventListener('change', loadTracks);
