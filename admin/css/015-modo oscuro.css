@@ -1,0 +1,38 @@
+/* MODO OSCURO*/
+.dark-mode {  background:#1a1a2e;color: #eee;}
+.dark-mode header {  background: #0f0f1a;}
+.dark-mode h1, .dark-mode h2, .dark-mode h3 {color: #ff4d8d;}
+.dark-mode .tab {background: #16213e;color: #ff4d8d;border-color: #ff4d8d;}
+.dark-mode .tab.active {background: linear-gradient(135deg, #ff4d8d, #9c4dff);color: white;}
+.dark-mode table {background: #16213e;color: #eee;}
+.dark-mode th {background: #0f0f1a;color: #ff4d8d;}
+.dark-mode td {border-color: #ff4d8d33;}
+.dark-mode .actions button {background: #ff4d8d;}
+.dark-mode .actions button:hover {background: #9c4dff;}
+.dark-mode .filters input,.dark-mode .filters select {background: #16213e;color: #ff4d8d;border-color: #ff4d8d;}
+.dark-mode form button {background: linear-gradient(135deg, #ff4d8d, #9c4dff);border-color: #ff4d8d;color: white;}
+.dark-mode .no-data {color: #ff4d8d;}
+/* Botón de modo oscuro */
+.theme-toggle {
+position: fixed;
+bottom: 20px;
+right: 20px;
+width: 50px;
+height: 50px;
+border-radius: 50%;
+background: #0f8b8d;
+color: white;
+border: none;
+cursor: pointer;
+font-size: 24px;
+display: flex;
+align-items: center;
+justify-content: center;
+box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+transition: all 0.3s ease;
+z-index: 1000;
+}
+/*Hovers*/
+.theme-toggle:hover {transform: scale(1.1);background: #3fe0d0;}
+.dark-mode .theme-toggle {background: #ff4d8d;}
+.dark-mode .theme-toggle:hover {background: #9c4dff;}

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloMViDex Admin Pro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #ec4899;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --dark: #1f2937;
+      --light: #f9fafb;
+      --gray: #6b7280;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .dashboard {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    /* Header Styles */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .title-section h1 {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-section p {
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    .stats {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #f3f4f6, #ffffff);
+      padding: 12px 24px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .stat-number {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--gray);
+    }
+
+    /* Tabs */
+    .tabs-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 10px 20px;
+      background: white;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--gray);
+      transition: all 0.3s ease;
+    }
+
+    .tab:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .tab.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+
+    .current-dir-badge {
+      background: #e5e7eb;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    /* Filters */
+    .filters-section {
+      margin-top: 20px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 250px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 12px 16px 12px 44px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+    }
+
+    .filter-select {
+      padding: 12px 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      min-width: 160px;
+      cursor: pointer;
+    }
+
+    .filter-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Upload Area */
+    .upload-area {
+      background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .upload-area h3 {
+      margin-bottom: 16px;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .upload-form {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .upload-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .upload-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Player */
+    .player-section {
+      background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+      border-radius: 16px;
+      padding: 20px;
+      color: white;
+      margin: 24px 0;
+    }
+
+    .player-section h3 {
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .player-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .track-info {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .track-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--secondary);
+    }
+
+    .track-file {
+      font-size: 0.875rem;
+      color: #9ca3af;
+    }
+
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 2;
+      min-width: 300px;
+    }
+
+    audio {
+      width: 100%;
+      height: 40px;
+    }
+
+    /* Table */
+    .table-container {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: linear-gradient(135deg, #f3f4f6, #ffffff);
+      padding: 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--dark);
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    td {
+      padding: 16px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #f9fafb;
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-play {
+      background: var(--success);
+      color: white;
+    }
+
+    .btn-play:hover {
+      background: #0d9488;
+      transform: translateY(-2px);
+    }
+
+    .btn-edit {
+      background: var(--warning);
+      color: white;
+    }
+
+    .btn-edit:hover {
+      background: #d97706;
+      transform: translateY(-2px);
+    }
+
+    .btn-delete {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+      transform: translateY(-2px);
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 48px !important;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 400px;
+      width: 90%;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal h3 {
+      margin-bottom: 20px;
+      color: var(--dark);
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+    }
+
+    .modal-actions button {
+      padding: 8px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .modal-save {
+      background: var(--primary);
+      color: white;
+    }
+
+    .modal-cancel {
+      background: #e5e7eb;
+      color: var(--dark);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--dark);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 8px;
+      animation: slideInRight 0.3s ease;
+      z-index: 1000;
+    }
+
+    @keyframes slideInRight {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .toast.success {
+      background: var(--success);
+    }
+
+    .toast.error {
+      background: var(--danger);
+    }
+
+    .toast.warning {
+      background: var(--warning);
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-top">
+        <div class="title-section">
+          <h1>FloMViDex Admin Pro</h1>
+          <p>Gestión avanzada de música Maidcore</p>
+        </div>
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-number" id="total-tracks">0</div>
+            <div class="stat-label">Tracks totales</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="active-dir-count">0</div>
+            <div class="stat-label">En directorio</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number" id="storage-used">0 MB</div>
+            <div class="stat-label">Almacenamiento</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs-container">
+        <div class="tabs">
+          <div class="tab active" data-dir="mc1">🎵 Maidcore 1.0</div>
+          <div class="tab" data-dir="mc2">🎵 Maidcore 2.0</div>
+          <div class="tab" data-dir="mc3">🎵 Maidcore 3.0</div>
+          <div class="tab" data-dir="mc4">🎵 Maidcore 4.0</div>
+        </div>
+        <div class="current-dir-badge" id="current-dir-badge">
+          📁 mc1
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters-section">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="Buscar por título o archivo...">
+        </div>
+        <select id="extension-filter" class="filter-select">
+          <option value="all">🎵 Todas las extensiones</option>
+          <option value="mp3">🎵 Solo MP3</option>
+          <option value="wav">🎵 Solo WAV</option>
+          <option value="flac">🎵 Solo FLAC</option>
+        </select>
+        <select id="sort-filter" class="filter-select">
+          <option value="id">🔢 Por ID</option>
+          <option value="title">📝 Por título</option>
+          <option value="file">📁 Por archivo</option>
+        </select>
+      </div>
+
+      <!-- Upload Area -->
+      <div class="upload-area">
+        <h3>📤 Subir nuevos tracks</h3>
+        <form id="create-form" class="upload-form">
+          <div class="form-group">
+            <label>Título base (opcional)</label>
+            <input type="text" name="title" placeholder="Ej: Maidcore Session">
+          </div>
+          <div class="form-group">
+            <label>Archivos MP3</label>
+            <input type="file" name="files" accept=".mp3,.wav,.flac" multiple required>
+          </div>
+          <button type="submit" class="upload-btn">
+            📤 Subir archivos
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Player Section -->
+    <div class="player-section">
+      <h3>🎧 Reproductor actual</h3>
+      <div class="player-container">
+        <div class="track-info">
+          <div class="track-title" id="current-track-title">Ningún track seleccionado</div>
+          <div class="track-file" id="current-track-file">-</div>
+        </div>
+        <div class="player-controls">
+          <audio id="main-player" controls>
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracks Table -->
+    <div class="table-container">
+      <table id="tracks-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Archivo</th>
+            <th>Tamaño</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Los datos se cargan dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal">
+    <div class="modal-content">
+      <h3>✏️ Editar track</h3>
+      <input type="text" id="edit-title" placeholder="Nuevo título">
+      <input type="text" id="edit-file" placeholder="Nuevo nombre de archivo">
+      <div class="modal-actions">
+        <button class="modal-cancel" onclick="closeEditModal()">Cancelar</button>
+        <button class="modal-save" onclick="saveEdit()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Base de datos simulada con metadatos
+    const tracksByDirectory = {
+      mc1: [
+        { id: 1, title: 'Maidcore Intro', file: 'maidcore_intro.mp3', size: 3.2, format: 'mp3' },
+        { id: 2, title: 'FloMViDex Theme', file: 'flomvidex_theme.mp3', size: 4.1, format: 'mp3' },
+        { id: 3, title: 'Sakura Dreams', file: 'sakura_dreams.wav', size: 8.5, format: 'wav' }
+      ],
+      mc2: [
+        { id: 1, title: 'Maidcore 2.0 – Café', file: 'maidcore_cafe.flac', size: 12.3, format: 'flac' },
+        { id: 2, title: 'Neon Tokyo', file: 'neon_tokyo.mp3', size: 3.8, format: 'mp3' }
+      ],
+      mc3: [
+        { id: 1, title: 'Cyberpunk Maid', file: 'cyberpunk_maid.mp3', size: 4.5, format: 'mp3' }
+      ],
+      mc4: []
+    };
+
+    let currentDirectory = 'mc1';
+    let nextIdByDirectory = {
+      mc1: 4,
+      mc2: 3,
+      mc3: 2,
+      mc4: 1
+    };
+
+    let currentEditId = null;
+    let toastTimeout = null;
+
+    // Elementos DOM
+    const elements = {
+      tabs: document.querySelectorAll('.tab'),
+      tableBody: document.getElementById('table-body'),
+      currentDirBadge: document.getElementById('current-dir-badge'),
+      createForm: document.getElementById('create-form'),
+      searchInput: document.getElementById('search-input'),
+      extensionFilter: document.getElementById('extension-filter'),
+      sortFilter: document.getElementById('sort-filter'),
+      mainPlayer: document.getElementById('main-player'),
+      currentTrackTitle: document.getElementById('current-track-title'),
+      currentTrackFile: document.getElementById('current-track-file'),
+      totalTracks: document.getElementById('total-tracks'),
+      activeDirCount: document.getElementById('active-dir-count'),
+      storageUsed: document.getElementById('storage-used'),
+      editModal: document.getElementById('edit-modal'),
+      editTitle: document.getElementById('edit-title'),
+      editFile: document.getElementById('edit-file')
+    };
+
+    // Event listeners
+    elements.tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        elements.tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentDirectory = tab.dataset.dir;
+        updateCurrentDirBadge();
+        loadTracks();
+        updateStats();
+      });
+    });
+
+    elements.searchInput.addEventListener('input', debounce(loadTracks, 300));
+    elements.extensionFilter.addEventListener('change', loadTracks);
+    elements.sortFilter.addEventListener('change', loadTracks);
+
+    elements.createForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      uploadFiles();
+    });
+
+    // Funciones de utilidad
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    function showToast(message, type = 'success') {
+      if (toastTimeout) clearTimeout(toastTimeout);
+      
+      const existingToast = document.querySelector('.toast');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+
+      toastTimeout = setTimeout(() => {
+        toast.remove();
+        toastTimeout = null;
+      }, 3000);
+    }
+
+    function formatBytes(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function updateCurrentDirBadge() {
+      elements.currentDirBadge.textContent = `📁 ${currentDirectory}`;
+    }
+
+    function updateStats() {
+      // Calcular total de tracks
+      const total = Object.values(tracksByDirectory).reduce((acc, curr) => acc + curr.length, 0);
+      elements.totalTracks.textContent = total;
+
+      // Tracks en directorio actual
+      const currentCount = tracksByDirectory[currentDirectory].length;
+      elements.activeDirCount.textContent = currentCount;
+
+      // Calcular almacenamiento usado (simulado)
+      const totalSize = Object.values(tracksByDirectory)
+        .flat()
+        .reduce((acc, track) => acc + (track.size || 0), 0);
+      elements.storageUsed.textContent = totalSize.toFixed(1) + ' MB';
+    }
+
+    function loadTracks() {
+      const tracks = tracksByDirectory[currentDirectory] || [];
+      const searchTerm = elements.searchInput.value.toLowerCase();
+      const extFilter = elements.extensionFilter.value;
+      const sortBy = elements.sortFilter.value;
+
+      // Aplicar filtros
+      let filtered = tracks.filter(track => {
+        const matchesSearch = 
+          track.title.toLowerCase().includes(searchTerm) ||
+          track.file.toLowerCase().includes(searchTerm);
+        
+        const matchesExt = extFilter === 'all' ? true : track.format === extFilter;
+        
+        return matchesSearch && matchesExt;
+      });
+
+      // Aplicar ordenamiento
+      filtered.sort((a, b) => {
+        if (sortBy === 'id') return a.id - b.id;
+        if (sortBy === 'title') return a.title.localeCompare(b.title);
+        if (sortBy === 'file') return a.file.localeCompare(b.file);
+        return 0;
+      });
+
+      renderTable(filtered);
+      updateStats();
+    }
+
+    function renderTable(tracks) {
+      if (tracks.length === 0) {
+        elements.tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" class="no-data">
+              📭 No hay tracks en este directorio con los filtros actuales
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      elements.tableBody.innerHTML = tracks.map(track => `
+        <tr>
+          <td>#${track.id}</td>
+          <td>
+            <strong>${track.title}</strong>
+            <div style="font-size: 0.75rem; color: var(--gray); margin-top: 4px;">
+              Formato: ${track.format.toUpperCase()}
+            </div>
+          </td>
+          <td>${track.file}</td>
+          <td>${track.size} MB</td>
+          <td>
+            <div class="actions">
+              <button class="btn btn-play" onclick="playTrack(${track.id})">
+                ▶️ Play
+              </button>
+              <button class="btn btn-edit" onclick="openEditModal(${track.id})">
+                ✏️ Editar
+              </button>
+              <button class="btn btn-delete" onclick="deleteTrack(${track.id})">
+                🗑️ Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function playTrack(id) {
+      const track = tracksByDirectory[currentDirectory].find(t => t.id === id);
+      if (!track) return;
+
+      // Simular ruta de archivo
+      const audioUrl = `/audio/${currentDirectory}/${track.file}`;
+      
+      elements.mainPlayer.src = audioUrl;
+      elements.mainPlayer.play().catch(() => {
+        showToast('No se pudo reproducir el archivo', 'error');
+      });
+
+      elements.currentTrackTitle.textContent = track.title;
+      elements.currentTrackFile.textContent = track.file;
+      
+      showToast(`Reproduciendo: ${track.title}`);
+    }
+
+    function openEditModal(id) {
+      const track = tracksByDirectory[currentDirectory].find(t => t.id === id);
+      if (!track) return;
+
+      currentEditId = id;
+      elements.editTitle.value = track.title;
+      elements.editFile.value = track.file;
+      elements.editModal.style.display = 'flex';
+    }
+
+    function closeEditModal() {
+      elements.editModal.style.display = 'none';
+      currentEditId = null;
+    }
+
+    function saveEdit() {
+      if (!currentEditId) return;
+
+      const track = tracksByDirectory[currentDirectory].find(t => t.id === currentEditId);
+      if (!track) return;
+
+      const newTitle = elements.editTitle.value.trim();
+      const newFile = elements.editFile.value.trim();
+
+      if (!newTitle || !newFile) {
+        showToast('Todos los campos son requeridos', 'error');
+        return;
+      }
+
+      track.title = newTitle;
+      track.file = newFile;
+      
+      closeEditModal();
+      loadTracks();
+      showToast('Track actualizado correctamente');
+    }
+
+    function deleteTrack(id) {
+      if (!confirm('¿Estás seguro de eliminar este track?')) return;
+
+      const index = tracksByDirectory[currentDirectory].findIndex(t => t.id === id);
+      if (index !== -1) {
+        const track = tracksByDirectory[currentDirectory][index];
+        tracksByDirectory[currentDirectory].splice(index, 1);
+        loadTracks();
+        showToast(`Track "${track.title}" eliminado`, 'warning');
+      }
+    }
+
+    function uploadFiles() {
+      const formData = new FormData(elements.createForm);
+      const titleBase = formData.get('title')?.trim() || '';
+      const files = formData.getAll('files');
+
+      if (!files || files.length === 0) {
+        showToast('Selecciona al menos un archivo', 'error');
+        return;
+      }
+
+      let uploadedCount = 0;
+
+      files.forEach((file, index) => {
+        if (!file || !file.name) return;
+
+        const extension = file.name.split('.').pop().toLowerCase();
+        const title = titleBase 
+          ? (files.length > 1 ? `${titleBase} (${index + 1})` : titleBase)
+          : file.name.replace(`.${extension}`, '');
+
+        const newTrack = {
+          id: nextIdByDirectory[currentDirectory]++,
+          title: title,
+          file: file.name,
+          size: (Math.random() * 5 + 2).toFixed(1), // Simular tamaño
+          format: extension
+        };
+
+        tracksByDirectory[currentDirectory].push(newTrack);
+        uploadedCount++;
+      });
+
+      elements.createForm.reset();
+      loadTracks();
+      showToast(`${uploadedCount} archivo(s) subido(s) correctamente`);
+    }
+
+    // Inicializar
+    updateCurrentDirBadge();
+    loadTracks();
+    updateStats();
+  </script>
+</body>
+</html>

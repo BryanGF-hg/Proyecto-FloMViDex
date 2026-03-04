@@ -1,0 +1,24 @@
+.lang-toggle {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #0f8b8d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  font-weight: bold;
+}
+
+.lang-toggle:hover {transform: scale(1.1);background: #3fe0d0;}
+.dark-mode .lang-toggle {background: #ff4d8d;}
+.dark-mode .lang-toggle:hover {background: #9c4dff;}
