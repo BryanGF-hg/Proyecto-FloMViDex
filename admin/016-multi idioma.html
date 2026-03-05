@@ -32,8 +32,8 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
 /* PLAYER */
 #header-player{width:100%;border:3px solid #ffd86b;border-radius:12px;animation:led 2.2s infinite ease-in-out}
   </style>
-   <link rel="stylesheet" href="css/boton lenguaje.css">
-   <link rel="stylesheet" href="css/modo oscuro.css">  
+   <link rel="stylesheet" href="css/016-boton lenguaje.css">
+   <link rel="stylesheet" href="css/017-modo oscuro.css">  
 </head>
 <body>
     <header>
@@ -102,10 +102,10 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       </thead> 
       <tbody></tbody>
     </table>
-    
-    <button class="theme-toggle" id="theme-toggle" title="Cambiar modo oscuro/claro">🌙</button>  <!-- Botón de modo oscuro -->
-    <button class="lang-toggle" id="lang-toggle" title="Cambiar idioma">EN</button>               <!-- Botón de idioma -->
-
+<!-- Botón de modo oscuro -->    
+    <button class="theme-toggle" id="theme-toggle" title="Cambiar modo oscuro/claro">🌙</button> 
+<!-- Botón de idioma -->       
+    <button class="lang-toggle" id="lang-toggle" title="Cambiar idioma">EN</button> 
 <script>
   // CONFIG
   // Si el frontend se sirve desde el mismo host:puerto que FastAPI, podemos usar rutas relativas sin http://localhost:8000
@@ -533,62 +533,59 @@ createForm.addEventListener('submit', async (e) => {
         themeToggle.textContent = '☀️';localStorage.setItem('flomvidex_theme', 'dark'); } else {
         themeToggle.textContent = '🌙';localStorage.setItem('flomvidex_theme', 'light');}          }); 
   
-// CAMBIO DE IDIOMA
+ // Cambio de idioma
     let translations = {};
     let currentLang = localStorage.getItem('flomvidex_lang') || 'es';
-    async function loadTranslations()       {
-        const res = await fetch('traducciones.json');
-        translations = await res.json();    }
-        
+    
+    async function loadTranslations() {
+      const res = await fetch('css/traducciones.json');
+      translations = await res.json();
+    }
+    
     function t(key, vars = {}) {
       let text = translations[currentLang]?.[key] || key;
       for (const k in vars) {
-       text = text.replace(`{${k}}`, vars[k]);  };
-      return text;                           }
-  
+        text = text.replace(`{${k}}`, vars[k]);
+      }
+      return text;
+    }
+    
     function applyTranslations() {
-        // Título
-        document.title = t("title");
-        document.querySelector("header h1").textContent = t("title");
-        // Directorio actual
-        const h3 = document.querySelector("#current-directory-label h3");
-        h3.textContent = t("current_dir");
-        // Buscador
-        searchInput.placeholder = t("search_placeholder");
-        // Select extensiones
-        const opts = extensionFilter.querySelectorAll("option");
-        opts[0].textContent = t("all_extensions");
-        opts[1].textContent = t("only_opus");
-        opts[2].textContent = t("only_mp3");
-        // Botones
-        deleteSelectedBtn.textContent = t("delete_selected");
-        exportJsonBtn.textContent    = t("export_json");
-        // H2: reproductor + create
-        const h2s = document.querySelectorAll("header h2");
-        h2s[0].textContent = t("player_title");
-        h2s[1].textContent = t("create_title");
-        // Placeholders create
-        document.querySelector("input[name=title]").placeholder  = t("title_placeholder");
-        document.querySelector("input[name=artist]").placeholder = t("artist_placeholder");
-        document.querySelector("input[name=tags]").placeholder   = t("tags_placeholder");
-        document.querySelector("#create-form button").textContent = t("upload_btn");
-        // Botón IDIOMA
-        document.getElementById("lang-toggle").textContent = currentLang === "es" ? "EN" : "ES";
-    }  
+      document.title = t("title");
+      document.querySelector("header h1").textContent = t("title");
+      
+      const h3 = document.querySelector("#current-directory-label h3");
+      h3.textContent = t("current_dir");
+      
+      searchInput.placeholder = t("search_placeholder");
+      
+      const opts = extensionFilter.querySelectorAll("option");
+      opts[0].textContent = t("all_extensions");
+      opts[1].textContent = t("only_opus");
+      opts[2].textContent = t("only_mp3");
+      
+      deleteSelectedBtn.textContent = t("delete_selected");
+      exportJsonBtn.textContent    = t("export_json");
+      
+      const h2s = document.querySelectorAll("header h2");
+      h2s[0].textContent = t("player_title");
+      h2s[1].textContent = t("create_title");
+      
+      document.querySelector("input[name=title]").placeholder  = t("title_placeholder");
+      document.querySelector("input[name=artist]").placeholder = t("artist_placeholder");
+      document.querySelector("input[name=tags]").placeholder   = t("tags_placeholder");
+      document.querySelector("#create-form button").textContent = t("upload_btn");
+      
+      document.getElementById("lang-toggle").textContent = currentLang === "es" ? "EN" : "ES";
+    }
 
-    const langToggle = document.getElementById('lang-toggle');  
+    const langToggle = document.getElementById('lang-toggle');
     langToggle.addEventListener("click", () => {
-        currentLang = currentLang === "es" ? "en" : "es";
-        localStorage.setItem("flomvidex_lang", currentLang);
-        applyTranslations();
-        loadTracks(); // refresca textos dinámicos
-    });    
-    (async () => {
-        await loadTranslations();
-        applyTranslations();
-        updateDirectoryLabel();
-        fetchTracks(currentDirectory);
-    })();
+      currentLang = currentLang === "es" ? "en" : "es";
+      localStorage.setItem("flomvidex_lang", currentLang);
+      applyTranslations();
+      loadTracks();
+    });
     
   
 // Botón "Exportar JSON del directorio"
