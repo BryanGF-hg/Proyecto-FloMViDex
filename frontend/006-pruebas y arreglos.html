@@ -9,17 +9,17 @@
 * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Tahoma","Arial",sans-serif; font-size: 11px;}
 body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/wallpaper/wallpaper-v0-ww00n61..._imresizer.png'); height: 100vh; overflow: hidden;}
 
-.window {width: 300px; height: 400px; background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 4px 4px 10px rgba(0,0,0,0.5);}
+.window {width: 300px; height: 400px; background-color: #c0c0c0; border-top: 1px solid; border-top-color: #fff; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 4px 4px 10px rgba(0,0,0,0.5);}
       .window-title {padding-left: 5px;}
       .window-content {padding: 10px; height: calc(100% - 28px); overflow: auto;}
       .window-controls {display: flex;}
-      .title-bar {background-image:linear-gradient(to right, #ce2e37, #d2771e, #d4cb1f, #81c220, #2582b5, #8f289f, #bd2f68); color: white; padding: 4px; height: 28px; display: flex; align-items: center; justify-content: space-between; font-weight: bold; font-size: 12px;}
+      .title-bar {background-image:linear-gradient(to right, #ce2e37, #d2771e, #d4cb1f, #81c220, #2582b5, #8f289f, #bd2f68); color: white; padding: 4px; height: 28px; display: flex; align-items: center; justify-content: space-between; font-weight: bolder;}
 
       .control-btn {width: 20px; height: 20px; margin-left: 2px; background-color: #c0c0c0; border: 1px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 10px; cursor: pointer;}
       .control-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
 
 /* Navegador de directorios */
-      .dir-nav {height:58px;background-color: #c0c0c0; border: 2px inset; padding: 5px;display: flex; gap:1px;}
+      .dir-nav {height:58px;background-color: #c0c0c0; border: 2px inset; padding: 4px;display: flex;}
       .dir-btn {background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; cursor: pointer; font-weight: bold;}
       .dir-btn.active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff; background-color: #000080; color: white;}
       .dir-stats {margin-left: auto; color: #000080; font-weight: bold; padding: 5px;}
@@ -33,7 +33,7 @@ body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyec
 /* Contenedor de lista de canciones */
       .playlist-container {background-color: #c0c0c0; border: 2px inset;}
       .playlist-header {font-weight: bold; padding: 5px; margin-bottom: 5px; background: linear-gradient(90deg, #000080, #1084d0); color: white;}
-      .playlist {background-color: white; border: 2px inset; height: 300px; overflow-y: auto;}
+      .playlist {background-color: white; border: 2px inset; height: 170px; overflow-y: auto;}
       .playlist-item {padding: 5px 8px; cursor: pointer; border-bottom: 1px dotted #c0c0c0; display: flex; align-items: center; gap: 10px;}
       .playlist-item.active {background-color: #000080; color: white; font-weight: bold;}
       .playlist-number {color: #808080; width: 30px;}
@@ -105,7 +105,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
 <!-- BARRA DE TAREAS (TASKBAR) -->
 <footer class="taskbar">
   <div class="start-btn" onclick="toggleStartMenu()">
-      <div class="start-icon">F</div>
+      <div class="start-icon"><img src="https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/Logo/medevil%20100x100.png" style="width:15px; height:15px;"></div>
       Start
   </div>    
   <div class="taskbar-items">
@@ -120,12 +120,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
         // Mismo LS que el admin
         const LS_KEY = 'flomvidex_tracks_v1';
         // Mapa lógico -> carpeta física
-        const DIR_PATHS = {
-          mc1: 'maidcore 1.0',
-          mc2: 'maidcore 2.0',
-          mc3: 'maidcore 3.0',
-          mc4: 'maidcore 4.0'
-        };    
+        const DIR_PATHS = { mc1: 'maidcore 1.0',  mc2: 'maidcore 2.0',  mc3: 'maidcore 3.0',  mc4: 'maidcore 4.0' };    
         const DIR_CONFIG = {
             mc1: { name: 'maidcore 1.0', path: 'maidcore 1.0', count: 470 },
             mc2: { name: 'maidcore 2.0', path: 'maidcore 2.0', count: 453 },
@@ -139,7 +134,6 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
         const audio = new Audio();
         const audioPlayer = document.getElementById('audio-player');        
         const playlistHeader = document.getElementById('playlist');        
-
 // Cargar tracks desde localStorage (los del Admin, SUPONIENDO QUE SE CARGA PRIMERO ADMIN CON LOS TRACKS EN CADA DIRECTORIO antes de EMPEZAR A USAR EL FRONT-END, MUY IMPORTANTE!!)
         function loadTracksFromLocalStorage() {
           let data = {};
@@ -446,9 +440,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
                         windowEl.style.width = '100%';windowEl.style.height = 'calc(100vh - 40px)';windowEl.style.top = '0';windowEl.style.left = '0';windowEl.style.transform = 'none';
                     }
                 } else if (index === 2) {                   // Cerrar
-                    if (confirm('Close MaidCore Player?')) {
-                        windowEl.style.display = 'none';document.querySelector('.taskbar-item').textContent = 'MaidCore Player [Closed]';document.querySelector('.taskbar-item').classList.remove('active');
-                    }
+                        windowEl.style.display = 'none';document.querySelector('.taskbar-item').textContent = 'MaidCore Player';document.querySelector('.taskbar-item').classList.remove('active');
                 }
             });
         });
