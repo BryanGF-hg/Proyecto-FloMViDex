@@ -13,7 +13,7 @@ body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyec
       .window-title {padding-left: 5px;}
       .window-content {padding: 10px; height: calc(100% - 28px); overflow: auto;}
       .window-controls {display: flex;}
-      .title-bar {background-image:linear-gradient(to right, #ce2e37, #d2771e, #d4cb1f, #81c220, #2582b5, #8f289f, #bd2f68); color: white; padding: 4px; height: 28px; display: flex; align-items: center; justify-content: space-between; font-weight: bolder;}
+      .title-bar {background-image:linear-gradient(to right, #ce2e37, #d2771e, #d4cb1f, #81c220, #2582b5, #8f289f, #bd2f68); color: white; padding: 4px; height: 28px; display: flex; align-items: center; justify-content: space-between; font-weight: bolder;user-select: none;}
 
       .control-btn {width: 20px; height: 20px; margin-left: 2px; background-color: #c0c0c0; border: 1px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 10px; cursor: pointer;}
       .control-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
@@ -133,7 +133,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
         let playlist = [];
         const audio = new Audio();
         const audioPlayer = document.getElementById('audio-player');        
-        const playlistHeader = document.getElementById('playlist');        
+        const playlistHeader = document.getElementById('playlist');                
 // Cargar tracks desde localStorage (los del Admin, SUPONIENDO QUE SE CARGA PRIMERO ADMIN CON LOS TRACKS EN CADA DIRECTORIO antes de EMPEZAR A USAR EL FRONT-END, MUY IMPORTANTE!!)
         function loadTracksFromLocalStorage() {
           let data = {};
@@ -168,13 +168,12 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
           // Si no hay nada en localStorage, fallback a dummy songs
           if (!playlist.length) {
             playlist = [
-              { title: "Sakura Electronica - Cherry Blossom Dreams", duration: "3:45", file: "", dir: "mc1" },
-              { title: "Kawaii Circuit - Digital Heartbeat",        duration: "4:12", file: "", dir: "mc1" },
-              { title: "Maid² - Binary Love",                       duration: "3:28", file: "", dir: "mc1" },
-              { title: "Tokyo Wave - Neon Streets",                 duration: "5:01", file: "", dir: "mc1" },
+              { title: "Sakura Electronica - Cherry Blossom Dreams",   duration: "3:45", file: "", dir: "mc1" },
+              { title: "Kawaii Circuit - Digital Heartbeat",           duration: "4:12", file: "", dir: "mc1" },
+              { title: "Maid² - Binary Love",                          duration: "3:28", file: "", dir: "mc1" },
+              { title: "Tokyo Wave - Neon Streets",                    duration: "5:01", file: "", dir: "mc1" },
               { title: "Valencia Otaku Ensemble - Mediterranean Maid", duration: "4:33", file: "", dir: "mc1" }
-            ];
-          }
+            ];                  }
 
           currentIndex = 0;
         }
@@ -186,28 +185,28 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
                 if (!res.ok) throw new Error("Error al cargar tracks");
 
                 playlist = await res.json();
-                playlistHeader.textContent =
-                    `📁 ${dir.toUpperCase()} - ${playlist.length} tracks`;
+                playlistHeader.textContent = `📁 ${dir.toUpperCase()} - ${playlist.length} tracks`;
 
                 currentIndex = 0;
                 renderPlaylist();
                 updateDisplay();
-            } catch (err) {
-                console.error("ERROR cargando backend:", err);
-            }
+            } catch (err) { console.error("ERROR cargando backend:", err);  }
         }
 
 
         function renderPlaylist() {
           const playlistEl = document.getElementById('playlist');
-          playlistEl.innerHTML = '<div style="font-weight: bold; margin-bottom: 5px;">Playlist:</div>';
-
+          const dirs = [...new Set(playlist.map(t => t.dir?.toUpperCase() || ''))]  .filter(directorio => directorio !== '');
+          playlistEl.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">
+              Playlist: [${dirs.join(', ')}]
+            </div>
+                                `;
           playlist.forEach((track, index) => {
             const item = document.createElement('div');
             item.className = 'playlist-item' + (index === currentIndex ? ' active' : '');
-            const dirLabel = track.dir ? track.dir.toUpperCase() : '';
             const num = String(index + 1).padStart(2, '0');
-            item.textContent = `${num}. [${dirLabel}] ${track.title}`;
+            item.textContent = `${num}. ${track.title}`;
             item.addEventListener('click', () => selectSong(index));
             playlistEl.appendChild(item);
           });
@@ -339,7 +338,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
         
 
 
-// Funciones de la "taskbar"
+// Funciones de la "TASKBAR"
         function focusWindow() {            document.querySelector('.window').style.zIndex = '1000';        }
                 
         function toggleStartMenu() {            alert('[Start Menu]\n\nPrograms:\n• MaidCore Player\n• MaidCore Explorer\n• MaidCore Browser\n\nDocuments\n• Settings\n• Help\n• About\n\nShut Down...');        }
@@ -349,7 +348,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
 // Reloj en tiempo real, Inicia y luego se llama a la funcion
         function updateClock() {const now = new Date(); const time = now.toLocaleTimeString('es-ES', { hour12: false }); document.getElementById('clock').textContent = time;}
         setInterval(updateClock, 1000);
-          updateClock();
+        updateClock();
 
 
 // Cambiar de directorio que va a la par con los Event listeners para directorios
@@ -423,36 +422,37 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
             windowEl.style.top = newTop + 'px';
             windowEl.style.transform = 'none';            
       }
-
-        function stopDrag() { isDragging = false; windowEl.style.cursor = 'default';}
+      function stopDrag() { isDragging = false; windowEl.style.cursor = 'default';}
        
 // Control de botones de ventana
-        document.querySelectorAll('.control-btn').forEach((btn, index) => {
-            btn.addEventListener('click', function() {
-                if (index === 0) {                          // Minimizar
-                    windowEl.style.display = 'none';
-                    document.querySelector('.taskbar-item').textContent = 'MaidCore Player [Minimized]';
-                } else if (index === 1) {                   // Maximizar/Restaurar
-                    if (windowEl.style.width === '100%') {
-                        windowEl.style.width = '700px';windowEl.style.height = '500px';
-                        windowEl.style.top = '50%';windowEl.style.left = '50%';windowEl.style.transform = 'translate(-50%, -50%)';
-                    } else {
-                        windowEl.style.width = '100%';windowEl.style.height = 'calc(100vh - 40px)';windowEl.style.top = '0';windowEl.style.left = '0';windowEl.style.transform = 'none';
-                    }
-                } else if (index === 2) {                   // Cerrar
-                        windowEl.style.display = 'none';document.querySelector('.taskbar-item').textContent = 'MaidCore Player';document.querySelector('.taskbar-item').classList.remove('active');
-                }
-            });
-        });
+      const playlistDiv = document.getElementById('playlist');
+      document.querySelectorAll('.control-btn').forEach((btn, index) => {
+          btn.addEventListener('click', function() {
+              if (index === 0) {                          // Minimizar
+                  windowEl.style.display = 'none';
+                  document.querySelector('.taskbar-item').textContent = 'MaidCore Player [Minimized]';
+              } else if (index === 1) {                  
+                  if (windowEl.style.width === '100%') {
+                      windowEl.style.width = '300px'; windowEl.style.height = '400px';
+                      windowEl.style.top = '50%';windowEl.style.left = '50%';windowEl.style.transform = 'translate(-50%, -50%)';
+                  } else {                                // Maximizar/Restaurar
+                      windowEl.style.width = '100%';windowEl.style.height = 'calc(100vh - 40px)';windowEl.style.top = '0';windowEl.style.left = '0';windowEl.style.transform = 'none';   if (playlistDiv) {playlistDiv.style.height = '320px';}
+                  }
+              } else if (index === 2) {                   // Cerrar
+                      windowEl.style.display = 'none';document.querySelector('.taskbar-item').textContent = 'MaidCore Player';document.querySelector('.taskbar-item'); 
+              }
+          });
+      });
 
-        // Restaurar ventana desde taskbar
-        document.querySelector('.taskbar-item').addEventListener('click', function() {
-            windowEl.style.display = 'block';   this.textContent = 'MaidCore Player';     this.classList.add('active');        });
-        
-      // Inicializar FLOMVIDEX!
-      loadSongsFromDirectory('mc1');      
-      renderPlaylist();
-      updateDisplay();        
-    </script>
+      // Restaurar ventana desde taskbar
+      document.querySelector('.taskbar-item').addEventListener('click', function() {
+   windowEl.style.display = 'block';windowEl.style.top = '50%';windowEl.style.left = '50%';windowEl.style.transform = 'translate(-50%, -50%)';
+   this.textContent = 'MaidCore Player';     this.classList.add('active');        });
+      
+    // Inicializar FLOMVIDEX!
+    loadSongsFromDirectory('mc1');      
+    renderPlaylist();
+    updateDisplay();        
+  </script>
 </body>
 </html>
