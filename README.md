@@ -53,13 +53,21 @@ Proyecto-FloMViDex/
 010-Aspectos sobre la calidad del proyecto           5
 011-Presentación en público de las ideas más relevantes	5
 **003-Propuesta de empresa spin off                                 6**
+
 001-Temporalización de las secuencias de actividades                6
+
 002-Determinacion de recursos y logística de cada actividad         6
+
 003-Permisos y autorizaciones necesarios                            6
+
 004-Actividades que implican riesgos                                6
+
 005-PRL                                                             6
+
 006-Recursos materiales y humanos de cada actividad                 6
+
 007-Posibles imprevistos                                            7
+
 008-Documentación necesaria                                         7
 **004-Relacion de unidad de empresa	8**
 001-Procedimiento de seguimiento de las actividades	8
