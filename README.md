@@ -40,17 +40,17 @@ Proyecto-FloMViDex/
 007-Valoracion de recursos humanos y materiales      3
 008-Realización de seguimiento                       3
 009-Desarrollo sostenible                            3
-**002-Selección de un servicio o producto	4**
-001-Identificar las necesidades 2026-01-30	4
-002-Plantear posibles soluciones 2026-01-30	4
-003-Información relativa a las soluciones 2026-02-06	4
-004-Aspectos innovadores	4
-005-Estudio de viabilidad técnica	4
-006-Partes del proyecto 2026-01-30 y 2026-02-06	4
-007-Recursos materiales y humanos necesarios	5
-008-Realización de presupuestos económicos	5
-009-Documentación para el diseño	5
-010-Aspectos sobre la calidad del proyecto	5
+**002-Selección de un servicio o producto            4**
+001-Identificar las necesidades                      4
+002-Plantear posibles soluciones                     4
+003-Información relativa a las soluciones            4
+004-Aspectos innovadores                             4
+005-Estudio de viabilidad técnica                    4
+006-Partes del proyecto                              4
+007-Recursos materiales y humanos necesarios         5
+008-Realización de presupuestos económicos           5
+009-Documentación para el diseño                     5
+010-Aspectos sobre la calidad del proyecto           5
 011-Presentación en público de las ideas más relevantes	5
 **003-Propuesta de empresa spin off	6**
 001-Temporalización de las secuencias de las actividades 2026-02-06	6
