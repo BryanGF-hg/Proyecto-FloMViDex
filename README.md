@@ -30,16 +30,16 @@ Proyecto-FloMViDex/
 
 # MEMORIA:
 **001-Abstracto 2026-01-30 	1**
-**001-Búsqueda de información	2**
-001-Identificar empresas representativas 2026-01-30	2
-002-Estructura de las empresas	2
-003-Características de los departamentos	2
-004-Funciones de cada departamento	2
-005-Evaluacion del volumen de negocio	2
-006-Estrategia para dar respuesta a las demandas	3
-007-Valoracion de recursos humanos y materiales	3
-008-Realización de seguimiento	3
-009-Desarrollo sostenible	3
+**001-Búsqueda de información                        2**
+001-Identificar empresas representativas             2
+002-Estructura de las empresas                       2
+003-Características de los departamentos             2
+004-Funciones de cada departamento                   2
+005-Evaluacion del volumen de negocio                2
+006-Estrategia para dar respuesta a las demandas     3
+007-Valoracion de recursos humanos y materiales      3
+008-Realización de seguimiento                       3
+009-Desarrollo sostenible                            3
 **002-Selección de un servicio o producto	4**
 001-Identificar las necesidades 2026-01-30	4
 002-Plantear posibles soluciones 2026-01-30	4
