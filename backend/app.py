@@ -96,6 +96,8 @@ def scan_media_folders() -> None:
         tracks: List[Track] = []
         next_id = 1
         for f in sorted(folder_path.iterdir()):
+            if f.stem.endswith("_backup"):
+                continue        
             if f.is_file() and f.suffix.lower() in {".mp3", ".opus", ".ogg", ".wav"}:
                 tracks.append(
                     Track(
@@ -248,13 +250,10 @@ async def create_track(
     existing_files = {t.file for t in existing_tracks}      
     if dest_path.exists() and original_name in existing_files:  # 1.- El archivo YA EXISTE y YA ESTÁ REGISTRADO
         raise HTTPException( status_code=400, detail=f"El archivo '{original_name}' ya existe en el directorio {dir}" )     # 2.- Si el archivo existe en disco pero NO en tracks.json (inconsistencia)
-    if dest_path.exists() and original_name not in existing_files: # Renombrar el archivo existente como backup
-        backup_name = f"{dest_path.stem}_backup{dest_path.suffix}"
-        backup_path = dest_dir / backup_name
-        dest_path.rename(backup_path)
-        print(f"[WARN] Archivo huérfano renombrado a {backup_name}") 
+    if dest_path.exists(): # Mostramos warning sin crear audios _backup
+        print(f"[WARN] Archivo huérfano renombrado a {dest_path.name}") 
 
-    # Guardar archivo físico
+    # Guardar archivo físico, ahora sobreescribe si existia
     with dest_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
