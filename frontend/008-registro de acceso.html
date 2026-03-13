@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaidCore Player</title>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/Logo/medevil%20100x100.png">    
+    <style>
+* {margin: 0; padding: 0; box-sizing: border-box; font-family: "Tahoma","Arial",sans-serif; font-size: 11px;}
+body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/wallpaper/wallpaper-v0-ww00n61..._imresizer.png'); height: 100vh; overflow: hidden;}
+
+.window {width: 300px; height: 400px; background-color: #c0c0c0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 4px 4px 10px rgba(0,0,0,0.5);}
+      .window-title {padding-left: 5px;}
+      .window-content {padding: 10px; height: calc(100% - 28px); overflow: auto;}
+      .window-controls {display: flex;}
+      .title-bar {background-image:linear-gradient(to right, #ce2e37, #d2771e, #d4cb1f, #81c220, #2582b5, #8f289f, #bd2f68); color: white; padding: 4px; height: 28px; display: flex; align-items: center; justify-content: space-between; font-weight: bolder;user-select: none;}
+
+      .control-btn {width: 20px; height: 20px; margin-left: 2px; background-color: #c0c0c0; border: 1px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 10px; cursor: pointer;}
+      .control-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
+
+/* Navegador de directorios */
+      .dir-nav {height:58px;background-color: #c0c0c0; border: 2px inset; padding: 4px;display: flex;}
+      .dir-btn {background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; cursor: pointer; font-weight: bold;}
+      .dir-btn.active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff; background-color: #000080; color: white;}
+      .dir-stats {margin-left: auto; color: #000080; font-weight: bold; padding: 5px;}
+
+.player {background-color: #c0c0c0; border: 2px inset; padding: 15px; margin-bottom: 15px; height: 120px;}
+      .player-display {background-color: black; color: #00ff00; padding: 10px;font-family: "Courier New", monospace; font-size: 12px; overflow: hidden; border: 1px inset;margin:-10px;}
+      .player-controls {display: flex; justify-content: center; gap:0px; margin-bottom: 12px; margin-top:10px;}
+      .player-btn {width: 100px; height: 25px; background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; cursor: pointer; font-size: 10px; font-weight: bold;}
+      .player-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
+
+/* Contenedor de lista de canciones */
+      .playlist-container {background-color: #c0c0c0; border: 2px inset;}
+      .playlist-header {font-weight: bold; padding: 5px; margin-bottom: 5px; background: linear-gradient(90deg, #000080, #1084d0); color: white;}
+      .playlist {background-color: white; border: 2px inset; height: 160px; overflow-y: auto;}
+      .playlist-item {padding: 5px 8px; cursor: pointer; border-bottom: 1px dotted #c0c0c0; display: flex; align-items: center; gap: 10px;}
+      .playlist-item.active {background-color: #000080; color: white; font-weight: bold;}
+      .playlist-number {color: #808080; width: 30px;}
+      .playlist-title {flex: 1;}
+      .playlist-duration {color: #808080;}
+      .playlist-item:hover {background-color: #000080; color: white;}      
+      .playlist-item:hover .playlist-number {color: white;}      
+      .playlist-item:hover .playlist-duration {color: white;}
+
+footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; background-color: #c0c0c0; border-top: 2px solid #fff; display: flex; align-items: center; padding: 0 5px;user-select: none;}
+      footer .taskbar-items {display: flex; gap: 5px; flex-grow: 1;}
+      footer .taskbar-item {background-color:#c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; padding: 5px 10px; min-width: 120px; cursor: pointer; font-size: 10px;}
+      footer .taskbar-item.active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
+      footer .start-btn {width: 80px; height: 30px; background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; display: flex; align-items: center; padding: 0 8px; font-weight: bold; font-size: 12px; cursor: pointer; margin-right: 10px;}
+      footer .start-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
+      footer .start-icon {background-color: #008080; color: white; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; margin-right: 5px; font-weight: bold;}
+      footer .clock {background-color:rgb(203, 203, 203); border: 2px inset; padding: 2px 6px; font-size: 12px; min-width: 100px; text-align: center; margin-left: 10px;}
+/* POPUP XP */
+      @keyframes openXP{0%{transform:translate(-50%,-60%);opacity:0}
+      to{transform:translate(-50%,-50%);opacity:1}
+      }
+      .xp-window{width:320px;background:#ece9d8;border:2px solid #003c74;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);font-family:Tahoma;font-size:12px;z-index:5000;box-shadow:0 0 15px rgba(0,0,0,.5);animation:openXP .2s ease-out}
+      .hidden{display:none}
+      .xp-titlebar{background:linear-gradient(180deg,#0a246a,#083a9b);color:#fff;padding:5px;font-weight:700;display:flex;justify-content:space-between;align-items:center}
+      .xp-close{width:18px;height:18px;background:silver;border:2px solid #000;cursor:pointer;font-size:10px;font-weight:700}
+      .xp-content{padding:10px}
+      .xp-input{width:95%;padding:4px;border:2px inset #fff;background:#fff}
+      .xp-btn{border:2px solid;border-color:#fff gray gray #fff;padding:4px 10px;cursor:pointer;background:silver}
+
+
+::-webkit-scrollbar {width: 16px;}
+  ::-webkit-scrollbar-track {background-color: #c0c0c0; border: 1px inset;}
+  ::-webkit-scrollbar-thumb {background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080;}
+    </style>
+</head>
+<body>
+<!-- Elemento de audio oculto -->   <audio id="audio-player" style="display: none;"></audio>
+<div class="window">                <!-- La GRAN ventana del player! -->
+    <div class="title-bar">
+      <div class="window-title">MaidCore Player v1.2.3 (1515 tracks)</div>
+      <div class="window-controls">
+          <div class="control-btn">_</div>
+          <div class="control-btn">□</div>
+          <div class="control-btn">X</div>
+      </div>
+    </div>
+        
+    <div class="window-content">
+<!-- Navegador de directorios -->
+      <div class="dir-nav">
+          <button class="dir-btn active" data-dir="mc1">maidcore 1.0</button>
+          <button class="dir-btn" data-dir="mc2">maidcore 2.0</button>
+          <button class="dir-btn" data-dir="mc3">maidcore 3.0</button>
+          <button class="dir-btn" data-dir="mc4">maidcore 4.0</button>
+      </div>        
+<!-- REPRODUCTOR -->
+        <div class="player">
+            <div class="player-display" id="display">
+                MaidCore Player - Ready<br>
+                -----------------------<br>
+                Now Playing: [Stopped]<br>
+                Time: 00:00 / 00:00
+            </div>
+            
+            <div class="player-controls">
+                <button class="player-btn" onclick="prevSong()">⏮</button>                    
+                <button class="player-btn" onclick="playSong()">▶ Play</button>                
+                <button class="player-btn" onclick="nextSong()">⏭</button>
+            </div>
+            
+<!-- Lista de canciones -->
+          <div class="playlist" id="playlist">
+            <div style="font-weight: bold; margin-bottom: 5px;">Playlist:</div>
+<!-- rellenada por JS -->
+          </div>
+          
+        </div>
+    </div>
+</div>
+<!-- BARRA DE TAREAS (TASKBAR) -->
+<footer class="taskbar">
+  <div class="start-btn" onclick="toggleStartMenu()">
+      <div class="start-icon"><img src="https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/Logo/medevil%20100x100.png" style="width:15px; height:15px;"></div>
+      Start
+  </div>    
+  <div class="taskbar-items">
+      <div class="taskbar-item active" onclick="focusWindow()">MaidCore Player</div>
+      <div class="taskbar-item" onclick="openExplorer()">Random Song</div>
+      <div class="taskbar-item" onclick="openBrowser()"> Albums</div>
+      <div class="taskbar-item" onclick="openPopup()">Registrar acceso</div>      
+  </div>
+  <span class="tray-icon">🔊</span>
+  <span class="tray-icon">📶</span>  
+  <div class="clock" id="clock">14:35:37</div>
+</footer>
+
+<!-- POPUP XP - FORMULARIO DE ACCESO -->
+<div id="xp-popup" class="xp-window hidden">
+    <div class="xp-titlebar">
+        <span>PopUp</span>
+        <button onclick="closePopup()" class="xp-close">X</button>
+    </div>
+
+    <div class="xp-content">
+        <p><b>Identificate si quieres</b></p>
+        <p>Introducete para registrar tu entrada o salida:</p>
+        <form method="POST" action="/api/registro-acceso">
+
+            <label>Nombre:</label><br>
+            <input type="text" name="nombre" class="xp-input" required><br><br>
+            <label>Apellidos:</label><br>
+            <input type="text" name="apellidos" class="xp-input" required><br><br>
+            <label>Acción:</label><br>
+            <select name="accion" class="xp-input" required>
+                <option value="entra">Entro</option>
+                <option value="sale">Salgo</option>
+            </select>
+
+            <br><br>
+            <button type="submit" class="xp-btn">Aceptar</button>
+            <button type="button" class="xp-btn" onclick="closePopup()">Cancelar</button>
+        </form>
+    </div>
+</div>
+
+<script>
+        // Mismo LS que el admin
+        const LS_KEY = 'flomvidex_tracks_v1';
+        // Mapa lógico -> carpeta física
+        const DIR_PATHS = { mc1: 'maidcore 1.0',  mc2: 'maidcore 2.0',  mc3: 'maidcore 3.0',  mc4: 'maidcore 4.0' };    
+        const DIR_CONFIG = {
+            mc1: { name: 'maidcore 1.0', path: 'maidcore 1.0', count: 470 },
+            mc2: { name: 'maidcore 2.0', path: 'maidcore 2.0', count: 453 },
+            mc3: { name: 'maidcore 3.0', path: 'maidcore 3.0', count: 452 },
+            mc4: { name: 'maidcore 4.0', path: 'maidcore 4.0', count: 140 }
+        };        
+        // Variables del reproductor
+        let currentIndex = 0;
+        let isPlaying = false;
+        let playlist = [];
+        const audio = new Audio();
+        const audioPlayer = document.getElementById('audio-player');        
+        const playlistHeader = document.getElementById('playlist');                
+// Cargar tracks desde localStorage (los del Admin, SUPONIENDO QUE SE CARGA PRIMERO ADMIN CON LOS TRACKS EN CADA DIRECTORIO antes de EMPEZAR A USAR EL FRONT-END, MUY IMPORTANTE!!)
+        function loadTracksFromLocalStorage() {
+          let data = {};
+          try {
+            const raw = localStorage.getItem(LS_KEY);
+            data = raw ? JSON.parse(raw) : {};
+          } catch (e) {
+            console.error('Error leyendo flomvidex_tracks_v1:', e);
+            data = {};
+          }
+
+          playlist = [];
+
+          // Aplanar: {mc1:[...], mc2:[...]} -> [ {.., dir:'mc1'}, {.., dir:'mc2'}, ... ]
+          Object.keys(data).forEach(dir => {
+            const arr = data[dir] || [];
+            arr.forEach(track => {
+              playlist.push({
+                ...track,
+                dir    : dir,
+                title  : track.title || track.file || 'Sin título',
+                artist : track.artist || '',
+                tags   : track.tags || []
+              });
+            });
+          });
+
+          // Orden: por directorio, luego por id
+          playlist.sort((a, b) => {if (a.dir < b.dir) return -1;            if (a.dir > b.dir) return 1;
+            return (a.id || 0) - (b.id || 0);          });
+
+          // Si no hay nada en localStorage, fallback a dummy songs
+          if (!playlist.length) {
+            playlist = [
+              { title: "Sakura Electronica - Cherry Blossom Dreams",   duration: "3:45", file: "", dir: "mc1" },
+              { title: "Kawaii Circuit - Digital Heartbeat",           duration: "4:12", file: "", dir: "mc1" },
+              { title: "Maid² - Binary Love",                          duration: "3:28", file: "", dir: "mc1" },
+              { title: "Tokyo Wave - Neon Streets",                    duration: "5:01", file: "", dir: "mc1" }
+            ];                  }
+
+          currentIndex = 0;
+        }
+
+        // Escanear directorio actual (simulado - en producción sería AJAX)
+        async function loadSongsFromDirectory(dir) {
+            try {
+                const res = await fetch(`/api/tracks?dir=${dir}`);
+                if (!res.ok) throw new Error("Error al cargar tracks");
+
+                playlist = await res.json();
+                playlistHeader.textContent = `📁 ${dir.toUpperCase()} - ${playlist.length} tracks`;
+
+                currentIndex = 0;
+                renderPlaylist();
+                updateDisplay();
+            } catch (err) { console.error("ERROR cargando backend:", err);  }
+        }
+
+
+        function renderPlaylist() {
+          const playlistEl = document.getElementById('playlist');
+          const dirs = [...new Set(playlist.map(t => t.dir?.toUpperCase() || ''))]  .filter(directorio => directorio !== '');
+          playlistEl.innerHTML = `
+            <div style="font-weight: bold; margin-bottom: 5px;">
+              Playlist: [${dirs.join(', ')}]
+            </div>
+                                `;
+          playlist.forEach((track, index) => {
+            const item = document.createElement('div');
+            item.className = 'playlist-item' + (index === currentIndex ? ' active' : '');
+            const num = String(index + 1).padStart(2, '0');
+            item.textContent = `${num}. ${track.title}`;
+            item.addEventListener('click', () => selectSong(index));
+            playlistEl.appendChild(item);
+          });
+        }
+
+        function getTrackUrl(track) {
+            return `/media/${track.dir}/${track.file}`;
+        }
+
+        function updatePlaylist() {
+            document.querySelectorAll('.playlist-item').forEach((el, i) => {
+                if (i === currentIndex) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+
+        // Funciones del reproductor
+        function selectSong(index) {        
+            currentIndex = index;             playSong();
+            updatePlaylist();            updateDisplay();        }
+
+
+         function playSong() {
+//Si isPlaying = true → pausa
+//Si isPlaying = false → reproduce         
+          if (!playlist.length) return;
+          const track = playlist[currentIndex];
+          if (isPlaying) {
+              audio.pause();
+              isPlaying = false;
+              const duration = track.duration || '??:??';
+              document.getElementById('display').innerHTML =
+                  `MaidCore Player - Paused<br>` +
+                  `-----------------------<br>` +
+                  `Now Playing: ${track.title}<br>` +
+                  `Time: ${formatTime(audio.currentTime)} / ${duration}`;
+              const playBtn = document.querySelector('.player-btn[onclick="playSong()"]');
+              if (playBtn) playBtn.innerHTML = '▶ Play';
+              return;    
+         }        
+        if (track.file) {
+            // Si no hay src o es diferente a la canción actual, cargar nueva
+            if (!audio.src || !audio.src.includes(track.file)) {
+                const url = getTrackUrl(track);
+                audio.src = url;
+            }
+            audio.play()
+                .then(() => {
+                    isPlaying = true;
+                    
+                    // Actualizar display a REPRODUCIENDO
+                    const duration = track.duration || '??:??';
+                    document.getElementById('display').innerHTML =
+                        `MaidCore Player - Playing<br>` +
+                        `-----------------------<br>` +
+                        `Now Playing: ${track.title}<br>` +
+                        `Time: ${formatTime(audio.currentTime)} / ${duration}`;
+                    
+                    // Cambiar texto del botón a "Pause"
+                    const playBtn = document.querySelector('.player-btn[onclick="playSong()"]');
+                    if (playBtn) playBtn.innerHTML = '⏸ Pause';
+                })
+                .catch(err => {
+                    console.error('Error al reproducir', err);
+                    document.getElementById('display').innerHTML =
+                        `MaidCore Player - Error<br>` +
+                        `-----------------------<br>` +
+                        `Error: No se pudo reproducir<br>` +
+                        `${track.title}`;
+                });
+        }
+    }
+        function formatTime(seconds) {
+            if (!seconds || isNaN(seconds)) return '00:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+// Función auxiliar para cambiar de canción, usada por nextSong y prevSong
+        function changeSong(direction) {
+            if (!playlist.length) return;
+            const wasPlaying = isPlaying;
+            // Calcular nuevo índice según dirección
+            if (direction === 'next') {
+                currentIndex = (currentIndex + 1) % playlist.length;
+            } else if (direction === 'prev') {
+                currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            }
+            // Cargar nueva canción
+            const track = playlist[currentIndex];
+            if (track.file) audio.src = getTrackUrl(track);
+            // Reproducir si estaba sonando
+            if (wasPlaying) {
+                audio.play()
+                    .then(() => isPlaying = true)
+                    .catch(() => isPlaying = false);
+            } else {             isPlaying = false;}
+            // Actualizar interfaz
+            updateDisplay();
+            updatePlaylist();
+        }        
+        function nextSong() { changeSong('next'); }
+        function prevSong() { changeSong('prev'); }
+
+        function updateDisplay() {
+          if (!playlist.length) {
+            document.getElementById('display').innerHTML =
+              `MaidCore Player - Ready<br>` +
+              `-----------------------<br>` +
+              `Now Playing: [No tracks]<br>` +
+              `Time: 00:00 / 00:00`;
+            return;
+          }
+          const track = playlist[currentIndex];
+          const status = isPlaying ? "Playing" : "Stopped";
+          const time = "00:00";
+          const duration = track.duration || '??:??';
+
+          document.getElementById('display').innerHTML =
+            `MaidCore Player - ${status}<br>` +
+            `-----------------------<br>` +
+            `Now Playing: ${track.title}<br>` +
+            `Time: ${time} / ${duration}`;
+        }
+        
+
+
+// Funciones de la "TASKBAR"
+        function focusWindow() {            document.querySelector('.window').style.zIndex = '1000';        }
+                
+        function toggleStartMenu() {            alert('[Start Menu]\n\nPrograms:\n• MaidCore Player\n• MaidCore Explorer\n• MaidCore Browser\n\nDocuments\n• Settings\n• Help\n• About\n\nShut Down...');        }
+        function openExplorer() {            alert('Canciones aleatorias a añadir en un futuro!');        }
+        function openBrowser() {            alert('Albumes a añadir en un futuro!');        }
+
+// Reloj en tiempo real, Inicia y luego se llama a la funcion
+        function updateClock() {const now = new Date(); const time = now.toLocaleTimeString('es-ES', { hour12: false }); document.getElementById('clock').textContent = time;}
+        setInterval(updateClock, 1000);
+        updateClock();
+
+
+// Cambiar de directorio que va a la par con los Event listeners para directorios
+        function switchDirectory(dir) {
+            currentDirectory = dir;
+            currentSongIndex = 0;
+            
+   // Actualizar botones activos
+            document.querySelectorAll('.dir-btn').forEach(btn => {
+                if (btn.dataset.dir === dir) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+  // Cargar canciones del directorio
+            loadSongsFromDirectory(dir);
+            
+  // Detener reproducción actual
+            audioPlayer.pause();
+            audioPlayer.src = '';
+        }
+  // Event listeners para directorios
+        document.querySelectorAll('.dir-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchDirectory(btn.dataset.dir);
+            });
+        });        
+
+
+
+// Efecto de arrastre para la ventana (simplificado)
+        let isDragging = false;
+        let offsetX, offsetY;
+        const windowEl = document.querySelector('.window');
+        const titleBar = document.querySelector('.title-bar');
+
+        titleBar.addEventListener('mousedown', startDrag);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', stopDrag);
+
+        function startDrag(e) {
+            isDragging = true;
+            // Obtener la posición actual considerando el transform para que guarde el offset relativo al mouse y empieza a establecer una nueva posicion actual
+            const rect = windowEl.getBoundingClientRect();
+
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            windowEl.style.transform = 'none';
+            windowEl.style.left = rect.left + 'px';
+            windowEl.style.top = rect.top + 'px';
+            windowEl.style.cursor = 'move';
+        }
+        function drag(e) {
+            if (!isDragging) return;
+            // Obtener dimensiones de la ventana y del viewport
+            const winWidth = windowEl.offsetWidth;
+            const winHeight = windowEl.offsetHeight;
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            // Calcular nueva posición
+            let newLeft = e.clientX - offsetX;
+            let newTop = e.clientY - offsetY;
+            // Restringir dentro de los límites
+            newLeft = Math.max(0, Math.min(newLeft, viewportWidth - winWidth));
+            newTop = Math.max(0, Math.min(newTop, viewportHeight - winHeight));    
+            // Aplicar posición
+            windowEl.style.left = newLeft + 'px';
+            windowEl.style.top = newTop + 'px';
+            windowEl.style.transform = 'none';            
+      }
+      function stopDrag() { isDragging = false; windowEl.style.cursor = 'default';}
+       
+// Control de botones de ventana
+      const playlistDiv = document.getElementById('playlist');
+      document.querySelectorAll('.control-btn').forEach((btn, index) => {
+          btn.addEventListener('click', function() {
+              if (index === 0) {                          // Minimizar
+                  windowEl.style.display = 'none';
+                  document.querySelector('.taskbar-item').textContent = 'MaidCore Player [Minimized]';
+              } else if (index === 1) {                  
+                  if (windowEl.style.width === '100%') {
+                      windowEl.style.width = '300px'; windowEl.style.height = '400px';
+                      windowEl.style.top = '50%';windowEl.style.left = '50%';windowEl.style.transform = 'translate(-50%, -50%)';
+                  } else {                                // Maximizar/Restaurar
+                      windowEl.style.width = '100%';windowEl.style.height = 'calc(100vh - 40px)';windowEl.style.top = '0';windowEl.style.left = '0';windowEl.style.transform = 'none';
+                  }
+              } else if (index === 2) {                   // Cerrar
+                      windowEl.style.display = 'none';const taskItem = document.querySelector('.taskbar-item');taskItem.textContent = 'MaidCore Player';taskItem.classList.remove('active');
+              }
+          });
+      });
+      // Restaurar o Minimizar ventana desde taskbar (Toggle)
+      document.querySelector('.taskbar-item').addEventListener('click', function() {
+          if (windowEl.style.display === 'none') {
+              // Si está oculta, la restauramos
+              windowEl.style.display = 'block';
+              
+              // Solo aplicamos el centrado si NO estaba maximizada antes
+              if (windowEl.style.width !== '100%') {
+                windowEl.style.top = '50%';windowEl.style.left = '50%';windowEl.style.transform = 'translate(-50%, -50%)';
+              }
+              
+              this.textContent = 'MaidCore Player';
+              this.classList.add('active');
+          } else {
+              // Si está visible, la minimizamos
+              windowEl.style.display = 'none';
+              this.textContent = 'MaidCore Player [Minimized]';
+              this.classList.remove('active');
+          }
+      });
+      
+      function openPopup() {
+          document.getElementById('xp-popup').classList.remove('hidden');
+      }
+
+      function closePopup() {
+          document.getElementById('xp-popup').classList.add('hidden');
+      }
+      
+    // Inicializar FLOMVIDEX!
+    loadSongsFromDirectory('mc1');      
+    renderPlaylist();
+    updateDisplay();        
+  </script>
+</body>
+</html>

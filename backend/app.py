@@ -1,9 +1,11 @@
-from fastapi import ( FastAPI,HTTPException,Query,UploadFile,File,Form)
+from fastapi import ( FastAPI,HTTPException,Query,UploadFile,File,Request,Form)
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import RedirectResponse
 from pydantic import BaseModel
 from typing import List, Dict, Optional
 from pathlib import Path
+import time
 import json
 import shutil
 app = FastAPI(title="FloMViDex Backend")
@@ -13,8 +15,13 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MEDIA_ROOT   = PROJECT_ROOT / "media" / "mp3" / "real mp3"
 ADMIN_DIR    = PROJECT_ROOT / "admin"
 FRONTEND_DIR = PROJECT_ROOT / "frontend"
+BACKEND_DIR = PROJECT_ROOT / "backend"
 DATA_DIR     = PROJECT_ROOT / "backend" / "data"
 DATA_FILE    = DATA_DIR / "tracks.json"
+
+LOG_DIR = Path(__file__).resolve().parent / "logs"
+LOG_DIR.mkdir(parents=True, exist_ok=True)
+
 
 DIR_PATHS = {
     "mc1": "maidcore 1.0",
@@ -30,10 +37,8 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=origins,allow_credentials=True,
+    allow_methods=["*"],allow_headers=["*"],
 )
 
 # =========================== MODELOS, es decir, como se basa los datos
@@ -117,6 +122,50 @@ def get_next_free_id(dir_key: str) -> int:
         i += 1
     return i
 
+# =========================== UTILIDADES: GUARDAR REGISTRO
+async def guardar_registro(request: Request, datos_extra: dict):
+    """
+    Equivalente a la clase Registro de PHP:
+    - servidor
+    - get
+    - post
+    - sesion (aquí lo dejaremos vacío o como 'session': None)
+    - extra
+    """
+    # Datos de servidor
+    servidor = {
+        "REQUEST_METHOD": request.method,
+        "REQUEST_URI": str(request.url.path),
+        "REMOTE_ADDR": request.client.host if request.client else None,
+        "HTTP_USER_AGENT": request.headers.get("user-agent"),
+    }
+
+    # Query params (equivalente $_GET)
+    get_data = dict(request.query_params)
+
+    # POST/form (equivalente $_POST)
+    # Aunque FastAPI ya nos da los campos por parámetro, recreamos el dict para el log
+    form = await request.form()
+    post_data = dict(form)
+
+    # No tenemos $_SESSION como en PHP; si quisieras, aquí iría tu lógica de sesión
+    sesion = {}
+
+    registro = {
+        "servidor": servidor,
+        "get": get_data,
+        "post": post_data,
+        "sesion": sesion,
+        "extra": datos_extra,
+    }
+
+    # Guardar en archivo JSON
+    archivo = LOG_DIR / f"{int(time.time())}.json"
+    with archivo.open("w", encoding="utf-8") as f:
+        json.dump(registro, f, ensure_ascii=False, indent=4)
+
+    return str(archivo)
+
 # STARTUP, al iniciar montame estáticos y usa las API para el CRUD en el backend
 @app.on_event("startup")
 def on_startup():
@@ -128,27 +177,34 @@ def on_startup():
 
 # =========================== ESTÁTICOS: AUDIO
 # /media/mc1/archivo.mp3 -> media/mp3/real mp3/maidcore 1.0/archivo.mp3
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~STATIC MOUNTS~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("AUDIO")
 for dir_key, folder_name in DIR_PATHS.items():
     mount_path = f"/media/{dir_key}"
     dir_path = MEDIA_ROOT / folder_name
     app.mount(mount_path, StaticFiles(directory=dir_path), name=f"media-{dir_key}")
     print(f"[INFO] Static mount: {mount_path} -> {dir_path}")
-# =========================== ESTÁTICOS: BACKEND ADMIN
+    
+# =========================== ESTÁTICOS: FRONTEND USUARIO
+print("FRONTEND")
+if FRONTEND_DIR.exists():
+    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend") #cambiar /"nombre_estatico" para que sea corresponda a la carpeta real como /frontend
+    print(f"[INFO] Static mount: /frontend -> {FRONTEND_DIR}")    
+else: print("[WARN] FRONTEND_DIR no existe:", FRONTEND_DIR)    
+
+# =========================== ESTÁTICOS: ADMIN
 # /admin/... -> FloMViDex/admin/*
+print("BACKEND")
 if ADMIN_DIR.exists():
     app.mount("/admin", StaticFiles(directory=ADMIN_DIR), name="admin")
     print(f"[INFO] Static mount: /admin -> {ADMIN_DIR}")
 else: print("[WARN] ADMIN_DIR no existe:", ADMIN_DIR)
-# =========================== ESTÁTICOS: FRONTEND USUARIO
-if FRONTEND_DIR.exists():
-    app.mount("/frontend", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend") #cambiar /"nombre_estatico" para que sea corresponda a la carpeta real como /frontend
-    print(f"[INFO] Static mount: /frontend -> {FRONTEND_DIR}")    
-else: print("[WARN] FRONTEND_DIR no existe:", FRONTEND_DIR)
 
-print("\n[INFO]-Admin:    http://127.0.0.1:8000/admin/archivo")
+print("\n~~~~~~~~~~~~~~~~~~~~~~~~~~~PUERTOS~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+print("[INFO]-Admin:    http://127.0.0.1:8000/admin/archivo")
 print("[INFO]-Frontend: http://127.0.0.1:8000/frontend/archivo")
-print("[INFO]-API MCX:  http://127.0.0.1:8000/api/tracks?dir=mcX\n")
-
+print("[INFO]-API MCX:  http://127.0.0.1:8000/api/tracks?dir=mcX")
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 
 
@@ -285,3 +341,42 @@ def delete_track(dir: str, track_id: int):
             return {"ok": True, "deleted_id": track_id, "dir": dir}
 
     raise HTTPException(status_code=404, detail="Track no encontrado")
+
+# ===========================
+# API: POST backend/logs/ (Sube Logs) 
+# ===========================    
+@app.post("/api/registro-acceso")
+async def registro_acceso(
+    request: Request,
+    nombre: str = Form(...),
+    apellidos: str = Form(...),
+    accion: str = Form(...)
+):
+    # Validación básica
+    nombre = nombre.strip()
+    apellidos = apellidos.strip()
+    accion = accion.strip()
+
+    if not nombre or not apellidos or not accion:
+        return {"error": "Faltan datos en el formulario."}
+
+
+    registro = {
+        "nombre": nombre,
+        "apellidos": apellidos,
+        "accion": accion,
+        "fecha_hora": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "ip": request.client.host if request.client else None,
+        "user_agent": request.headers.get("user-agent"),
+    }
+
+    # Guardar JSON: backend/logs/XXXXXXXX.json
+    file_path = LOG_DIR / f"{int(time.time())}.json"
+    with file_path.open("w", encoding="utf-8") as f:
+        json.dump(registro, f, ensure_ascii=False, indent=4)
+    print("Log guardado en:", file_path)
+    # Redirigir al frontend
+    return RedirectResponse(
+        url="/frontend/008-registro de acceso.html",  # cambiar si es necesario
+        status_code=303
+    )
