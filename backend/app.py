@@ -348,22 +348,22 @@ def delete_track(dir: str, track_id: int):
 async def registro_acceso(
     request: Request,
     nombre: str = Form(...),
-    apellidos: str = Form(...),
+    informacion: str = Form(...),
     accion: str = Form(...)
 ):
     # Validación básica
     nombre = nombre.strip()
-    apellidos = apellidos.strip()
+    informacion = informacion.strip()
     accion = accion.strip()
 
-    if not nombre or not apellidos or not accion:
+    if not nombre or not informacion or not accion:
         return {"error": "Faltan datos en el formulario."}
 
 
     registro = {
-        "nombre": nombre,
-        "apellidos": apellidos,
-        "accion": accion,
+        "Nombre": nombre,
+        "Informacion": informacion,
+        "ACCIÓN": accion,
         "fecha_hora": time.strftime("%Y-%m-%d %H:%M:%S"),
         "ip": request.client.host if request.client else None,
         "user_agent": request.headers.get("user-agent"),
