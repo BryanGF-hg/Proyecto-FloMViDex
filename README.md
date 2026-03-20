@@ -140,4 +140,10 @@ https://www.talytaxavier.com/2018/04/favicons-mini-gifs-para-blog-tumblr-sites.h
 https://radioactivegraphics.blogspot.com/2013/04/tutorial-como-cambiar-el-favicon-del.html
 # Errores que pueden encontrarse:
 206 = Primera vez o el usuario movió el cursor
-304 = Ya estaba en caché    
+304 = Ya estaba en caché
+# Copia de Seguridad Periódica con CronTab:
+0 3 * * * "/var/www/html/1DAM/@CEAC/[Proyecto] FloMViDex/guardavidas.sh" >> "/var/www/html/1DAM/@CEAC/[Proyecto] FloMViDex/backend/backups/backup.log" 2>&1
+
+0 3 * * *: Se ejecuta todos los días a las 3:00 AM.
+"/var/www/html/1DAM/@CEAC/[Proyecto] FloMViDex/guardavidas.sh": La ruta del script de bash.
+"/var/www/html/1DAM/@CEAC/[Proyecto] FloMViDex/backend/backups/backup.log": Guarda un registro de si el backup funcionó o falló.    
