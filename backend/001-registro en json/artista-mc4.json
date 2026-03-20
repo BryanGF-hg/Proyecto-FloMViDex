@@ -1,0 +1,714 @@
+{
+  "mc": [
+    {
+      "id": 1,
+      "artist": "Chikoi The Maid",
+      "title": "My Sweet Little Maid"
+    },
+    {
+      "id": 2,
+      "artist": "Chikoi The Maid",
+      "title": "Rose"
+    },
+    {
+      "id": 3,
+      "artist": "Chikoi The Maid",
+      "title": "Reset?"
+    },
+    {
+      "id": 4,
+      "artist": "Chikoi The Maid",
+      "title": "Smitbw"
+    },
+    {
+      "id": 5,
+      "artist": "Chikoi The Maid",
+      "title": "Mental Warfare"
+    },
+    {
+      "id": 6,
+      "artist": "Chikoi The Maid",
+      "title": "Killing-Machine"
+    },
+    {
+      "id": 7,
+      "artist": "Chikoi The Maid",
+      "title": "Breather"
+    },
+    {
+      "id": 8,
+      "artist": "Chikoi The Maid",
+      "title": "Inted"
+    },
+    {
+      "id": 9,
+      "artist": "Chikoi The Maid",
+      "title": "Wishes"
+    },
+    {
+      "id": 10,
+      "artist": "Chikoi The Maid",
+      "title": "True Color"
+    },
+    {
+      "id": 11,
+      "artist": "Chikoi The Maid",
+      "title": "Autumn Melancholy"
+    },
+    {
+      "id": 12,
+      "artist": "Chikoi The Maid",
+      "title": "Ympn"
+    },
+    {
+      "id": 13,
+      "artist": "Chikoi The Maid",
+      "title": "Nii-San"
+    },
+    {
+      "id": 14,
+      "artist": "Monarus",
+      "title": "Revolt"
+    },
+    {
+      "id": 15,
+      "artist": "Yowai the Maid",
+      "title": "All That I Have is Unfulfilled Dreams"
+    },
+    {
+      "id": 16,
+      "artist": "Chikoi The Maid",
+      "title": "Basecamp"
+    },
+    {
+      "id": 17,
+      "artist": "Byakko The Maid",
+      "title": "Your Beats, My Soul"
+    },
+    {
+      "id": 18,
+      "artist": "Akui The Maid",
+      "title": "Unsupported"
+    },
+    {
+      "id": 19,
+      "artist": "Medoi The Maid",
+      "title": "Scarlet;blaze"
+    },
+    {
+      "id": 20,
+      "artist": "Nimitori The Maid",
+      "title": "Dirty Vintage"
+    },
+    {
+      "id": 21,
+      "artist": "Yakui The Maid",
+      "title": "Paranoidal Turtle"
+    },
+    {
+      "id": 22,
+      "artist": "Byakko The Maid",
+      "title": "White Tiga!"
+    },
+    {
+      "id": 23,
+      "artist": "Yakui the Maid",
+      "title": "Immolation Of Classmates"
+    },
+    {
+      "id": 24,
+      "artist": "Chikoi The Maid",
+      "title": "True Color"
+    },
+    {
+      "id": 25,
+      "artist": "Kairi The Maid",
+      "title": "Whisper of the Thousand Gods"
+    },
+    {
+      "id": 26,
+      "artist": "alicirno",
+      "title": "Yearning"
+    },
+    {
+      "id": 27,
+      "artist": "fekalia the maid",
+      "title": "Yakui The Maid x fekalia the maid - 7779brrk MLG EXTENDED EDITION SUPER VIP KOLBACHET MIX"
+    },
+    {
+      "id": 28,
+      "artist": "fekalia the maid",
+      "title": "якуй бьёт"
+    },
+    {
+      "id": 29,
+      "artist": "Moroi The Maid",
+      "title": "Luft Av Ingenting"
+    },
+    {
+      "id": 30,
+      "artist": "Moroi The Maid",
+      "title": "Morning after Metal Rain"
+    },
+    {
+      "id": 31,
+      "artist": "Moroi The Maid",
+      "title": "Det Finns Inget Mer sött"
+    },
+    {
+      "id": 32,
+      "artist": "Moroi The Maid",
+      "title": "Falling into Nowhere"
+    },
+    {
+      "id": 33,
+      "artist": "Moroi The Maid",
+      "title": "Förfall"
+    },
+    {
+      "id": 34,
+      "artist": "tonzy",
+      "title": "Ozoi The Maid x UN|T - 2007"
+    },
+    {
+      "id": 35,
+      "artist": "tonzy",
+      "title": "Ozoi The Maid x UN|T - Elide"
+    },
+    {
+      "id": 36,
+      "artist": "Byakko The Maid",
+      "title": "Maid"
+    },
+    {
+      "id": 37,
+      "artist": "Asai The Maid",
+      "title": "Past Reflection"
+    },
+    {
+      "id": 38,
+      "artist": "Komak The Maid",
+      "title": "Struggle With Inner Emptiness"
+    },
+    {
+      "id": 39,
+      "artist": "Chikoi The Maid",
+      "title": "Force Staff"
+    },
+    {
+      "id": 40,
+      "artist": "Modoi The Maid",
+      "title": "cumulonimbus"
+    },
+    {
+      "id": 41,
+      "artist": "Yakui The Maid",
+      "title": "Rx Queen (Deftones Cover)"
+    },
+    {
+      "id": 42,
+      "artist": "Nimitori The Maid",
+      "title": "Sounds Coming from Underground Passages"
+    },
+    {
+      "id": 43,
+      "artist": "痛いさアレス",
+      "title": "Crowds"
+    },
+    {
+      "id": 44,
+      "artist": "Madoi The Maid",
+      "title": "The Breakcore Supremacy"
+    },
+    {
+      "id": 45,
+      "artist": "Nimitori The Maid",
+      "title": "Firestarter"
+    },
+    {
+      "id": 46,
+      "artist": "Moroi The Maid",
+      "title": "Rotten and Fallen"
+    },
+    {
+      "id": 47,
+      "artist": "sdadga pşutka",
+      "title": "Nakai The Maid X Itai The Maid - Покажи Мне Любовь"
+    },
+    {
+      "id": 48,
+      "artist": "Svtori Evergarden",
+      "title": "Never Let Me Down Again"
+    },
+    {
+      "id": 49,
+      "artist": "VIVI the maid",
+      "title": "UnVeiled"
+    },
+    {
+      "id": 50,
+      "artist": "VIVI the maid",
+      "title": "Is This All I Can Be For You ?"
+    },
+    {
+      "id": 51,
+      "artist": "VIVI the maid",
+      "title": "the worms will consume my cold body one day"
+    },
+    {
+      "id": 52,
+      "artist": "Yakui The Maid",
+      "title": "I Stole Some Witchouse To Feed My Pirozhki"
+    },
+    {
+      "id": 53,
+      "artist": "痛いさアレス",
+      "title": "1997✝ x Yakui The Maid – 子守唄"
+    },
+    {
+      "id": 54,
+      "artist": "Yakui The Maid",
+      "title": "Crepitus"
+    },
+    {
+      "id": 55,
+      "artist": "Yakui The Maid",
+      "title": "I Hope You're Satisfied, Hipster Shithead Scum"
+    },
+    {
+      "id": 56,
+      "artist": "Yakui The Maid",
+      "title": "Selfdestroyer"
+    },
+    {
+      "id": 57,
+      "artist": "Yakui The Maid",
+      "title": "Hati"
+    },
+    {
+      "id": 58,
+      "artist": "Yakui The Maid",
+      "title": "Clownfish"
+    },
+    {
+      "id": 59,
+      "artist": "Modoi The Maid",
+      "title": "g0ld"
+    },
+    {
+      "id": 60,
+      "artist": "Nimitori The Maid",
+      "title": "Butterfly Wings"
+    },
+    {
+      "id": 61,
+      "artist": "Hidoi the Maid",
+      "title": "YnVybm91dA=="
+    },
+    {
+      "id": 62,
+      "artist": "Hidoi the Maid",
+      "title": "0Y8g0YPRgdGC0LDQuyA="
+    },
+    {
+      "id": 63,
+      "artist": "Hidoi the Maid",
+      "title": "aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": 64,
+      "artist": "Nimitori The Maid",
+      "title": "Pianophrenia"
+    },
+    {
+      "id": 65,
+      "artist": "Hayai The Maid",
+      "title": "unrlsd trck"
+    },
+    {
+      "id": 66,
+      "artist": "᠌Ozoi The Maid",
+      "title": "Untitled Expression"
+    },
+    {
+      "id": 67,
+      "artist": "Hayai The Maid",
+      "title": "the incarnation of nonexistence demo"
+    },
+    {
+      "id": 68,
+      "artist": "Hayai The Maid",
+      "title": "unttld0"
+    },
+    {
+      "id": 69,
+      "artist": "Kuri",
+      "title": "Flow"
+    },
+    {
+      "id": 70,
+      "artist": "sib the maid",
+      "title": "Re"
+    },
+    {
+      "id": 71,
+      "artist": "᠌",
+      "title": "Itai The Maid - Firmamentum"
+    },
+    {
+      "id": 72,
+      "artist": "Kichi The Maid",
+      "title": "This Is My Goodbye"
+    },
+    {
+      "id": 73,
+      "artist": "Chikoi The Maid",
+      "title": "YMPN"
+    },
+    {
+      "id": 74,
+      "artist": "nihigo",
+      "title": "take230212"
+    },
+    {
+      "id": 75,
+      "artist": "nihigo",
+      "title": "230217"
+    },
+    {
+      "id": 76,
+      "artist": "Kairi The Maid",
+      "title": "Mist of Zheleznogorsk"
+    },
+    {
+      "id": 77,
+      "artist": "Kairi The Maid",
+      "title": "Crystal of Faded Childhood"
+    },
+    {
+      "id": 78,
+      "artist": "Kairi The Maid",
+      "title": "The Albatross Journey to Neptune"
+    },
+    {
+      "id": 79,
+      "artist": "Kairi The Maid",
+      "title": "Botomless Quarry"
+    },
+    {
+      "id": 80,
+      "artist": "Kairi The Maid",
+      "title": "Broken Bridge in Sleepy Woods"
+    },
+    {
+      "id": 81,
+      "artist": "Kairi The Maid",
+      "title": "Forgotten Grove Infirmary"
+    },
+    {
+      "id": 82,
+      "artist": "Kairi The Maid",
+      "title": "M.G.O.K․"
+    },
+    {
+      "id": 83,
+      "artist": "Kairi The Maid",
+      "title": "Abandoned Factory"
+    },
+    {
+      "id": 84,
+      "artist": "Kairi The Maid",
+      "title": "Serene Voices of Chromatic Lakes"
+    },
+    {
+      "id": 85,
+      "artist": "Kairi The Maid",
+      "title": "First Breathe"
+    },
+    {
+      "id": 86,
+      "artist": "Kairi The Maid",
+      "title": "Seim (Outro)"
+    },
+    {
+      "id": 87,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Asian Art Of Dollmaking"
+    },
+    {
+      "id": 88,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Ice Witches On Spacefridges Enslaved The World"
+    },
+    {
+      "id": 89,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Δ9 - THC Rainmeter"
+    },
+    {
+      "id": 90,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Unverified Room Object"
+    },
+    {
+      "id": 91,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Dead Pilots Are Coming Home"
+    },
+    {
+      "id": 92,
+      "artist": "nothin",
+      "title": "Shitai The Maid - A Beginner's Guide To Making Friends"
+    },
+    {
+      "id": 93,
+      "artist": "nothin",
+      "title": "Shitai the Maid - Mental Central Dialog (Lifelover remake)"
+    },
+    {
+      "id": 94,
+      "artist": "nothin",
+      "title": "Hikki The Maid - pain and burnt to the ground September"
+    },
+    {
+      "id": 95,
+      "artist": "nothin",
+      "title": "Iya The Maid - We Are Both Lost Shoegaze Remake By Sib The Maid"
+    },
+    {
+      "id": 96,
+      "artist": "nothin",
+      "title": "Yakui The Maid - Любые Попытки Твоего Самовыражения На Фоне Нейросетевой Генерации Выглядят Жалко"
+    },
+    {
+      "id": 97,
+      "artist": "nothin",
+      "title": "Chikoi the Maid - Upset"
+    },
+    {
+      "id": 98,
+      "artist": "Komak The Maid",
+      "title": "Missed Monday"
+    },
+    {
+      "id": 99,
+      "artist": "Byakko The Maid",
+      "title": "Reaper (feat. Hatsune Miku)"
+    },
+    {
+      "id": 100,
+      "artist": "Hayai The Maid",
+      "title": "Spiraling Down (demo)"
+    },
+    {
+      "id": 101,
+      "artist": "Medoi The Maid",
+      "title": "Даже зимой солнце светит"
+    },
+    {
+      "id": 102,
+      "artist": "Medoi The Maid",
+      "title": "Блики"
+    },
+    {
+      "id": 103,
+      "artist": "Medoi The Maid",
+      "title": "Похожие"
+    },
+    {
+      "id": 104,
+      "artist": "Medoi The Maid",
+      "title": "Прости Прощай"
+    },
+    {
+      "id": 105,
+      "artist": "Medoi The Maid",
+      "title": "Плохие мысли"
+    },
+    {
+      "id": 106,
+      "artist": "Medoi The Maid",
+      "title": "Связь"
+    },
+    {
+      "id": 107,
+      "artist": "Medoi The Maid",
+      "title": "Останься"
+    },
+    {
+      "id": 108,
+      "artist": "Medoi The Maid",
+      "title": "Прелестен каскад"
+    },
+    {
+      "id": 109,
+      "artist": "Medoi The Maid",
+      "title": "Песнь бездушных панелей"
+    },
+    {
+      "id": 110,
+      "artist": "Medoi The Maid",
+      "title": "Здесь не живут люди"
+    },
+    {
+      "id": 111,
+      "artist": "Scythe of Luna",
+      "title": "Winterhold"
+    },
+    {
+      "id": 112,
+      "artist": "Scythe of Luna",
+      "title": "Drink Up Pirate Nekololi"
+    },
+    {
+      "id": 113,
+      "artist": "Scythe of Luna",
+      "title": "Out Of The Black Waters"
+    },
+    {
+      "id": 114,
+      "artist": "Scythe of Luna",
+      "title": "Corpsebuckle"
+    },
+    {
+      "id": 115,
+      "artist": "Scythe of Luna",
+      "title": "Dance Dance Little Fairy"
+    },
+    {
+      "id": 116,
+      "artist": "Scythe of Luna",
+      "title": "Roll The Barrels"
+    },
+    {
+      "id": 117,
+      "artist": "Scythe of Luna",
+      "title": "The Great Mechanicus"
+    },
+    {
+      "id": 118,
+      "artist": "Scythe of Luna",
+      "title": "The Dreadship"
+    },
+    {
+      "id": 119,
+      "artist": "Scythe of Luna",
+      "title": "Into The Storm"
+    },
+    {
+      "id": 120,
+      "artist": "Scythe of Luna",
+      "title": "Lights And Traces"
+    },
+    {
+      "id": 121,
+      "artist": "Scythe of Luna",
+      "title": "Princess In A Stone"
+    },
+    {
+      "id": 122,
+      "artist": "Scythe of Luna",
+      "title": "Inn'O Galleon"
+    },
+    {
+      "id": 123,
+      "artist": "Scythe of Luna",
+      "title": "Winterhold (Off Vocal)"
+    },
+    {
+      "id": 124,
+      "artist": "Scythe of Luna",
+      "title": "Drink Up Pirate Nekololi (Off Vocal)"
+    },
+    {
+      "id": 125,
+      "artist": "Scythe of Luna",
+      "title": "Out Of The Black Waters (Off Vocal)"
+    },
+    {
+      "id": 126,
+      "artist": "Scythe of Luna",
+      "title": "Corpsebuckle (Off Vocal)"
+    },
+    {
+      "id": 127,
+      "artist": "Scythe of Luna",
+      "title": "Dance Dance Little Fairy (Off Vocal)"
+    },
+    {
+      "id": 128,
+      "artist": "Scythe of Luna",
+      "title": "Roll The Barrels (Off Vocal)"
+    },
+    {
+      "id": 129,
+      "artist": "Scythe of Luna",
+      "title": "The Great Mechanicus (Off Vocal)"
+    },
+    {
+      "id": 130,
+      "artist": "Scythe of Luna",
+      "title": "The Dreadship (Off Vocal)"
+    },
+    {
+      "id": 131,
+      "artist": "Scythe of Luna",
+      "title": "Into The Storm (Off Vocal)"
+    },
+    {
+      "id": 132,
+      "artist": "Scythe of Luna",
+      "title": "Lights And Traces (Off Vocal)"
+    },
+    {
+      "id": 133,
+      "artist": "Scythe of Luna",
+      "title": "Princess In A Stone (Off Vocal)"
+    },
+    {
+      "id": 134,
+      "artist": "Scythe of Luna",
+      "title": "Inn'O Galleon (Off Vocal)"
+    },
+    {
+      "id": 135,
+      "artist": "nihigo",
+      "title": "simulatization of others or maybe even your own self"
+    },
+    {
+      "id": 136,
+      "artist": "Chikoi The Maid",
+      "title": "Conviction"
+    },
+    {
+      "id": 137,
+      "artist": "Chikoi The Maid",
+      "title": "Weakness"
+    },
+    {
+      "id": 138,
+      "artist": "Chikoi The Maid",
+      "title": "Rehub"
+    },
+    {
+      "id": 139,
+      "artist": "Chikoi The Maid",
+      "title": "Precision"
+    },
+    {
+      "id": 140,
+      "artist": "Chikoi The Maid",
+      "title": "Jitter"
+    },
+    {
+      "id": 141,
+      "artist": "Chikoi The Maid",
+      "title": "Outland"
+    },
+    {
+      "id": 142,
+      "artist": "Chikoi The Maid",
+      "title": "Victim"
+    }
+  ]
+}

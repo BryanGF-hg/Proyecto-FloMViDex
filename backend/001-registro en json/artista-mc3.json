@@ -1,0 +1,2469 @@
+{
+  "mc": [
+    {
+      "id": 1,
+      "artist": "Yakui The Maid",
+      "title": "Maid Goes Mad"
+    },
+    {
+      "id": 2,
+      "artist": "Monarus",
+      "title": "Synthetic Cure"
+    },
+    {
+      "id": 3,
+      "artist": "Yakui The Maid",
+      "title": "Daisy Killer"
+    },
+    {
+      "id": 4,
+      "artist": "Yakui The Maid",
+      "title": "Neuma"
+    },
+    {
+      "id": 5,
+      "artist": "Yakui The Maid",
+      "title": "Wounds"
+    },
+    {
+      "id": 6,
+      "artist": "Yakui The Maid",
+      "title": "Bryophyta"
+    },
+    {
+      "id": 7,
+      "artist": "Yakui The Maid",
+      "title": "Hati"
+    },
+    {
+      "id": 8,
+      "artist": "Yakui The Maid",
+      "title": "Grendel"
+    },
+    {
+      "id": 9,
+      "artist": "Yakui The Maid",
+      "title": "Selfdestroyer"
+    },
+    {
+      "id": 10,
+      "artist": "Yakui The Maid",
+      "title": "Polyneuroparty, Pt. 2"
+    },
+    {
+      "id": 11,
+      "artist": "Yakui The Maid",
+      "title": "Outro"
+    },
+    {
+      "id": 12,
+      "artist": "Yakui The Maid",
+      "title": "Amalgam"
+    },
+    {
+      "id": 13,
+      "artist": "Yakui The Maid",
+      "title": "Asper Girl"
+    },
+    {
+      "id": 14,
+      "artist": "Yakui The Maid",
+      "title": "Сlonidine"
+    },
+    {
+      "id": 15,
+      "artist": "Yakui The Maid",
+      "title": "Drain"
+    },
+    {
+      "id": 16,
+      "artist": "Yakui The Maid",
+      "title": "Witch Creek Road"
+    },
+    {
+      "id": 17,
+      "artist": "Yakui The Maid",
+      "title": "P.D.M."
+    },
+    {
+      "id": 18,
+      "artist": "Yakui The Maid",
+      "title": "Burial"
+    },
+    {
+      "id": 19,
+      "artist": "Yakui The Maid",
+      "title": "Clownfish"
+    },
+    {
+      "id": 20,
+      "artist": "Yakui The Maid",
+      "title": "Lepidoptera"
+    },
+    {
+      "id": 21,
+      "artist": "Yakui The Maid",
+      "title": "Chloral"
+    },
+    {
+      "id": 22,
+      "artist": "Yakui The Maid",
+      "title": "Laryngitis"
+    },
+    {
+      "id": 23,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 24,
+      "artist": "Yakui The Maid",
+      "title": "Flock"
+    },
+    {
+      "id": 25,
+      "artist": "Yakui The Maid",
+      "title": "Neurological"
+    },
+    {
+      "id": 26,
+      "artist": "Yakui The Maid",
+      "title": "Guilt"
+    },
+    {
+      "id": 27,
+      "artist": "Yakui The Maid",
+      "title": "Cremation"
+    },
+    {
+      "id": 28,
+      "artist": "Yakui The Maid",
+      "title": "Sköll"
+    },
+    {
+      "id": 29,
+      "artist": "Yakui The Maid",
+      "title": "Everything Lit"
+    },
+    {
+      "id": 30,
+      "artist": "Yakui The Maid",
+      "title": "M.L.T.O.H."
+    },
+    {
+      "id": 31,
+      "artist": "Yakui The Maid",
+      "title": "Void"
+    },
+    {
+      "id": 32,
+      "artist": "Yakui The Maid",
+      "title": "Adhesive"
+    },
+    {
+      "id": 33,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 34,
+      "artist": "Yakui The Maid",
+      "title": "Calamity"
+    },
+    {
+      "id": 35,
+      "artist": "Yakui The Maid",
+      "title": "Goodnight World"
+    },
+    {
+      "id": 36,
+      "artist": "Yakui The Maid",
+      "title": "A Moth"
+    },
+    {
+      "id": 37,
+      "artist": "Yakui The Maid",
+      "title": "In Affliction"
+    },
+    {
+      "id": 38,
+      "artist": "Yakui The Maid",
+      "title": "Radiostalking"
+    },
+    {
+      "id": 39,
+      "artist": "Yakui The Maid",
+      "title": "Kyphosis"
+    },
+    {
+      "id": 40,
+      "artist": "Yakui The Maid",
+      "title": "Continium"
+    },
+    {
+      "id": 41,
+      "artist": "Yakui The Maid",
+      "title": "Chloramine"
+    },
+    {
+      "id": 42,
+      "artist": "Yakui The Maid",
+      "title": "Outro"
+    },
+    {
+      "id": 43,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 44,
+      "artist": "Yakui The Maid",
+      "title": "Helios"
+    },
+    {
+      "id": 45,
+      "artist": "Yakui The Maid",
+      "title": "Echidna"
+    },
+    {
+      "id": 46,
+      "artist": "Yakui The Maid",
+      "title": "Chimeric Mouse"
+    },
+    {
+      "id": 47,
+      "artist": "Yakui The Maid",
+      "title": "Ijousha No Ai"
+    },
+    {
+      "id": 48,
+      "artist": "Yakui The Maid",
+      "title": "Falling Down"
+    },
+    {
+      "id": 49,
+      "artist": "Yakui The Maid",
+      "title": "Achromachia"
+    },
+    {
+      "id": 50,
+      "artist": "Yakui The Maid",
+      "title": "Opiliones"
+    },
+    {
+      "id": 51,
+      "artist": "Yakui The Maid",
+      "title": "Placeholder"
+    },
+    {
+      "id": 52,
+      "artist": "Yakui The Maid",
+      "title": "Molting World"
+    },
+    {
+      "id": 53,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 54,
+      "artist": "Yakui The Maid",
+      "title": "Laughter"
+    },
+    {
+      "id": 55,
+      "artist": "Yakui The Maid",
+      "title": "Crypsis"
+    },
+    {
+      "id": 56,
+      "artist": "Yakui The Maid",
+      "title": "Clutter"
+    },
+    {
+      "id": 57,
+      "artist": "Yakui The Maid",
+      "title": "Kurumi"
+    },
+    {
+      "id": 58,
+      "artist": "Yakui The Maid",
+      "title": "She Grows Her Lungs on Daises Field"
+    },
+    {
+      "id": 59,
+      "artist": "Yakui The Maid",
+      "title": "Narcolepsy"
+    },
+    {
+      "id": 60,
+      "artist": "Yakui The Maid",
+      "title": "Continium"
+    },
+    {
+      "id": 61,
+      "artist": "Yakui The Maid",
+      "title": "Shrouded"
+    },
+    {
+      "id": 62,
+      "artist": "Yakui The Maid",
+      "title": "Outro"
+    },
+    {
+      "id": 63,
+      "artist": "Yakui The Maid",
+      "title": "Calamity (Intro)"
+    },
+    {
+      "id": 64,
+      "artist": "Yakui The Maid",
+      "title": "Fields, Flowers, Rails"
+    },
+    {
+      "id": 65,
+      "artist": "Yakui The Maid",
+      "title": "Gear of Despondency"
+    },
+    {
+      "id": 66,
+      "artist": "Yakui The Maid",
+      "title": "Ghostbusters"
+    },
+    {
+      "id": 67,
+      "artist": "Yakui The Maid",
+      "title": "Rusting Away"
+    },
+    {
+      "id": 68,
+      "artist": "Yakui The Maid",
+      "title": "Outro"
+    },
+    {
+      "id": 69,
+      "artist": "Yakui The Maid",
+      "title": "Disorder#1"
+    },
+    {
+      "id": 70,
+      "artist": "Yakui The Maid",
+      "title": "Amyloidosis#2"
+    },
+    {
+      "id": 71,
+      "artist": "Yakui The Maid",
+      "title": "Myeloma#3"
+    },
+    {
+      "id": 72,
+      "artist": "Yakui The Maid",
+      "title": "Rejected#4"
+    },
+    {
+      "id": 73,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 74,
+      "artist": "Yakui The Maid",
+      "title": "Mechanical Starfish"
+    },
+    {
+      "id": 75,
+      "artist": "Yakui The Maid",
+      "title": "Prototype"
+    },
+    {
+      "id": 76,
+      "artist": "Yakui The Maid",
+      "title": "Voices"
+    },
+    {
+      "id": 77,
+      "artist": "Yakui The Maid",
+      "title": "Koto"
+    },
+    {
+      "id": 78,
+      "artist": "Yakui The Maid",
+      "title": "Ethanol"
+    },
+    {
+      "id": 79,
+      "artist": "Yakui The Maid",
+      "title": "Interference"
+    },
+    {
+      "id": 80,
+      "artist": "Yakui The Maid",
+      "title": "Continium"
+    },
+    {
+      "id": 81,
+      "artist": "Yakui The Maid",
+      "title": "Outbreak"
+    },
+    {
+      "id": 82,
+      "artist": "Yakui The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 83,
+      "artist": "Yakui The Maid",
+      "title": "Fireflies"
+    },
+    {
+      "id": 84,
+      "artist": "Yakui The Maid",
+      "title": "Serenity"
+    },
+    {
+      "id": 85,
+      "artist": "Yakui The Maid",
+      "title": "Nereid"
+    },
+    {
+      "id": 86,
+      "artist": "Yakui The Maid",
+      "title": "Drops"
+    },
+    {
+      "id": 87,
+      "artist": "Yakui The Maid",
+      "title": "One Small Step for Man, One Giant Leap for Drunk Pandas"
+    },
+    {
+      "id": 88,
+      "artist": "Yakui The Maid",
+      "title": "Dehydrate"
+    },
+    {
+      "id": 89,
+      "artist": "Yakui The Maid",
+      "title": "Midian"
+    },
+    {
+      "id": 90,
+      "artist": "Medoi The Maid",
+      "title": "Рисую кровью (билборды Cover)"
+    },
+    {
+      "id": 91,
+      "artist": "sib the maid",
+      "title": "Udalitʹ i ne dodelyvatʹ"
+    },
+    {
+      "id": 92,
+      "artist": "mfniki",
+      "title": "ugly shit by yakui the maid(slowed and reverb)"
+    },
+    {
+      "id": 93,
+      "artist": "Yakui The Maid",
+      "title": "Low Orbit Ion Cannon"
+    },
+    {
+      "id": 94,
+      "artist": "пациend",
+      "title": "yakui the maid - i won't be home for christmas"
+    },
+    {
+      "id": 95,
+      "artist": "kayuu",
+      "title": "Rotten/Blood ( Yowai The Maid vocal cover)"
+    },
+    {
+      "id": 96,
+      "artist": "Kairi The Maid",
+      "title": "Torture"
+    },
+    {
+      "id": 97,
+      "artist": "Kairi The Maid",
+      "title": "my friend is a brass door"
+    },
+    {
+      "id": 98,
+      "artist": "Moroi The Maid",
+      "title": "Aphex Twin - Flim (Moroi The Maid Cover)"
+    },
+    {
+      "id": 99,
+      "artist": "Asai The Maid",
+      "title": "Slowly sinking"
+    },
+    {
+      "id": 100,
+      "artist": "Asai The Maid",
+      "title": "А как же любовь?"
+    },
+    {
+      "id": 101,
+      "artist": "Inai The Maid",
+      "title": "Disintegration"
+    },
+    {
+      "id": 102,
+      "artist": "Asai The Maid",
+      "title": "Disgusting Memories"
+    },
+    {
+      "id": 103,
+      "artist": "Itai The Maid",
+      "title": "Unfinished"
+    },
+    {
+      "id": 104,
+      "artist": "Modoi The-Maid",
+      "title": "фортепиано"
+    },
+    {
+      "id": 105,
+      "artist": "Yuki The Maid",
+      "title": "Vie"
+    },
+    {
+      "id": 106,
+      "artist": "Kairi The Maid",
+      "title": "Clamare"
+    },
+    {
+      "id": 107,
+      "artist": "Kairi The Maid",
+      "title": "sense of hopelessness"
+    },
+    {
+      "id": 108,
+      "artist": "Modoi The Maid",
+      "title": "tension and loneliness"
+    },
+    {
+      "id": 109,
+      "artist": "Dorei The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 110,
+      "artist": "Dorei The Maid",
+      "title": "There's No Any Freedom"
+    },
+    {
+      "id": 111,
+      "artist": "Dorei The Maid",
+      "title": "Этажность"
+    },
+    {
+      "id": 112,
+      "artist": "Dorei The Maid",
+      "title": "Choleric Nature Slave"
+    },
+    {
+      "id": 113,
+      "artist": "Dorei The Maid",
+      "title": "I'm Afraid of the Mcdonald's Cashier"
+    },
+    {
+      "id": 114,
+      "artist": "Dorei The Maid",
+      "title": "Master's Funreal"
+    },
+    {
+      "id": 115,
+      "artist": "Hayai The Maid",
+      "title": "Drowning"
+    },
+    {
+      "id": 116,
+      "artist": "Futaba The Maid",
+      "title": "Behind?"
+    },
+    {
+      "id": 117,
+      "artist": "Kairi The Maid",
+      "title": "Helianthus"
+    },
+    {
+      "id": 118,
+      "artist": "Hayai The Maid",
+      "title": "Ammonia (demo)"
+    },
+    {
+      "id": 119,
+      "artist": "Futaba The Maid",
+      "title": "so, hello"
+    },
+    {
+      "id": 120,
+      "artist": "Futaba The Maid",
+      "title": "emotional fluctuations"
+    },
+    {
+      "id": 121,
+      "artist": "Futaba The Maid",
+      "title": "dive"
+    },
+    {
+      "id": 122,
+      "artist": "Futaba The Maid",
+      "title": "the end is near"
+    },
+    {
+      "id": 123,
+      "artist": "Futaba The Maid",
+      "title": "Foggy Edges"
+    },
+    {
+      "id": 124,
+      "artist": "Yakui Bass Camp",
+      "title": "Misaki Complex"
+    },
+    {
+      "id": 125,
+      "artist": "Inai The Maid",
+      "title": "Distress Call"
+    },
+    {
+      "id": 126,
+      "artist": "Dorei",
+      "title": "Dorei The Maid - Painful And Sad"
+    },
+    {
+      "id": 127,
+      "artist": "nihigo",
+      "title": "130823"
+    },
+    {
+      "id": 128,
+      "artist": "Hayai The Maid",
+      "title": "No Title"
+    },
+    {
+      "id": 129,
+      "artist": "Hayai The Maid",
+      "title": "Boss!! (Sonic CD OST cover)"
+    },
+    {
+      "id": 130,
+      "artist": "Asai The Maid",
+      "title": "I'm sorry mom, I drank more that I could"
+    },
+    {
+      "id": 131,
+      "artist": "nihigo",
+      "title": "0002"
+    },
+    {
+      "id": 132,
+      "artist": "1997x",
+      "title": "1997✝ X Yakui The Maid - 子守唄"
+    },
+    {
+      "id": 133,
+      "artist": "1997x",
+      "title": "1997✝ X Yakui The Maid - These Feelings Will Be Gone"
+    },
+    {
+      "id": 134,
+      "artist": "1997x",
+      "title": "1997✝ X Yakui The Maid - Midian"
+    },
+    {
+      "id": 135,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - IntroEnd"
+    },
+    {
+      "id": 136,
+      "artist": "Chikoi The Maid",
+      "title": "Insertion"
+    },
+    {
+      "id": 137,
+      "artist": "Chikoi The Maid",
+      "title": "Xample"
+    },
+    {
+      "id": 138,
+      "artist": "Chikoi The Maid",
+      "title": "Edge"
+    },
+    {
+      "id": 139,
+      "artist": "Chikoi The Maid",
+      "title": "That All About Your Fear"
+    },
+    {
+      "id": 140,
+      "artist": "Chikoi The Maid",
+      "title": "Liar"
+    },
+    {
+      "id": 141,
+      "artist": "Chikoi The Maid",
+      "title": "Catharsis"
+    },
+    {
+      "id": 142,
+      "artist": "Chikoi The Maid",
+      "title": "Deserve"
+    },
+    {
+      "id": 143,
+      "artist": "Chikoi The Maid",
+      "title": "Shitposted"
+    },
+    {
+      "id": 144,
+      "artist": "Kairi The Maid",
+      "title": "Deviation"
+    },
+    {
+      "id": 145,
+      "artist": "Naite The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 146,
+      "artist": "Naite The Maid",
+      "title": "Narcosis"
+    },
+    {
+      "id": 147,
+      "artist": "Naite The Maid",
+      "title": "Lost"
+    },
+    {
+      "id": 148,
+      "artist": "Naite The Maid",
+      "title": "Frostbite"
+    },
+    {
+      "id": 149,
+      "artist": "Naite The Maid",
+      "title": "Moonlight"
+    },
+    {
+      "id": 150,
+      "artist": "Naite The Maid",
+      "title": "Catwalk"
+    },
+    {
+      "id": 151,
+      "artist": "Naite The Maid",
+      "title": "Astrofish"
+    },
+    {
+      "id": 152,
+      "artist": "Medoi The Maid",
+      "title": "Портрет"
+    },
+    {
+      "id": 153,
+      "artist": "Medoi The Maid",
+      "title": "Портрет (Instrumental)"
+    },
+    {
+      "id": 154,
+      "artist": "Medoi The Maid",
+      "title": "Angel Lake"
+    },
+    {
+      "id": 155,
+      "artist": "Medoi The Maid",
+      "title": "Край обетованный"
+    },
+    {
+      "id": 156,
+      "artist": "Medoi The Maid",
+      "title": "Тоска"
+    },
+    {
+      "id": 157,
+      "artist": "Medoi The Maid",
+      "title": "Dreamcore.exe"
+    },
+    {
+      "id": 158,
+      "artist": "Medoi The Maid",
+      "title": "Танцующая во тьме"
+    },
+    {
+      "id": 159,
+      "artist": "Medoi The Maid",
+      "title": "Своя душа, мечты и идеи"
+    },
+    {
+      "id": 160,
+      "artist": "Medoi The Maid",
+      "title": "Уныние"
+    },
+    {
+      "id": 161,
+      "artist": "Medoi The Maid",
+      "title": "Пустые обещания"
+    },
+    {
+      "id": 162,
+      "artist": "Medoi The Maid",
+      "title": "Изящный силуэт"
+    },
+    {
+      "id": 163,
+      "artist": "Medoi The Maid",
+      "title": "Тоска"
+    },
+    {
+      "id": 164,
+      "artist": "Medoi The Maid",
+      "title": "Уныние"
+    },
+    {
+      "id": 165,
+      "artist": "Medoi The Maid",
+      "title": "Dreamcore.exe"
+    },
+    {
+      "id": 166,
+      "artist": "Medoi The Maid",
+      "title": "Thinned Out"
+    },
+    {
+      "id": 167,
+      "artist": "sib the maid",
+      "title": "Dorei The Maid x Sib The Maid — BoundlessEternity"
+    },
+    {
+      "id": 168,
+      "artist": "Dorei",
+      "title": "Dorei The Maid-Friends? I don't have one..."
+    },
+    {
+      "id": 169,
+      "artist": "Divinelink archive",
+      "title": "Buried_guitar"
+    },
+    {
+      "id": 170,
+      "artist": "fekalia the maid",
+      "title": "Fuck The Maid x fekalia the maid - witch house celebration"
+    },
+    {
+      "id": 171,
+      "artist": "Kaitai The Maid",
+      "title": "Genesis"
+    },
+    {
+      "id": 172,
+      "artist": "nihigo",
+      "title": "someday it will get better"
+    },
+    {
+      "id": 173,
+      "artist": "Xotaru The Maid",
+      "title": "Yakui The Maid - Maeve"
+    },
+    {
+      "id": 174,
+      "artist": "Dorei The Maid",
+      "title": "But Nobody Came"
+    },
+    {
+      "id": 175,
+      "artist": "Ersh, Jaga & Portvein",
+      "title": "Dakyousinai x samobójstwo. — Acardia"
+    },
+    {
+      "id": 176,
+      "artist": "Ersh, Jaga & Portvein",
+      "title": "Dakyousinai x samobójstwo. — Asomnia"
+    },
+    {
+      "id": 177,
+      "artist": "Hidoi the Maid",
+      "title": "Karoshi"
+    },
+    {
+      "id": 178,
+      "artist": "Medoi The Maid",
+      "title": "Medoi The Maid - Портрет (feat. Lieath)"
+    },
+    {
+      "id": 179,
+      "artist": "Kichi The Maid",
+      "title": "Braving Our Tempertation [Feat. Chikoi The Maid]"
+    },
+    {
+      "id": 180,
+      "artist": "Hayai The Maid",
+      "title": "No Sense Of Time"
+    },
+    {
+      "id": 181,
+      "artist": "ricatx",
+      "title": "Summer and Kaitaibows %Mashup%"
+    },
+    {
+      "id": 182,
+      "artist": "Kairi The Maid",
+      "title": "Lost Memories"
+    },
+    {
+      "id": 183,
+      "artist": "Hayai The Maid",
+      "title": "No Sense of Time"
+    },
+    {
+      "id": 184,
+      "artist": "nihigo",
+      "title": "tlnos"
+    },
+    {
+      "id": 185,
+      "artist": "Dorei The Maid",
+      "title": "Depressive Thoughts before Bed"
+    },
+    {
+      "id": 186,
+      "artist": "Yakui The Maid",
+      "title": "Calamity (SLOWED&REVERB)"
+    },
+    {
+      "id": 187,
+      "artist": "Yakui The Maid",
+      "title": "Thinned out"
+    },
+    {
+      "id": 188,
+      "artist": "slvckty",
+      "title": "Yakui the Maid x Black Kray - Calamity/Iced out Castles"
+    },
+    {
+      "id": 189,
+      "artist": "INFECTED YUKE",
+      "title": "Stay"
+    },
+    {
+      "id": 190,
+      "artist": "Hayai The Maid",
+      "title": "Foreboding"
+    },
+    {
+      "id": 191,
+      "artist": "Medoi The Maid",
+      "title": "天使だと思っていたのに (Utsu - P Cover) (Instrumental)"
+    },
+    {
+      "id": 192,
+      "artist": "Scythe of Luna",
+      "title": "Golden Hammer (Remastered)"
+    },
+    {
+      "id": 193,
+      "artist": "Scythe of Luna",
+      "title": "The Last Eclipse (Remastered)"
+    },
+    {
+      "id": 194,
+      "artist": "Scythe of Luna",
+      "title": "Witch of Creeping Mist (Remastered)"
+    },
+    {
+      "id": 195,
+      "artist": "Scythe of Luna",
+      "title": "She Wears the Ashes (Remastered)"
+    },
+    {
+      "id": 196,
+      "artist": "Scythe of Luna",
+      "title": "Carnivorous Carnival XX (Remastered)"
+    },
+    {
+      "id": 197,
+      "artist": "Scythe of Luna",
+      "title": "Dakko No Kisetsu"
+    },
+    {
+      "id": 198,
+      "artist": "Nin",
+      "title": "Scythe Of Luna  Amp  Yakui The Maid - Lament Rain  Off Vocal"
+    },
+    {
+      "id": 199,
+      "artist": "Asai The Maid",
+      "title": "Morbidness"
+    },
+    {
+      "id": 200,
+      "artist": "᠌Ozoi The Maid",
+      "title": "Ozoi The Maid X Futorio Franklin - На Далеком Этаже"
+    },
+    {
+      "id": 201,
+      "artist": "Hidoi the Maid",
+      "title": "I Was Trying To Do Something"
+    },
+    {
+      "id": 202,
+      "artist": "Nimitori The Maid",
+      "title": "Age of Trust"
+    },
+    {
+      "id": 203,
+      "artist": "Nimitori The Maid",
+      "title": "The Forgotten Shamanic Dance"
+    },
+    {
+      "id": 204,
+      "artist": "Nimitori The Maid",
+      "title": "Garden of Dust"
+    },
+    {
+      "id": 205,
+      "artist": "Nimitori The Maid",
+      "title": "Rise of Blast"
+    },
+    {
+      "id": 206,
+      "artist": "Nimitori The Maid",
+      "title": "Hurt of Past"
+    },
+    {
+      "id": 207,
+      "artist": "Nimitori The Maid",
+      "title": "Kind of Just"
+    },
+    {
+      "id": 208,
+      "artist": "Nimitori The Maid",
+      "title": "Glade of Last"
+    },
+    {
+      "id": 209,
+      "artist": "Nimitori The Maid",
+      "title": "A Scream Lives Somewhere"
+    },
+    {
+      "id": 210,
+      "artist": "Nimitori The Maid",
+      "title": "Bamboo Bee"
+    },
+    {
+      "id": 211,
+      "artist": "Nimitori The Maid",
+      "title": "The Lost Amulet"
+    },
+    {
+      "id": 212,
+      "artist": "Yabai The Maid",
+      "title": "Whatever"
+    },
+    {
+      "id": 213,
+      "artist": "Yabai The Maid",
+      "title": "Another World"
+    },
+    {
+      "id": 214,
+      "artist": "Yabai The Maid",
+      "title": "Path from Nowhere to Nowhere"
+    },
+    {
+      "id": 215,
+      "artist": "Yabai The Maid",
+      "title": "So Close and Yet So Far"
+    },
+    {
+      "id": 216,
+      "artist": "Yabai The Maid",
+      "title": "I'm Happy But Trying to Make Sad Music"
+    },
+    {
+      "id": 217,
+      "artist": "Yabai The Maid",
+      "title": "It Always Happens No Matter What"
+    },
+    {
+      "id": 218,
+      "artist": "Yabai The Maid",
+      "title": "Ocean of Sorrow, Pt. 1"
+    },
+    {
+      "id": 219,
+      "artist": "Yabai The Maid",
+      "title": "Ocean of Sorrow, Pt. 2"
+    },
+    {
+      "id": 220,
+      "artist": "Yabai The Maid",
+      "title": "Cirrus"
+    },
+    {
+      "id": 221,
+      "artist": "Yabai The Maid",
+      "title": "Cumulus"
+    },
+    {
+      "id": 222,
+      "artist": "Yabai The Maid",
+      "title": "Cumulonimbus"
+    },
+    {
+      "id": 223,
+      "artist": "Yabai The Maid",
+      "title": "Stratus"
+    },
+    {
+      "id": 224,
+      "artist": "Yabai The Maid",
+      "title": "Nimbostratus"
+    },
+    {
+      "id": 225,
+      "artist": "Yabai The Maid",
+      "title": "60bpl"
+    },
+    {
+      "id": 226,
+      "artist": "Yabai The Maid",
+      "title": "Among the Branches of Trees"
+    },
+    {
+      "id": 227,
+      "artist": "Yabai The Maid",
+      "title": "Anguish"
+    },
+    {
+      "id": 228,
+      "artist": "Yabai The Maid",
+      "title": "Dont Forget"
+    },
+    {
+      "id": 229,
+      "artist": "Yabai The Maid",
+      "title": "Everything Is Overrated"
+    },
+    {
+      "id": 230,
+      "artist": "Yabai The Maid",
+      "title": "First for Me"
+    },
+    {
+      "id": 231,
+      "artist": "Yabai The Maid",
+      "title": "Ill Never See You Alive"
+    },
+    {
+      "id": 232,
+      "artist": "Yabai The Maid",
+      "title": "Internal State"
+    },
+    {
+      "id": 233,
+      "artist": "Yabai The Maid",
+      "title": "Life Causes Smoking"
+    },
+    {
+      "id": 234,
+      "artist": "Yabai The Maid",
+      "title": "Owl"
+    },
+    {
+      "id": 235,
+      "artist": "Yabai The Maid",
+      "title": "Past Summer"
+    },
+    {
+      "id": 236,
+      "artist": "Yabai The Maid",
+      "title": "Rain"
+    },
+    {
+      "id": 237,
+      "artist": "Yabai The Maid",
+      "title": "Second for Affection"
+    },
+    {
+      "id": 238,
+      "artist": "Yabai The Maid",
+      "title": "Solar"
+    },
+    {
+      "id": 239,
+      "artist": "Yabai The Maid",
+      "title": "Stop Running for a Moment"
+    },
+    {
+      "id": 240,
+      "artist": "Yabai The Maid",
+      "title": "Wind"
+    },
+    {
+      "id": 241,
+      "artist": "Yabai The Maid",
+      "title": "Big Blue Sky Painted on My Ceiling (feat. Yakui the Maid)"
+    },
+    {
+      "id": 242,
+      "artist": "Yabai The Maid",
+      "title": "Impossibility of Existence (feat. Yakui the Maid)"
+    },
+    {
+      "id": 243,
+      "artist": "Yabai The Maid",
+      "title": "Pathetic Attempts of Self-affirmation (feat. Ozoi the Maid)"
+    },
+    {
+      "id": 244,
+      "artist": "Yabai The Maid",
+      "title": "Rain (feat. Ozoi the Maid)"
+    },
+    {
+      "id": 245,
+      "artist": "Hidoi the Maid",
+      "title": "I Was Trying To Do Something (instrumental)"
+    },
+    {
+      "id": 246,
+      "artist": "Yakui The Maid",
+      "title": "I Stole Some Bugs To Feed My Refrigerator"
+    },
+    {
+      "id": 247,
+      "artist": "Scythe of Luna",
+      "title": "Pale-Grey (Instrumental)"
+    },
+    {
+      "id": 248,
+      "artist": "Kichi The Maid",
+      "title": "Suffer! Suffer!"
+    },
+    {
+      "id": 249,
+      "artist": "Futaba The Maid",
+      "title": "Behindv2"
+    },
+    {
+      "id": 250,
+      "artist": "Chikoi The Maid",
+      "title": "Beholder"
+    },
+    {
+      "id": 251,
+      "artist": "Dorei",
+      "title": "Dorei The Maid - Noesis"
+    },
+    {
+      "id": 252,
+      "artist": "Kairi The Maid",
+      "title": "mind-destroying routine"
+    },
+    {
+      "id": 253,
+      "artist": "mahou_melodism",
+      "title": "Ozoi The Maid x Yakui The Maid — Wonderland"
+    },
+    {
+      "id": 254,
+      "artist": "Yakui the Maid",
+      "title": "WSPRS"
+    },
+    {
+      "id": 255,
+      "artist": "BELADIT",
+      "title": "Some Random Words · KICHI · Yakui The Maid"
+    },
+    {
+      "id": 256,
+      "artist": "240",
+      "title": "1000 И 1 Мэшап С Мейдами - №139 УННВ X Yakui the maid"
+    },
+    {
+      "id": 257,
+      "artist": "nihigo",
+      "title": "long time no see"
+    },
+    {
+      "id": 258,
+      "artist": "Lieath",
+      "title": "Pitch Black (w/ Medoi)"
+    },
+    {
+      "id": 259,
+      "artist": "d4rk w1nd bl0ws",
+      "title": "flood of fear (ft. liorinkarmic)"
+    },
+    {
+      "id": 260,
+      "artist": "nahfuy",
+      "title": "Liorinkarmic - It Is Over For Me, And You Are The Only Hope We Have Left"
+    },
+    {
+      "id": 261,
+      "artist": "TimeTravel-X",
+      "title": "ダブル SUICIDE - SUICIDE /W YOWAI THE MAID"
+    },
+    {
+      "id": 262,
+      "artist": "Akui The Maid",
+      "title": "Jaguar"
+    },
+    {
+      "id": 263,
+      "artist": "Chikoi The Maid",
+      "title": "I'm Cool"
+    },
+    {
+      "id": 264,
+      "artist": "tsumetai (dead account)",
+      "title": "under the ocean (feat. Yowai the Maid)"
+    },
+    {
+      "id": 265,
+      "artist": "Chikoi The Maid",
+      "title": "Prophet"
+    },
+    {
+      "id": 266,
+      "artist": "Dorei The Maid",
+      "title": "One Pretty Summer Day I Died"
+    },
+    {
+      "id": 267,
+      "artist": "Dorei The Maid",
+      "title": "Love Is An Excuse for Killing People"
+    },
+    {
+      "id": 268,
+      "artist": "Dorei The Maid",
+      "title": "Pathetic Creatures"
+    },
+    {
+      "id": 269,
+      "artist": "Dorei The Maid",
+      "title": "I Sold My Soul to Buy a Pack of Сigarettes"
+    },
+    {
+      "id": 270,
+      "artist": "Dorei The Maid",
+      "title": "Dreams of a Better Life"
+    },
+    {
+      "id": 271,
+      "artist": "Dorei The Maid",
+      "title": "Little Redhead Girl from the Dream"
+    },
+    {
+      "id": 272,
+      "artist": "Dorei The Maid",
+      "title": "Noesis"
+    },
+    {
+      "id": 273,
+      "artist": "Dorei The Maid",
+      "title": "Painful and Sad"
+    },
+    {
+      "id": 274,
+      "artist": "Dorei The Maid",
+      "title": "Friends? I Don't Have One..."
+    },
+    {
+      "id": 275,
+      "artist": "Dorei The Maid",
+      "title": "Этажность 2"
+    },
+    {
+      "id": 276,
+      "artist": "Dorei The Maid",
+      "title": "23:59 Я Начинаю Исчезать"
+    },
+    {
+      "id": 277,
+      "artist": "Kurai The Maid",
+      "title": "/r/y/o/n/a/"
+    },
+    {
+      "id": 278,
+      "artist": "痛いさアレス",
+      "title": "Continium"
+    },
+    {
+      "id": 279,
+      "artist": "Nimitori The Maid",
+      "title": "Pink Paw"
+    },
+    {
+      "id": 280,
+      "artist": "nihigo",
+      "title": "wandering again"
+    },
+    {
+      "id": 281,
+      "artist": "Akane The Maid",
+      "title": "Hotel Bellagio"
+    },
+    {
+      "id": 282,
+      "artist": "Akane The Maid",
+      "title": "My Eraser"
+    },
+    {
+      "id": 283,
+      "artist": "Komak The Maid",
+      "title": "Springtime"
+    },
+    {
+      "id": 284,
+      "artist": "Komak The Maid",
+      "title": "Carbon Leather"
+    },
+    {
+      "id": 285,
+      "artist": "Kitty On Fire Records",
+      "title": "Vociferate"
+    },
+    {
+      "id": 286,
+      "artist": "Kitty On Fire Records",
+      "title": "Abhorrence"
+    },
+    {
+      "id": 287,
+      "artist": "Kitty On Fire Records",
+      "title": "Downfall"
+    },
+    {
+      "id": 288,
+      "artist": "Kitty On Fire Records",
+      "title": "Untitled Expression"
+    },
+    {
+      "id": 289,
+      "artist": "Kitty On Fire Records",
+      "title": "Clouds Of My Depression"
+    },
+    {
+      "id": 290,
+      "artist": "Komak The Maid",
+      "title": "Patronage"
+    },
+    {
+      "id": 291,
+      "artist": "Chikoi The Maid",
+      "title": "Misunderstanding"
+    },
+    {
+      "id": 292,
+      "artist": "Scythe of Luna",
+      "title": "Corpsebuckle"
+    },
+    {
+      "id": 293,
+      "artist": "Scythe of Luna",
+      "title": "Scythe of Luna × Yakui The Maid - Ugly Witchery"
+    },
+    {
+      "id": 294,
+      "artist": "Verty",
+      "title": "Mushroom For Dinner"
+    },
+    {
+      "id": 295,
+      "artist": "Kairi The Maid",
+      "title": "Roots wrap around my feet"
+    },
+    {
+      "id": 296,
+      "artist": "Naite The Maid",
+      "title": "Restless Trip"
+    },
+    {
+      "id": 297,
+      "artist": "Medoi The Maid",
+      "title": "Medoitxpe Cvlt"
+    },
+    {
+      "id": 298,
+      "artist": "Chikoi The Maid",
+      "title": "Timeline"
+    },
+    {
+      "id": 299,
+      "artist": "Akui The Maid",
+      "title": "Amethyst"
+    },
+    {
+      "id": 300,
+      "artist": "Akui The Maid",
+      "title": "Qqx"
+    },
+    {
+      "id": 301,
+      "artist": "Akui The Maid",
+      "title": "Radio Storm"
+    },
+    {
+      "id": 302,
+      "artist": "Akui The Maid",
+      "title": "Mr Robot"
+    },
+    {
+      "id": 303,
+      "artist": "Akui The Maid",
+      "title": "Crestfallen Carpetrats"
+    },
+    {
+      "id": 304,
+      "artist": "Akui The Maid",
+      "title": "Jaguar"
+    },
+    {
+      "id": 305,
+      "artist": "Akui The Maid",
+      "title": "Porcelain Doll"
+    },
+    {
+      "id": 306,
+      "artist": "Akui The Maid",
+      "title": "End"
+    },
+    {
+      "id": 307,
+      "artist": "Chikoi The Maid",
+      "title": "Reflection"
+    },
+    {
+      "id": 308,
+      "artist": "cruithne",
+      "title": "Shitai the Maid x nunashi - Catharsis"
+    },
+    {
+      "id": 309,
+      "artist": "W232F",
+      "title": "Iya The Maid - Graveyard Song"
+    },
+    {
+      "id": 310,
+      "artist": "Kichi The Maid",
+      "title": "Insight"
+    },
+    {
+      "id": 311,
+      "artist": "Akui The Maid",
+      "title": "sata andagi"
+    },
+    {
+      "id": 312,
+      "artist": "nihigo",
+      "title": "lostlost"
+    },
+    {
+      "id": 313,
+      "artist": "Nimitori The Maid",
+      "title": "Despair"
+    },
+    {
+      "id": 314,
+      "artist": "nihigo",
+      "title": "still a quiet evening..."
+    },
+    {
+      "id": 315,
+      "artist": "Futaba The Maid",
+      "title": "Risen Dead"
+    },
+    {
+      "id": 316,
+      "artist": "Futaba The Maid",
+      "title": "Blood Moon"
+    },
+    {
+      "id": 317,
+      "artist": "Futaba The Maid",
+      "title": "Dark Emptiness"
+    },
+    {
+      "id": 318,
+      "artist": "Sib The Maid",
+      "title": "Go Astray"
+    },
+    {
+      "id": 319,
+      "artist": "Kichi The Maid",
+      "title": "Mental Obscurance"
+    },
+    {
+      "id": 320,
+      "artist": "Dorei The Maid",
+      "title": "Nostalgia Is Killing Me"
+    },
+    {
+      "id": 321,
+      "artist": "Nimitori The Maid",
+      "title": "Lullaby for Yuki"
+    },
+    {
+      "id": 322,
+      "artist": "Asai The Maid",
+      "title": "Acid Cloud's"
+    },
+    {
+      "id": 323,
+      "artist": "Kichi The Maid",
+      "title": "cure"
+    },
+    {
+      "id": 324,
+      "artist": "Medoi The Maid",
+      "title": "Akumu (UN|T Cover)"
+    },
+    {
+      "id": 325,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - L22"
+    },
+    {
+      "id": 326,
+      "artist": "Akui The Maid",
+      "title": "awakening"
+    },
+    {
+      "id": 327,
+      "artist": "Moroi The Maid",
+      "title": "Aphex Twin - #3 (Moroi The Maid X Sib The Maid Cover)"
+    },
+    {
+      "id": 328,
+      "artist": "nihigo",
+      "title": "nothing to forget"
+    },
+    {
+      "id": 329,
+      "artist": "Kuri",
+      "title": "Maiden"
+    },
+    {
+      "id": 330,
+      "artist": "Kuri",
+      "title": "Dozen"
+    },
+    {
+      "id": 331,
+      "artist": "Kuri",
+      "title": "Lone"
+    },
+    {
+      "id": 332,
+      "artist": "Kuri",
+      "title": "Be Over"
+    },
+    {
+      "id": 333,
+      "artist": "Jegul The Maid",
+      "title": "dr3ams"
+    },
+    {
+      "id": 334,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - Loser"
+    },
+    {
+      "id": 335,
+      "artist": "Chikoi The Maid",
+      "title": "My Last December"
+    },
+    {
+      "id": 336,
+      "artist": "Asai The Maid",
+      "title": "Shallow Breathing"
+    },
+    {
+      "id": 337,
+      "artist": "Medoi The Maid",
+      "title": "人マニア (原口沙輔 Cover)"
+    },
+    {
+      "id": 338,
+      "artist": "Komak The Maid",
+      "title": "Аlacrity"
+    },
+    {
+      "id": 339,
+      "artist": "Medoi The Maid",
+      "title": "Medoi The Maid - Плачу На Техно"
+    },
+    {
+      "id": 340,
+      "artist": "Kuri",
+      "title": "Realize"
+    },
+    {
+      "id": 341,
+      "artist": "Moroi The Maid",
+      "title": "Digital Winter and the Warmth of the Red Scarf"
+    },
+    {
+      "id": 342,
+      "artist": "Medoi The Maid",
+      "title": "Medoi The Maid - Continium (Yakui The Maid Cover)"
+    },
+    {
+      "id": 343,
+      "artist": "Salt Of The Earth",
+      "title": "Chikoi The Maid & Kichi Collaberated Demo"
+    },
+    {
+      "id": 344,
+      "artist": "notakuu",
+      "title": "Yakui The Maid - Sad Effects Of Mushroom Tea"
+    },
+    {
+      "id": 345,
+      "artist": "Cdr Drip",
+      "title": "Chikoi The Maid - Apchi's Ending"
+    },
+    {
+      "id": 346,
+      "artist": "SpriteSikle",
+      "title": "Kurushimi the Maid ~ SpriteSiklesServant"
+    },
+    {
+      "id": 347,
+      "artist": "Aikiwa",
+      "title": "Yakui The Maid - Tanabata"
+    },
+    {
+      "id": 348,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - Melting"
+    },
+    {
+      "id": 349,
+      "artist": "Verty",
+      "title": "Peoplephobia"
+    },
+    {
+      "id": 350,
+      "artist": "Konatkin",
+      "title": "Yakui The Maid - Hedgehog Pt2"
+    },
+    {
+      "id": 351,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - SNAFU"
+    },
+    {
+      "id": 352,
+      "artist": "Medoi The Maid",
+      "title": "Promise (King's Raid OST Cover) (Instrumental)"
+    },
+    {
+      "id": 353,
+      "artist": "maidcore",
+      "title": "Yakui The Maid - DFC"
+    },
+    {
+      "id": 354,
+      "artist": "Madoi The Maid",
+      "title": "10pm"
+    },
+    {
+      "id": 355,
+      "artist": "Madoi The Maid",
+      "title": "11pm"
+    },
+    {
+      "id": 356,
+      "artist": "Madoi The Maid",
+      "title": "12pm (Goodbye Cruel World)"
+    },
+    {
+      "id": 357,
+      "artist": "Madoi The Maid",
+      "title": "1am _ Calmy Thingies"
+    },
+    {
+      "id": 358,
+      "artist": "Madoi The Maid",
+      "title": "2am"
+    },
+    {
+      "id": 359,
+      "artist": "Madoi The Maid",
+      "title": "3am - Alternative Root"
+    },
+    {
+      "id": 360,
+      "artist": "Madoi The Maid",
+      "title": "4am"
+    },
+    {
+      "id": 361,
+      "artist": "Madoi The Maid",
+      "title": "5am"
+    },
+    {
+      "id": 362,
+      "artist": "Akui The Maid",
+      "title": "Nhk"
+    },
+    {
+      "id": 363,
+      "artist": "Akui The Maid",
+      "title": "Sata Andagi"
+    },
+    {
+      "id": 364,
+      "artist": "Akui The Maid",
+      "title": "Mid Boss"
+    },
+    {
+      "id": 365,
+      "artist": "Akui The Maid",
+      "title": "Nyan Degenerate"
+    },
+    {
+      "id": 366,
+      "artist": "Akui The Maid",
+      "title": "Hypocrites Don't Cry"
+    },
+    {
+      "id": 367,
+      "artist": "Akui The Maid",
+      "title": "Moon Overdrive"
+    },
+    {
+      "id": 368,
+      "artist": "Akui The Maid",
+      "title": "Awakening"
+    },
+    {
+      "id": 369,
+      "artist": "Akui The Maid",
+      "title": "I Came Here to Take Your Food"
+    },
+    {
+      "id": 370,
+      "artist": "Akui The Maid",
+      "title": "Wake Up Brother I Got Some Tuts for You"
+    },
+    {
+      "id": 371,
+      "artist": "Akui The Maid",
+      "title": "I Like Doing Lalala"
+    },
+    {
+      "id": 372,
+      "artist": "Akui The Maid",
+      "title": "Unpredicteble Floor Object"
+    },
+    {
+      "id": 373,
+      "artist": "Akui The Maid",
+      "title": "Void"
+    },
+    {
+      "id": 374,
+      "artist": "Akui The Maid",
+      "title": "Owari No Yume"
+    },
+    {
+      "id": 375,
+      "artist": "4u6uk",
+      "title": "rofortyseven - Почему брат"
+    },
+    {
+      "id": 376,
+      "artist": "Yakui The Maid",
+      "title": "Futility"
+    },
+    {
+      "id": 377,
+      "artist": "Yakui The Maid",
+      "title": "Tides"
+    },
+    {
+      "id": 378,
+      "artist": "Yakui The Maid",
+      "title": "Artificial Stupidity"
+    },
+    {
+      "id": 379,
+      "artist": "Yakui The Maid",
+      "title": "Side Effects of Mushroom Tea"
+    },
+    {
+      "id": 380,
+      "artist": "Yakui The Maid",
+      "title": "Dysfunctional"
+    },
+    {
+      "id": 381,
+      "artist": "Yakui The Maid",
+      "title": "Tortricidae"
+    },
+    {
+      "id": 382,
+      "artist": "Yakui The Maid",
+      "title": "Regrets"
+    },
+    {
+      "id": 383,
+      "artist": "Yakui The Maid",
+      "title": "Arrays"
+    },
+    {
+      "id": 384,
+      "artist": "Yakui The Maid",
+      "title": "Rusted"
+    },
+    {
+      "id": 385,
+      "artist": "Yakui The Maid",
+      "title": "Anastrepha"
+    },
+    {
+      "id": 386,
+      "artist": "Dorei The Maid",
+      "title": "Boundlesseternity"
+    },
+    {
+      "id": 387,
+      "artist": "Kairi The Maid",
+      "title": "Pentagram in My Room Full of Human Vices"
+    },
+    {
+      "id": 388,
+      "artist": "Kairi The Maid",
+      "title": "Homeless Kitten Under the Truck Wheels"
+    },
+    {
+      "id": 389,
+      "artist": "Kairi The Maid",
+      "title": "When They Cry"
+    },
+    {
+      "id": 390,
+      "artist": "Kairi The Maid",
+      "title": "Intro"
+    },
+    {
+      "id": 391,
+      "artist": "Kairi The Maid",
+      "title": "Sky Is Nauses"
+    },
+    {
+      "id": 392,
+      "artist": "Kairi The Maid",
+      "title": "あがったり"
+    },
+    {
+      "id": 393,
+      "artist": "Kairi The Maid",
+      "title": "Blue Whale Busted for Drugs"
+    },
+    {
+      "id": 394,
+      "artist": "Kairi The Maid",
+      "title": "Basement"
+    },
+    {
+      "id": 395,
+      "artist": "Kairi The Maid",
+      "title": "Fragmentorum Cinis"
+    },
+    {
+      "id": 396,
+      "artist": "Kairi The Maid",
+      "title": "Endless Frustration"
+    },
+    {
+      "id": 397,
+      "artist": "Hayai The Maid",
+      "title": "No Title"
+    },
+    {
+      "id": 398,
+      "artist": "Verty",
+      "title": "Type-5"
+    },
+    {
+      "id": 399,
+      "artist": "Verty",
+      "title": "Mikoyan"
+    },
+    {
+      "id": 400,
+      "artist": "Verty",
+      "title": "Ice Cold Dream"
+    },
+    {
+      "id": 401,
+      "artist": "Kuri",
+      "title": "Maiden (2024 Remake)"
+    },
+    {
+      "id": 402,
+      "artist": "Merrite Broccoli",
+      "title": "Yakui The Maid - Nyan - Nyan, Motherfucker"
+    },
+    {
+      "id": 403,
+      "artist": "Asai The Maid",
+      "title": "Inutility."
+    },
+    {
+      "id": 404,
+      "artist": "EpicEmeraldDude",
+      "title": "Dante Hema The Maids Goodbye Raven"
+    },
+    {
+      "id": 405,
+      "artist": "alicirno",
+      "title": "I_ntro"
+    },
+    {
+      "id": 406,
+      "artist": "alicirno",
+      "title": "Shattered"
+    },
+    {
+      "id": 407,
+      "artist": "alicirno",
+      "title": "The Darkest Hour"
+    },
+    {
+      "id": 408,
+      "artist": "alicirno",
+      "title": "Act Of Dying"
+    },
+    {
+      "id": 409,
+      "artist": "alicirno",
+      "title": "Madness"
+    },
+    {
+      "id": 410,
+      "artist": "alicirno",
+      "title": "Horizon"
+    },
+    {
+      "id": 411,
+      "artist": "alicirno",
+      "title": "Unfulfilled Dream"
+    },
+    {
+      "id": 412,
+      "artist": "alicirno",
+      "title": "(We've Set This) World On Fire"
+    },
+    {
+      "id": 413,
+      "artist": "Nimitori The Maid",
+      "title": "Decoder"
+    },
+    {
+      "id": 414,
+      "artist": "Yakui The Maid",
+      "title": "Refractions"
+    },
+    {
+      "id": 415,
+      "artist": "Nerenai The Maid",
+      "title": "Return of Feelings"
+    },
+    {
+      "id": 416,
+      "artist": "Nerenai The Maid",
+      "title": "Life on the Internet"
+    },
+    {
+      "id": 417,
+      "artist": "Nerenai The Maid",
+      "title": "Torn Heart"
+    },
+    {
+      "id": 418,
+      "artist": "Nerenai The Maid",
+      "title": "Game Time Reflexia Alone"
+    },
+    {
+      "id": 419,
+      "artist": "Nerenai The Maid",
+      "title": "Rainy Night"
+    },
+    {
+      "id": 420,
+      "artist": "Nerenai The Maid",
+      "title": "Slight Sadness"
+    },
+    {
+      "id": 421,
+      "artist": "Nerenai The Maid",
+      "title": "Just Me in a Dark Room"
+    },
+    {
+      "id": 422,
+      "artist": "Nerenai The Maid",
+      "title": "3:33x2 Am"
+    },
+    {
+      "id": 423,
+      "artist": "Nerenai The Maid",
+      "title": "The Past Cannot Be Returned"
+    },
+    {
+      "id": 424,
+      "artist": "Nerenai The Maid",
+      "title": "Euphoria Overdose"
+    },
+    {
+      "id": 425,
+      "artist": "Nimitori The Maid",
+      "title": "Maidcore.info"
+    },
+    {
+      "id": 426,
+      "artist": "゙ozoi the maid ゙",
+      "title": "abhorrence"
+    },
+    {
+      "id": 427,
+      "artist": "Yabai The Maid",
+      "title": "victim (intro)"
+    },
+    {
+      "id": 428,
+      "artist": "Hayai The Maid",
+      "title": "Let Me Drown In The Winter Night"
+    },
+    {
+      "id": 429,
+      "artist": "Medoi The Maid",
+      "title": "Далёкое небо"
+    },
+    {
+      "id": 430,
+      "artist": "Medoi The Maid",
+      "title": "Конец рая"
+    },
+    {
+      "id": 431,
+      "artist": "Naite The Maid",
+      "title": "Existence On a Whim"
+    },
+    {
+      "id": 432,
+      "artist": "Sib The Maid",
+      "title": "Pressure"
+    },
+    {
+      "id": 433,
+      "artist": "Sib The Maid",
+      "title": "Panic"
+    },
+    {
+      "id": 434,
+      "artist": "Sib The Maid",
+      "title": "Taedet Me Venire Cum Nomine"
+    },
+    {
+      "id": 435,
+      "artist": "Sib The Maid",
+      "title": "F"
+    },
+    {
+      "id": 436,
+      "artist": "Sib The Maid",
+      "title": "Zero Reflections"
+    },
+    {
+      "id": 437,
+      "artist": "Sib The Maid",
+      "title": "Beer Trip"
+    },
+    {
+      "id": 438,
+      "artist": "Sib The Maid",
+      "title": "たたたた。"
+    },
+    {
+      "id": 439,
+      "artist": "Sib The Maid",
+      "title": "Postmaidcore"
+    },
+    {
+      "id": 440,
+      "artist": "Sib The Maid",
+      "title": "Premaidcore"
+    },
+    {
+      "id": 441,
+      "artist": "Sib The Maid",
+      "title": "Afterlie"
+    },
+    {
+      "id": 442,
+      "artist": "Sib The Maid",
+      "title": "Runaway"
+    },
+    {
+      "id": 443,
+      "artist": "Sib The Maid",
+      "title": "Frustration Synth"
+    },
+    {
+      "id": 444,
+      "artist": "Sib The Maid",
+      "title": "Shoegaze Again!"
+    },
+    {
+      "id": 445,
+      "artist": "Sib The Maid",
+      "title": "We Never Wake Again"
+    },
+    {
+      "id": 446,
+      "artist": "Sib The Maid",
+      "title": "Qxdwx'aopp"
+    },
+    {
+      "id": 447,
+      "artist": "Sib The Maid",
+      "title": "And He Sat on a Toilet, and His Name Was Sib"
+    },
+    {
+      "id": 448,
+      "artist": "Sib The Maid",
+      "title": "No Jokes"
+    },
+    {
+      "id": 449,
+      "artist": "Sib The Maid",
+      "title": "Summer Coma"
+    },
+    {
+      "id": 450,
+      "artist": "Sib The Maid",
+      "title": "Destructive Life Form"
+    },
+    {
+      "id": 451,
+      "artist": "alicirno",
+      "title": "A.D. (Anxiety Disorder)"
+    },
+    {
+      "id": 452,
+      "artist": "Kairi The Maid",
+      "title": "On Little Cat Feet(Nightmargin cover)"
+    },
+    {
+      "id": 453,
+      "artist": "Yakui The Maid",
+      "title": "Shrouded"
+    },
+    {
+      "id": 454,
+      "artist": "Verty",
+      "title": "Gaze_Inter"
+    },
+    {
+      "id": 455,
+      "artist": "Hebei The Maid",
+      "title": "Peacemeal collection"
+    },
+    {
+      "id": 456,
+      "artist": "Nemui_-_The_-_Maid",
+      "title": "Daydream"
+    },
+    {
+      "id": 457,
+      "artist": "Silma",
+      "title": "Ever After"
+    },
+    {
+      "id": 458,
+      "artist": "Chikoi The Maid",
+      "title": "Reserve"
+    },
+    {
+      "id": 459,
+      "artist": "Chikoi The Maid",
+      "title": "Endless"
+    },
+    {
+      "id": 460,
+      "artist": "Chikoi The Maid",
+      "title": "Premition"
+    },
+    {
+      "id": 461,
+      "artist": "Chikoi The Maid",
+      "title": "Destruction"
+    },
+    {
+      "id": 462,
+      "artist": "Chikoi The Maid",
+      "title": "2cops1drags"
+    },
+    {
+      "id": 463,
+      "artist": "Chikoi The Maid",
+      "title": "Sandalee"
+    },
+    {
+      "id": 464,
+      "artist": "Chikoi The Maid",
+      "title": "Neuromorph"
+    },
+    {
+      "id": 465,
+      "artist": "Chikoi The Maid",
+      "title": "Prophet"
+    },
+    {
+      "id": 466,
+      "artist": "Chikoi The Maid",
+      "title": "Scarlet/a#"
+    },
+    {
+      "id": 467,
+      "artist": "Chikoi The Maid",
+      "title": "Basecamp"
+    },
+    {
+      "id": 468,
+      "artist": "Chikoi The Maid",
+      "title": "Ikuyover"
+    },
+    {
+      "id": 469,
+      "artist": "Asai The Maid",
+      "title": "Teenage Suicide"
+    },
+    {
+      "id": 470,
+      "artist": "Chikoi The Maid",
+      "title": "Statement"
+    },
+    {
+      "id": 471,
+      "artist": "Hayai The Maid",
+      "title": "Unavailability (feat. Nerenai The Maid)"
+    },
+    {
+      "id": 472,
+      "artist": "Hayai The Maid",
+      "title": "Qwerty? Asdfg!"
+    },
+    {
+      "id": 473,
+      "artist": "Hidoi the Maid",
+      "title": "escapism"
+    },
+    {
+      "id": 474,
+      "artist": "Inai The Maid",
+      "title": "Interference"
+    },
+    {
+      "id": 475,
+      "artist": "Yakui The Maid",
+      "title": "Outro"
+    },
+    {
+      "id": 476,
+      "artist": "Sib The Maid",
+      "title": "Melancholic Echoes"
+    },
+    {
+      "id": 477,
+      "artist": "Sib The Maid",
+      "title": "Something Weird"
+    },
+    {
+      "id": 478,
+      "artist": "Sib The Maid",
+      "title": "Song 3"
+    },
+    {
+      "id": 479,
+      "artist": "Sib The Maid",
+      "title": "I Want to Offend Everyone"
+    },
+    {
+      "id": 480,
+      "artist": "Aikiwa",
+      "title": "Rising of The Dark Sun - Lullaby The Maid"
+    },
+    {
+      "id": 481,
+      "artist": "᠌Itai The Maid",
+      "title": "Gloria"
+    },
+    {
+      "id": 482,
+      "artist": "Hayai The Maid",
+      "title": "Inclement (feat. Cold Fire)"
+    },
+    {
+      "id": 483,
+      "artist": "Hayai The Maid",
+      "title": "rndm improvis #2"
+    },
+    {
+      "id": 484,
+      "artist": "Verty",
+      "title": "Tea Party Of The Freak"
+    },
+    {
+      "id": 485,
+      "artist": "Nimitori The Maid",
+      "title": "Победа будет за нами"
+    },
+    {
+      "id": 486,
+      "artist": "Nimitori The Maid",
+      "title": "Лужа"
+    },
+    {
+      "id": 487,
+      "artist": "Nimitori The Maid",
+      "title": "Истерика"
+    },
+    {
+      "id": 488,
+      "artist": "Nimitori The Maid",
+      "title": "Яд"
+    },
+    {
+      "id": 489,
+      "artist": "Nimitori The Maid",
+      "title": "Ветер"
+    },
+    {
+      "id": 490,
+      "artist": "Ozoi The Maid",
+      "title": "downfall pt.2"
+    },
+    {
+      "id": 491,
+      "artist": "Svtori Evergarden",
+      "title": "Guide Me, Enlighten Me"
+    },
+    {
+      "id": 492,
+      "artist": "Byakko The Maid",
+      "title": "Bridge"
+    },
+    {
+      "id": 493,
+      "artist": "Tsurai The Maid",
+      "title": "Medley Spoiled Feelings"
+    }
+  ]
+}
