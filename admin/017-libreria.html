@@ -24,9 +24,11 @@
         <input type="text" id="search-input" placeholder="Buscar por título, archivo, artista o tag...">
         <select id="extension-filter">
           <option value="all">Todas las extensiones</option>
-          <option value="opus">Solo .opus</option>            
-          <option value="mp3">Solo .mp3</option>
+          <option value="global">---BÚSQUEDA GLOBAL---</option> 
+          <option value="opus">Solo .opus de este DIRECTORIO</option>            
+          <option value="mp3">Solo .mp3 de este DIRECTORIO</option>
         </select>
+        
         <div id="table-toolbar">
           <button id="delete-selected-btn">Eliminar seleccionados</button>
           <button id="export-json-btn">Exportar JSON del directorio</button>
@@ -57,7 +59,7 @@
         <input type="text" name="title" placeholder="[OPCIONAL] Título base del track">
         <input type="text" name="artist" placeholder="[OPCIONAL] Artista">
         <input type="text" name="tags" placeholder="[OPCIONAL] Tags (coma, separadas)">
-        <input type="file" name="file" accept="audio/" multiple required>
+        <input type="file" name="file" accept="audio/*" multiple required>
         <button type="submit">Subir</button>
       </form>
     </div>
@@ -87,7 +89,7 @@
 JAVASCRIPT!:
 1	 Configuración global
 2	 Elementos DOM	
-3	 Funciones que sonUtilidades básicas	
+3	 Funciones que son Utilidades básicas: actualizacion de Directorios + contador total  
 4	 API CRUD	
 5	 Renderizado tabla
 6	 Eventos directorios	+ Preview variables
