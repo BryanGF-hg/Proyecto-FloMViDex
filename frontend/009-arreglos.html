@@ -9,7 +9,7 @@
 * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Tahoma","Arial",sans-serif; font-size: 11px;}
 body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/wallpaper/wallpaper-v0-ww00n61..._imresizer.png'); height: 100vh; overflow: hidden;}
 
-.window {width: 300px; height: 400px; background-color: #c0c0c0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 4px 4px 10px rgba(0,0,0,0.5);}
+.window {width: 300px; height: 450px; background-color: #c0c0c0;position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 4px 4px 10px rgba(0,0,0,0.5);}
       .window-title {padding-left: 5px;}
       .window-content {padding: 10px; height: calc(100% - 28px); overflow: auto;}
       .window-controls {display: flex;}
@@ -24,8 +24,8 @@ body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyec
       .dir-btn.active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff; background-color: #000080; color: white;}
       .dir-stats {margin-left: auto; color: #000080; font-weight: bold; padding: 5px;}
 
-.player {background-color: #c0c0c0; border: 2px inset; padding: 15px; margin-bottom: 15px; height: 120px;}
-      .player-display {height:103px; background-color: black; color: #00ff00; padding: 10px;font-family: "Courier New", monospace; font-size: 12px; overflow: hidden; border: 1px inset;margin:-10px;}
+.player {background-color: #c0c0c0; border: 2px inset; padding: 15px; margin-bottom: 15px;}
+      .player-display {height:103px; background-color: black; color: #00ff00; padding: 10px;font-family: "Courier New", monospace; font-size: 12px; overflow: hidden; border: 1px inset;margin:-10px;height:120px;}
       .player-controls {display: flex; justify-content: center; gap:0px; margin-bottom: 12px; margin-top:10px;}
       .player-btn {width: 100px; height: 25px; background-color: #c0c0c0; border: 2px solid; border-top-color: #fff; border-left-color: #fff; border-right-color: #808080; border-bottom-color: #808080; cursor: pointer; font-size: 10px; font-weight: bold;}
       .player-btn:active {border-top-color: #808080; border-left-color: #808080; border-right-color: #fff; border-bottom-color: #fff;}
@@ -33,7 +33,7 @@ body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyec
 /* Contenedor de lista de canciones */
       .playlist-container {background-color: #c0c0c0; border: 2px inset;}
       .playlist-header {font-weight: bold; padding: 5px; margin-bottom: 5px; background: linear-gradient(90deg, #000080, #1084d0); color: white;}
-      .playlist {background-color: white; border: 2px inset; height: 160px; overflow-y: auto;}
+      .playlist {background-color: white; border: 2px inset; height: 175px; overflow-y: auto;}
       .playlist-item {padding: 5px 8px; cursor: pointer; border-bottom: 1px dotted #c0c0c0; display: flex; align-items: center; gap: 10px;}
       .playlist-item.active {background-color: #000080; color: white; font-weight: bold;}
       .playlist-number {color: #808080; width: 30px;}
@@ -162,6 +162,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
 </div>
 
 <script>
+        const API_BASE = "http://127.0.0.1:8000"; // Ajusta el puerto si es necesario
         // Mismo LS que el admin
         const LS_KEY = 'flomvidex_tracks_v1';
         // Mapa lógico -> carpeta física
@@ -401,6 +402,24 @@ if (!playlist || playlist.length === 0 || !playlist[currentIndex]){document.getE
         function updateClock() {const now = new Date(); const time = now.toLocaleTimeString('es-ES', { hour12: false }); document.getElementById('clock').textContent = time;}
         setInterval(updateClock, 1000);
         updateClock();
+        
+// Funcion de contador total de tracks        
+        async function fetchGlobalStats() {
+            try {
+                const res = await fetch(`${API_BASE}/api/stats`);
+                const data = await res.json();
+        // Buscamos el elemento de la barra de título
+                const titleEl = document.querySelector('.window-title');
+                
+                if (titleEl) {
+                    // Actualizamos el contenido manteniendo el nombre del programa
+                    titleEl.innerHTML = `MaidCore Player v1.2.3 (${data.total_global} tracks)`;
+                }
+            } catch (e) {
+                console.error("Error al obtener stats globales:", e);
+            }
+        }
+
 
 
 // Cambiar de directorio que va a la par con los Event listeners para directorios
@@ -514,6 +533,7 @@ if (!playlist || playlist.length === 0 || !playlist[currentIndex]){document.getE
     // Inicializar FLOMVIDEX!
     loadSongsFromDirectory('mc1');      
     renderPlaylist();
+    fetchGlobalStats();
     updateDisplay();        
   </script>
 </body>
