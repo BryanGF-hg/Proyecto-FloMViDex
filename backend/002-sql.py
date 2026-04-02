@@ -210,6 +210,45 @@ def get_track_by_id(track_id: int):
         return t
 
 # ===========================
+# API: POST backend/logs/ (Sube Logs) 
+# ===========================    
+@app.post("/api/registro-acceso")
+async def registro_acceso(
+    request: Request,
+    nombre: str = Form(...),
+    informacion: str = Form(...),
+    accion: str = Form(...)
+):
+    # Validación básica
+    nombre = nombre.strip()
+    informacion = informacion.strip()
+    accion = accion.strip()
+
+    if not nombre or not informacion or not accion:
+        return {"error": "Faltan datos en el formulario."}
+
+
+    registro = {
+        "Nombre": nombre,
+        "Informacion": informacion,
+        "ACCIÓN": accion,
+        "fecha_hora": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "ip": request.client.host if request.client else None,
+        "user_agent": request.headers.get("user-agent"),
+    }
+
+    # Guardar JSON: backend/logs/XXXXXXXX.json
+    file_path = LOG_DIR / f"{int(time.time())}.json"
+    with file_path.open("w", encoding="utf-8") as f:
+        json.dump(registro, f, ensure_ascii=False, indent=4)
+    print("Log guardado en:", file_path)
+    # Redirigir al frontend
+    return RedirectResponse(
+        url="/frontend/009-arreglos.html",  # cambiar si es necesario
+        status_code=303
+    )
+
+# ===========================
 # API: COUNT /api/stats/{dir}/{id}
 # ===========================
 @app.get("/api/stats")
@@ -232,3 +271,6 @@ def get_stats():
             }
     finally:
         conn.close()        
+
+if __name__ == '__main__':
+    app.run(debug=True, port=8000)        
