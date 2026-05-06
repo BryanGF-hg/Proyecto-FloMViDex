@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FloMViDex - MaidCore Player</title>
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/Logo/medevil%20100x100.png">    
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/Logo/medevil%20100x100.png"> 
+       
     <style>
 * {margin: 0; padding: 0; box-sizing: border-box; font-family: "Tahoma","Arial",sans-serif; font-size: 11px;}
 body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyecto-FloMViDex/refs/heads/main/media/Images/wallpaper/wallpaper-v0-ww00n61..._imresizer.png'); height: 100vh; overflow: hidden;}
@@ -33,7 +34,7 @@ body {background-image: url('https://raw.githubusercontent.com/BryanGF-hg/Proyec
 /* Contenedor de lista de canciones */
       .playlist-container {background-color: #c0c0c0; border: 2px inset;}
       .playlist-header {font-weight: bold; padding: 5px; margin-bottom: 5px; background: linear-gradient(90deg, #000080, #1084d0); color: white;}
-      .playlist {background-color: white; border: 2px inset; height: 175px; overflow-y: auto;}
+      .playlist {background-color: white; border: 2px inset; height: 175px; overflow-y: auto;user-select:none;}
       .playlist-item {padding: 5px 8px; cursor: pointer; border-bottom: 1px dotted #c0c0c0; display: flex; align-items: center; gap: 10px;}
       .playlist-item.active {background-color: #000080; color: white; font-weight: bold;}
       .playlist-number {color: #808080; width: 30px;}
@@ -64,9 +65,13 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
       .xp-btn{border:2px solid;border-color:#fff gray gray #fff;padding:4px 10px;cursor:pointer;background:silver}
 
 /*System Sidebar(Izquierda)*/
-#startSidebar {{  transition: transform 0.25s ease, opacity 0.25s ease;}}
-#startSidebar.hidden {{  transform: translateX(-100%);  opacity: 0;}}
-#startSidebar.visible {{  transform: translateX(0);  opacity: 1;}}
+#startSidebar{position:fixed;top:436px;left:0;width:300px;height:163px;border-right:2px solid gray;z-index:2000;background:silver;user-select:none;}
+  .start-header{padding:8px;background:linear-gradient(90deg,navy,#1084d0);color:#fff;font-weight:700}
+  .start-header p{font-size:10px;font-weight:400}
+  .start-menu{padding:6px;display:flex;flex-direction:column;gap:4px}
+  .start-menu button{border:2px solid;border-color:#fff gray gray #fff;cursor:pointer;font-size:11px;padding:4px;text-align:left;background:silver}
+  .start-menu button:hover{color:#fff;background:navy}
+
 
 ::-webkit-scrollbar {width: 16px;}
   ::-webkit-scrollbar-track {background-color: #c0c0c0; border: 1px inset;}
@@ -106,6 +111,7 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
                 <button class="player-btn" id="prevBtn">⏮</button>                    
                 <button class="player-btn" id="playBtn">▶ Play</button>                
                 <button class="player-btn" id="nextBtn">⏭</button>
+                <button class="player-btn" id="random">🔁️</button>              
             </div>
             
 <!-- Lista de canciones -->
@@ -166,27 +172,17 @@ footer {position: fixed; bottom: 0; left: 0; width: 100%; height: 35px; backgrou
 </div>
 
 <!-- EL SIDEBAR DE LA IZQUIERDA que se inicia al presionar "Start "-->
-<aside id="startSidebar" class="hidden fixed left-0 top-0 h-full z-40 bg-slate-100/60 backdrop-blur-2xl shadow-2xl w-64 pt-10">
-  <div class="px-6 py-3 border-b border-outline-variant/10">
-    <h2 class="text-xl font-black text-blue-800">System Playlist</h2>
-    <p class="text-[10px] uppercase tracking-[5%] text-slate-500">
-      User-01 // Maidcore
-    </p>
+<aside id="startSidebar" class="hidden">
+  <div class="start-header">
+    <h2>System Playlist</h2>
+    <p>User-001 // Maidcore</p>
   </div>
 
-  <nav class="flex flex-col py-4">
-    <div class="flex items-center gap-3 px-6 py-2 bg-blue-600 text-white font-bold">
-      Atmospheric
-    </div>
-    <div class="flex items-center gap-3 px-6 py-2 hover:bg-slate-200/50 cursor-pointer">
-      Glitch
-    </div>
-    <div class="flex items-center gap-3 px-6 py-2 hover:bg-slate-200/50 cursor-pointer">
-      Lo‑Fi
-    </div>
-    <div class="flex items-center gap-3 px-6 py-2 hover:bg-slate-200/50 cursor-pointer">
-      Classical
-    </div>
+  <nav class="start-menu">
+    <button onclick="switchDirectory('mc1')">Atmospheric</button>
+    <button onclick="switchDirectory('mc2')">Glitch</button>
+    <button onclick="switchDirectory('mc3')">Lo‑Fi</button>
+    <button onclick="switchDirectory('mc4')">Classical</button>
   </nav>
 </aside>
 
@@ -419,17 +415,28 @@ if (!playlist || playlist.length === 0 || !playlist[currentIndex]){document.getE
         nextBtn.addEventListener('click', () => {   changeSong(1);      });
 
         
-  
+// Escucha para que cierre el startSidebar  
+document.addEventListener('click', (e) => {
+  const sidebar = document.getElementById('startSidebar');
+  const startBtn = document.querySelector('.start-btn');
+
+  if (!sidebar || sidebar.classList.contains('hidden')) return;
+  if (sidebar.contains(e.target) || startBtn.contains(e.target)) return;
+
+  sidebar.classList.add('hidden');
+});
 // Funciones de la "TASKBAR"
         function focusWindow() {            document.querySelector('.window').style.zIndex = '1000';        }
+          
                 
         function toggleStartMenu() {            
          const sidebar = document.getElementById('startSidebar');
-         if (!sidebar)
-         alert('[Start Menu]\n\nPrograms:\n• MaidCore Player\n• MaidCore Explorer\n• MaidCore Browser\n\nDocuments\n• Settings\n• Help\n• About\n\nShut Down...');   
+         if (!sidebar) {
+          alert('[Start Menu]\n\nPrograms:\n• MaidCore Player\n• MaidCore Explorer\n• MaidCore Browser\n\nDocuments\n• Settings\n• Help\n• About\n\nShut Down...');   
+          return;
+         }
          
          sidebar.classList.toggle('hidden');
-         sidebar.classList.toggle('visible')
         }
         function openExplorer() {            alert('Canciones aleatorias a añadir en un futuro!');        }
         function openBrowser() {            alert('Albumes a añadir en un futuro!');        }
@@ -566,7 +573,7 @@ if (!playlist || playlist.length === 0 || !playlist[currentIndex]){document.getE
       function openPopup() { document.getElementById('xp-popup').classList.remove('hidden');}
       function closePopup(){ document.getElementById('xp-popup').classList.add('hidden');}
       
-    // Inicializar FLOMVIDEX!
+// Inicializar FLOMVIDEX!
     loadSongsFromDirectory('mc1');      
     renderPlaylist();
     fetchGlobalStats();
