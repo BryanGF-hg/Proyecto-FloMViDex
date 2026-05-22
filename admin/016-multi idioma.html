@@ -81,7 +81,7 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
           <input type="text" name="title" placeholder="[OPCIONAL] Título base del track">
           <input type="text" name="artist" placeholder="[OPCIONAL] Artista">
           <input type="text" name="tags" placeholder="[OPCIONAL] Tags (coma, separadas)">
-          <input type="file" name="file" accept="audio/" multiple required>
+          <input type="file" name="file" accept="audio/*" multiple required>
           <button type="submit">Subir</button>
         </form>
       </div>     
@@ -353,10 +353,18 @@ th{background:#3fe0d033;color:#0f8b8d;font-weight:bold}
       playBtn.addEventListener('click', () => playInHeader(track));
       const editBtn = document.createElement('button');
       editBtn.textContent = 'Editar';
-      editBtn.addEventListener('click', () => editTrack(track.id));
+      editBtn.addEventListener('click', () => {
+        currentDirectory = track.dir || currentDirectory;
+        editTrack(track.id);
+      });
+
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'Eliminar';
-      deleteBtn.addEventListener('click', () => deleteTrack(track.id));
+      deleteBtn.addEventListener('click', () => {
+        currentDirectory = track.dir || currentDirectory;
+        deleteTrack(track.id)
+      });
+
 
       actionsCell.appendChild(playBtn);
       actionsCell.appendChild(editBtn);

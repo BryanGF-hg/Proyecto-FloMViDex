@@ -16,6 +16,15 @@
       loadTracks();
     }
   }
+
+  async function fetchAllTracks() {
+    await Promise.all([
+      fetchTracks('mc1'),
+      fetchTracks('mc2'),
+      fetchTracks('mc3'),
+      fetchTracks('mc4')
+    ]);
+  }
   
   // 4.2 PUT /api/tracks (editar metadata)
   const editTrack = async id => {

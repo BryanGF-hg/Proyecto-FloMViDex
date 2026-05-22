@@ -2,48 +2,68 @@
   // 5. RENDERIZADO DE TABLA (loadTracks)
   // ============================================
   const loadTracks = () => {
-    const currentList = tracksByDirectory[currentDirectory] || [];
-    currentList.sort((a, b) => a.id - b.id);
-    tableBody.innerHTML = '';
-
     const term = searchInput.value.trim().toLowerCase();
-    const ext = extensionFilter.value;
-
-    const filtered = currentList.filter(t => {
-      const title = (t.title || '').toLowerCase();
-      const file = (t.file || '').toLowerCase();
-      const artist = (t.artist || '').toLowerCase();
-      const tagsText = Array.isArray(t.tags) ? t.tags.join(' ').toLowerCase() : (t.tags || '').toLowerCase();
-
-      const textMatch =
-        !term ||
-        title.includes(term) ||
-        file.includes(term) ||
-        artist.includes(term) ||
+    const mode = extensionFilter.value;
+    
+    tableBody.innerHTML = '';
+    
+    let sourceList = [];
+    
+    // Si el usuario elige búsqueda global o estamos en modo global
+    if (mode === 'global' || currentDirectory === 'global') {
+      sourceList = [];
+      ['mc1', 'mc2', 'mc3', 'mc4'].forEach(dir => {
+        const tracks = tracksByDirectory[dir] || [];
+        sourceList.push(...tracks);
+      });
+    } else {
+      sourceList = tracksByDirectory[currentDirectory] || [];
+    }
+    
+    // Ordenar por ID
+    sourceList.sort((a, b) => a.id - b.id);
+    
+    const filtered = sourceList.filter(track => {
+      const title = (track.title || '').toLowerCase();
+      const file = (track.file || '').toLowerCase();
+      const artist = (track.artist || '').toLowerCase();
+      const tagsText = Array.isArray(track.tags) 
+        ? track.tags.join(' ').toLowerCase() 
+        : (track.tags || '').toLowerCase();
+      
+      const textMatch = !term || 
+        title.includes(term) || 
+        file.includes(term) || 
+        artist.includes(term) || 
         tagsText.includes(term);
-
-      const extMatch = ext === 'all' ? true : file.split('.').pop() === ext;
-
+      
+      let extMatch = true;
+      if (mode === 'mp3') {
+        extMatch = file.endsWith('.mp3');
+      } else if (mode === 'opus') {
+        extMatch = file.endsWith('.opus');
+      }
+      
       return textMatch && extMatch;
     });
-
+    
     if (selectAllCheckbox) selectAllCheckbox.checked = false;
-
+    
     if (!filtered.length) {
       const row = document.createElement('tr');
       const cell = document.createElement('td');
       cell.colSpan = 7;
-      cell.textContent = 'No hay tracks en este directorio con el filtro actual.';
+      cell.textContent = t('no_tracks');
       cell.className = 'no-data';
       row.appendChild(cell);
       tableBody.appendChild(row);
       updateDirectoryLabel();
       return;
     }
-
+    
     filtered.forEach(track => {
       const row = document.createElement('tr');
-
+      
       // Selección
       const selectCell = document.createElement('td');
       selectCell.className = 'select-col';
@@ -52,11 +72,11 @@
       cb.className = 'row-select';
       cb.dataset.id = track.id;
       selectCell.appendChild(cb);
-
+      
       // ID
       const idCell = document.createElement('td');
       idCell.textContent = track.id;
-
+      
       // Título
       const titleCell = document.createElement('td');
       titleCell.textContent = track.title;
@@ -71,7 +91,8 @@
         const save = async () => {
           const val = input.value.trim();
           if (val && val !== track.title) {
-            await editTrackTitleOnly(track.id, val);
+            track.title = val;
+            await editTrack(track.id);
           } else {
             loadTracks();
           }
@@ -82,36 +103,38 @@
           if (e.key === 'Escape') loadTracks();
         });
       });
-
+      
       // Artista
       const artistCell = document.createElement('td');
       artistCell.textContent = track.artist || '-';
       
       // Tags
       const tagsCell = document.createElement('td');
-      tagsCell.textContent = Array.isArray(track.tags) ? track.tags.join(', ') : (track.tags || '-');
-
+      tagsCell.textContent = Array.isArray(track.tags) 
+        ? track.tags.join(', ') 
+        : (track.tags || '-');
+      
       // Archivo
       const fileCell = document.createElement('td');
       fileCell.textContent = track.file;
-
+      
       // Acciones
       const actionsCell = document.createElement('td');
       actionsCell.className = 'actions';
       const playBtn = document.createElement('button');
-      playBtn.textContent = 'Reproducir';
+      playBtn.textContent = t('play_btn');
       playBtn.addEventListener('click', () => playInHeader(track));
       const editBtn = document.createElement('button');
-      editBtn.textContent = 'Editar';
+      editBtn.textContent = t('edit_btn');
       editBtn.addEventListener('click', () => editTrack(track.id));
       const deleteBtn = document.createElement('button');
-      deleteBtn.textContent = 'Eliminar';
+      deleteBtn.textContent = t('delete_btn');
       deleteBtn.addEventListener('click', () => deleteTrack(track.id));
-
+      
       actionsCell.appendChild(playBtn);
       actionsCell.appendChild(editBtn);
       actionsCell.appendChild(deleteBtn);
-
+      
       row.appendChild(selectCell);
       row.appendChild(idCell);
       row.appendChild(titleCell);
@@ -119,9 +142,9 @@
       row.appendChild(tagsCell);
       row.appendChild(fileCell);
       row.appendChild(actionsCell);
-
+      
       tableBody.appendChild(row);
     });
-
+    
     updateDirectoryLabel();
   };
