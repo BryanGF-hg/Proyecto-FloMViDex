@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Admin Dashboard – FloMViDex</title>
+  <link rel="stylesheet" href="css/015-css general.css"> 
+    <!--/* Generales */ /* Directorios */ /* Motor de Busqueda */ /* Formulario CREATE */ /* Tabla */ /* PLAYER */-->
+  <link rel="stylesheet" href="css/016-boton lenguaje.css">
+    <!-- /*Toggle+Hover*/ -->
+  <link rel="stylesheet" href="css/017-modo oscuro.css">  
+    <!-- /*MODO OSCURO*/ /* Botón de modo oscuro */ /*Hovers*/-->   
+</head>
+<body>
+  <header>
+<!-- header = Herramientas + directorios + Player+ Formulario CREATE + Botones de Utilidad-->
+    <div class="divider" style="flex: 2 1 320px;">
+      <h1>Admin Dashboard para FloMViDex</h1>
+      <div id="current-directory-label">
+        <h3>Directorio actual:</h3>
+      </div>
+       <span id="directory-stats"></span>                  
+      <div class="filters">
+        <input type="text" id="search-input" placeholder="Buscar por título, archivo, artista o tag...">
+        <select id="extension-filter">
+          <option value="all">Todas las extensiones</option>
+          <option value="opus">Solo .opus de este DIRECTORIO</option>            
+          <option value="mp3">Solo .mp3 de este DIRECTORIO</option>
+          <option value="global">---BÚSQUEDA GLOBAL---</option>           
+        </select>
+        
+        <div id="table-toolbar">
+          <button id="delete-selected-btn">Eliminar seleccionados</button>
+          <button id="export-json-btn">Exportar JSON del directorio</button>
+        </div>          
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-dir="mc1">maidcore 1.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc1"> JSON</a></div>
+      <div class="tab" data-dir="mc2">maidcore 2.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc2"> JSON</a></div>
+      <div class="tab" data-dir="mc3">maidcore 3.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc3"> JSON</a></div>
+      <div class="tab" data-dir="mc4">maidcore 4.0<a href="http://127.0.0.1:8000/api/tracks?dir=mc4"> JSON</a></div>
+    </div>
+
+<!-- Reproductor -->
+    <div class="divider" style="flex: 1 1 260px;">
+      <h2>Reproductor básico</h2>
+      <div id="player-info"></div>
+      <audio id="header-player" controls>
+        Tu navegador no soporta el elemento de audio.
+      </audio>
+    </div>
+
+<!-- CREATE -->
+    <div class="divider" style="flex: 1 1 260px;">
+      <h2>Crear nuevo track</h2>
+      <form id="create-form">
+        <input type="text" name="title" placeholder="[OPCIONAL] Título base del track">
+        <input type="text" name="artist" placeholder="[OPCIONAL] Artista">
+        <input type="text" name="tags" placeholder="[OPCIONAL] Tags (coma, separadas)">
+        <input type="file" name="file" accept="audio/*" multiple required>
+        <button type="submit">Subir</button>
+      </form>
+    </div> 
+  </header>
+    
+<!-- Botón de modo oscuro -->    
+    <button class="theme-toggle" id="theme-toggle" title="Cambiar modo oscuro/claro">🌙</button> 
+<!-- Botón de idioma -->       
+    <button class="lang-toggle" id="lang-toggle" title="Cambiar idioma">EN</button>                     
+<!-- Botón toggle del header -->       
+<button class="header-toggle" id="header-toggle" title="Ocultar panel superior">⬆️</button>   
+    
+<!-- TABLA! -->
+    <table id="tracks-table">
+      <thead>
+        <tr>
+          <th class="select-col"><input type="checkbox" id="select-all"></th>
+          <th>ID</th>
+          <th>Título</th>
+          <th>Artista</th>
+          <th>Tags</th>
+          <th>Archivo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead> 
+      <tbody></tbody>
+    </table>
+
+<!--
+JAVASCRIPT!:
+1	 Configuración global
+2	 Elementos DOM	
+13 Drodpdown para visibilidades reducidas
+3	 Funciones que son Utilidades básicas: actualizacion de Directorios + contador total  
+4	 API CRUD	
+5	 Renderizado tabla
+6	 Eventos directorios	+ Preview variables
+7	 CREATE/subir	
+8	 DELETE múltiple	
+9	 Modo oscuro	
+10 Traducciones	
+11 Additions =	Exportar JSON	+	Checkbox todo	+ Filtros	
+12 Init = Inicialización	
+-->        
+<script src="js/001-const.js"></script>
+<script src="js/002-dom.js"></script>
+<script src="js/013-header-toggle.js"></script>
+<script src="js/003-fbasica.js"></script>
+<script src="js/004-api_crud.js"></script>
+<script src="js/005-renderizado.js"></script>
+<script src="js/006-el_dir.js"></script>
+<script src="js/007-create.js"></script>
+<script src="js/008-delete_multiple.js"></script>
+<script src="js/009-dark_mode.js"></script>
+<script src="js/010-languages.js"></script>
+<script src="js/011-additions.js"></script>
+<script src="js/012-init.js"></script>
+</body>
+</html>
